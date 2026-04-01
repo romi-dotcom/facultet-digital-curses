@@ -2,12 +2,18 @@
 
 /* Brand color tokens — generate bg-*, text-*, border-* utilities */
 @theme {
-  --color-brand:        #1B2B4B;
-  --color-brand-light:  #2D4A7A;
-  --color-accent:       #E85D2F;
-  --color-accent-hover: #C94D22;
-  --color-warm:         #F5F0E8;
-  --color-warm-dark:    #E8E0CE;
+  --color-brand:          #1B2B4B;
+  --color-brand-light:    #2D4A7A;
+  --color-brand-deep:     #0F172A;
+  --color-brand-warm:     #2A1F1A;
+  --color-accent:         #E85D26;
+  --color-accent-hover:   #C94D1F;
+  --color-warm:           #F5F0E8;
+  --color-warm-dark:      #E8E0CE;
+  --color-surface:        #F8FAFC;
+  --color-text-secondary: #64748B;
+  --color-text-muted:     #94A3B8;
+  --color-border:         #E2E8F0;
 }
 
 /* Font mapping to next/font CSS variables */
@@ -21,6 +27,11 @@
 :root {
   --background: #ffffff;
   --foreground: #1B2B4B;
+
+  /* Dark section gradient: navy → warm brown */
+  --gradient-dark: linear-gradient(180deg, #1E293B 0%, #2A1F1A 100%);
+  /* Deep dark for final CTA */
+  --gradient-deep: linear-gradient(180deg, #0F172A 0%, #1E293B 100%);
 }
 
 * {
@@ -34,6 +45,15 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Reusable gradient backgrounds */
+.bg-dark-section {
+  background: var(--gradient-dark);
+}
+
+.bg-deep-section {
+  background: var(--gradient-deep);
 }
 
 @media (prefers-reduced-motion: reduce) {

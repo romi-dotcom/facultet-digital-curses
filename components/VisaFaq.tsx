@@ -56,7 +56,7 @@ export default function VisaFaq() {
           <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">
             Your questions, answered
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-brand leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-brand leading-tight">
             Everything you need
             <br />
             to know before enrolling

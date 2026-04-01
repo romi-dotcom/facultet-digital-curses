@@ -17,20 +17,35 @@ export default function SuccessStories() {
             <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">
               After Facultet
             </p>
-            <h2 className="font-display text-4xl sm:text-5xl font-semibold text-brand leading-tight">
+            <h2 className="font-display text-4xl sm:text-5xl font-bold text-brand leading-tight">
               What the numbers actually say
             </h2>
           </FadeUp>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
             {outcomes.map(({ stat, label, sub }, i) => (
               <FadeUp key={label} delay={i * 0.08}>
-                <div className="bg-warm rounded-2xl p-6 text-center">
-                  <p className="font-display text-4xl sm:text-5xl font-semibold text-brand mb-2">
+                <div className={`rounded-2xl p-6 lg:p-8 text-center border ${
+                  i === 0 ? "bg-brand border-brand text-white" :
+                  i === 1 ? "bg-accent border-accent text-white" :
+                  i === 2 ? "bg-warm border-warm-dark text-brand" :
+                  "bg-white border-border text-brand shadow-sm"
+                }`}>
+                  <p className={`font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-2 ${
+                    i < 2 ? "text-white" : "text-brand"
+                  }`}>
                     {stat}
                   </p>
-                  <p className="font-semibold text-brand text-sm mb-1">{label}</p>
-                  <p className="text-slate-400 text-xs">{sub}</p>
+                  <p className={`font-bold text-sm mb-1 ${
+                    i < 2 ? "text-white/80" : "text-brand"
+                  }`}>
+                    {label}
+                  </p>
+                  <p className={`text-xs ${
+                    i < 2 ? "text-white/50" : "text-text-muted"
+                  }`}>
+                    {sub}
+                  </p>
                 </div>
               </FadeUp>
             ))}
@@ -39,13 +54,13 @@ export default function SuccessStories() {
       </section>
 
       {/* Final CTA section */}
-      <section id="consult" className="bg-brand py-20 lg:py-28">
+      <section id="consult" className="bg-deep-section py-20 lg:py-28">
         <div className="max-w-3xl mx-auto px-5 text-center">
           <FadeUp>
             <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-5">
               Ready to start?
             </p>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-white leading-tight mb-6">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
               Solve your visa and your career in one conversation.
             </h2>
             <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
@@ -137,7 +152,7 @@ export default function SuccessStories() {
       </section>
 
       {/* Minimal footer */}
-      <footer className="bg-brand border-t border-white/5 py-6">
+      <footer className="bg-brand-deep border-t border-white/5 py-6">
         <div className="max-w-6xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <span className="font-display text-white/40 text-sm tracking-widest uppercase">
             Facultet School

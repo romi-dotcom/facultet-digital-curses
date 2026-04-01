@@ -5,36 +5,31 @@ const steps = [
     step: "01",
     title: "Apply online",
     timeline: "5 minutes",
-    description:
-      "Fill out our short program application. No documents needed yet — just your name, email, and the program you're interested in.",
+    description: "Fill out our short program application. No documents needed yet — just your name, email, and the program you're interested in.",
   },
   {
     step: "02",
     title: "Get your acceptance",
     timeline: "Within 48 hours",
-    description:
-      "An admissions advisor reviews your application and sends your acceptance letter and enrollment agreement to sign.",
+    description: "An admissions advisor reviews your application and sends your acceptance letter and enrollment agreement to sign.",
   },
   {
     step: "03",
     title: "Receive your documents",
     timeline: "Within 14 days",
-    description:
-      "After your first tuition payment, we prepare your full AIMA-compliant documentation package: enrollment letter, program schedule, and supporting materials.",
+    description: "After your first tuition payment, we prepare your full AIMA-compliant documentation package: enrollment letter, program schedule, and supporting materials.",
   },
   {
     step: "04",
     title: "Submit to AIMA",
     timeline: "You control the timeline",
-    description:
-      "Submit your student residence permit (D4) application to AIMA. Our documentation advisor is available to answer any questions throughout the process.",
+    description: "Submit your student residence permit (D4) application to AIMA. Our documentation advisor is available throughout the process.",
   },
   {
     step: "05",
     title: "Start studying",
     timeline: "Next cohort: September",
-    description:
-      "While your permit is being processed, you can attend classes. Most students receive their student permit within 6–10 weeks of submission.",
+    description: "While your permit is being processed, you can attend classes. Most students receive their permit within 6–10 weeks of submission.",
   },
 ];
 
@@ -46,84 +41,100 @@ export default function VisaSteps() {
           <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">
             The visa process
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-brand leading-tight">
-            From application to
-            <br />
-            residence permit in 5 steps
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-brand leading-tight">
+            From application to{" "}
+            <span className="text-accent">residence permit</span>
+            <br />in 5 steps
           </h2>
-          <p className="text-slate-500 mt-4 text-lg max-w-xl mx-auto">
+          <p className="text-text-secondary mt-4 text-lg max-w-xl mx-auto">
             Our admissions team has walked this process with over 2,000 students. We know exactly what AIMA needs.
           </p>
         </FadeUp>
 
-        {/* Steps — vertical on mobile, horizontal on desktop */}
-        <FadeUp delay={0.1}>
-          <div className="relative">
-            {/* Connector line — desktop only */}
-            <div
-              aria-hidden
-              className="hidden lg:block absolute top-9 left-[calc(10%+36px)] right-[calc(10%+36px)] h-0.5 bg-gradient-to-r from-warm-dark via-accent/30 to-warm-dark"
-            />
-
-            {/* Desktop: 5 columns | Mobile: vertical list */}
-            <div className="hidden lg:grid lg:grid-cols-5 gap-8">
+        {/* Split layout: steps list left + reassurance right */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+          {/* Left: steps */}
+          <FadeUp delay={0.1}>
+            <div className="space-y-0 divide-y divide-border">
               {steps.map(({ step, title, timeline, description }) => (
-                <div key={step} className="text-left">
-                  <div className="w-[72px] h-[72px] rounded-full bg-warm border-2 border-warm-dark flex items-center justify-center mb-5 relative z-10">
-                    <span className="font-display text-2xl font-semibold text-brand">{step}</span>
+                <div key={step} className="flex gap-6 py-7 first:pt-0">
+                  {/* Big step number */}
+                  <div className="flex-shrink-0 w-14">
+                    <span className="font-display text-5xl font-bold text-brand/10 leading-none">
+                      {step}
+                    </span>
                   </div>
-                  <span className="inline-block text-xs font-bold uppercase tracking-widest text-accent bg-orange-50 px-2.5 py-0.5 rounded-full mb-2">
-                    {timeline}
-                  </span>
-                  <h3 className="font-semibold text-brand text-lg mb-2">{title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed">{description}</p>
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-1.5 flex-wrap">
+                      <h3 className="font-bold text-brand text-lg">{title}</h3>
+                      <span className="text-xs font-semibold text-accent bg-orange-50 px-2.5 py-0.5 rounded-full">
+                        {timeline}
+                      </span>
+                    </div>
+                    <p className="text-text-secondary text-sm leading-relaxed">
+                      {description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
+          </FadeUp>
 
-            {/* Mobile: vertical steps with left connector */}
-            <div className="lg:hidden relative pl-12">
-              {/* Vertical connector */}
-              <div
-                aria-hidden
-                className="absolute left-[22px] top-9 bottom-9 w-0.5 bg-gradient-to-b from-warm-dark via-accent/30 to-warm-dark"
-              />
-              <div className="space-y-10">
-                {steps.map(({ step, title, timeline, description }) => (
-                  <div key={step} className="relative">
-                    {/* Step bubble anchored to left */}
-                    <div className="absolute -left-12 w-11 h-11 rounded-full bg-warm border-2 border-warm-dark flex items-center justify-center z-10">
-                      <span className="font-display text-base font-semibold text-brand">{step}</span>
-                    </div>
-                    <span className="inline-block text-xs font-bold uppercase tracking-widest text-accent bg-orange-50 px-2.5 py-0.5 rounded-full mb-2">
-                      {timeline}
-                    </span>
-                    <h3 className="font-semibold text-brand text-lg mb-1">{title}</h3>
-                    <p className="text-slate-500 text-sm leading-relaxed">{description}</p>
+          {/* Right: sticky reassurance card */}
+          <FadeUp delay={0.2}>
+            <div className="lg:sticky lg:top-24 space-y-5">
+              {/* Approval rate card */}
+              <div className="bg-brand rounded-2xl p-8 text-white">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
                   </div>
-                ))}
+                  <p className="font-semibold text-white/80 text-sm leading-snug">
+                    AIMA-compliant documentation
+                  </p>
+                </div>
+                <p className="font-display text-6xl font-bold text-white mb-2">94%</p>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  Student visa approval rate across all Facultet applications. Every documentation package is reviewed by our compliance team before it leaves our hands.
+                </p>
               </div>
-            </div>
-          </div>
-        </FadeUp>
 
-        <FadeUp delay={0.2} className="mt-16">
-          <div className="bg-warm rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5">
-            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-white border border-warm-dark flex items-center justify-center">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
-            </div>
-            <div>
-              <p className="font-semibold text-brand text-lg mb-1">
-                Our 94% approval rate isn't luck — it's process.
+              {/* Timeline card */}
+              <div className="bg-warm rounded-2xl p-7 border border-warm-dark">
+                <p className="font-bold text-brand text-lg mb-4">Typical timeline</p>
+                <div className="space-y-3">
+                  {[
+                    { label: "Enrollment letter", time: "14 days" },
+                    { label: "AIMA processing", time: "6–10 weeks" },
+                    { label: "Permit in hand", time: "~3 months total" },
+                  ].map(({ label, time }) => (
+                    <div key={label} className="flex items-center justify-between">
+                      <span className="text-text-secondary text-sm">{label}</span>
+                      <span className="font-bold text-brand text-sm">{time}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 pt-5 border-t border-warm-dark">
+                  <a
+                    href="#consult"
+                    className="block w-full text-center bg-accent hover:bg-accent-hover text-white font-semibold py-3.5 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25 text-sm"
+                  >
+                    Start My Application →
+                  </a>
+                </div>
+              </div>
+
+              {/* Guarantee note */}
+              <p className="text-text-muted text-xs text-center leading-relaxed px-2">
+                If your application is rejected, we appeal and re-apply at no extra charge.
+                60% refund after two failed attempts.
               </p>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                Every Facultet documentation package is reviewed by our compliance team before it leaves our hands. If your application is rejected, we assist with the appeal and re-application at no extra charge.
-              </p>
             </div>
-          </div>
-        </FadeUp>
+          </FadeUp>
+        </div>
       </div>
     </section>
   );

@@ -29,13 +29,13 @@ const pains = [
 
 export default function PainAgitation() {
   return (
-    <section className="bg-brand py-20 lg:py-28">
+    <section className="bg-dark-section py-20 lg:py-28">
       <div className="max-w-6xl mx-auto px-5">
         <FadeUp className="mb-14 max-w-2xl">
           <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">
             If this sounds familiar
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-white leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white leading-tight">
             You're not struggling because
             <br />
             you're not trying hard enough.
@@ -65,12 +65,26 @@ export default function PainAgitation() {
         </FadeUp>
 
         <FadeUp delay={0.2} className="mt-14 border-t border-white/10 pt-10 max-w-2xl">
-          <p className="font-display text-3xl sm:text-4xl font-semibold text-white leading-snug">
+          <p className="font-display text-3xl sm:text-4xl font-bold text-white leading-snug">
             It doesn't have to stay this way.
           </p>
-          <p className="text-white/60 text-lg mt-3">
+          <p className="text-white/60 text-lg mt-3 mb-8">
             2,147 people in your exact situation enrolled at Facultet — and walked out with a residence permit and a career.
           </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href="#consult"
+              className="inline-block bg-accent hover:bg-accent-hover text-white font-semibold px-8 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 text-sm text-center"
+            >
+              Book My Free Consultation
+            </a>
+            <a
+              href="#programmes"
+              className="inline-block bg-white/10 hover:bg-white/15 border border-white/40 text-white font-semibold px-8 py-3.5 rounded-lg transition-all text-sm text-center"
+            >
+              See Programs →
+            </a>
+          </div>
         </FadeUp>
       </div>
     </section>

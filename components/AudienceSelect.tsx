@@ -39,7 +39,7 @@ export default function AudienceSelect() {
           <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">
             Who comes to Facultet
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-brand leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-brand leading-tight">
             Two problems. One solution.
           </h2>
           <p className="text-slate-500 mt-4 text-lg max-w-xl mx-auto">

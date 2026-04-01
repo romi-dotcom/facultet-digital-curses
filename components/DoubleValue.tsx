@@ -37,7 +37,7 @@ export default function DoubleValue() {
           <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">
             The Facultet difference
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-brand leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-brand leading-tight">
             One enrollment.
             <br />
             Two transformations.

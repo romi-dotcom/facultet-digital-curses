@@ -36,7 +36,7 @@ export default function Hero() {
           </motion.div>
 
           {/* H1 */}
-          <motion.h1 {...item(0.1)} className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold text-white leading-tight tracking-tight mb-6">
+          <motion.h1 {...item(0.1)} className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight tracking-tight mb-6">
             Your Visa Problem
             <br />
             <span className="text-accent">Has an Education</span>

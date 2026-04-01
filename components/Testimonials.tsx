@@ -37,13 +37,13 @@ const testimonials: Testimonial[] = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-brand py-20 lg:py-28">
+    <section className="bg-dark-section py-20 lg:py-28">
       <div className="max-w-6xl mx-auto px-5">
         <FadeUp className="text-center mb-14">
           <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">
             Student stories
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-white leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white leading-tight">
             In their own words
           </h2>
           <p className="text-white/50 mt-4 text-lg">
@@ -83,8 +83,22 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <FadeUp delay={0.3}>
-          <p className="text-center text-white/30 text-sm mt-10">
+        <FadeUp delay={0.3} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="#consult"
+            className="inline-block bg-accent hover:bg-accent-hover text-white font-semibold px-8 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 text-sm"
+          >
+            Book My Free Consultation
+          </a>
+          <a
+            href="#programmes"
+            className="inline-block bg-white/10 hover:bg-white/15 border border-white/40 text-white font-semibold px-8 py-3.5 rounded-lg transition-all text-sm"
+          >
+            See Programs →
+          </a>
+        </FadeUp>
+        <FadeUp delay={0.4}>
+          <p className="text-center text-white/25 text-xs mt-6">
             Read 312 more reviews on Google Maps · Average rating 4.9 / 5
           </p>
         </FadeUp>

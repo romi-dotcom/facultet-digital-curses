@@ -1,177 +1,142 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import FadeUp from "./FadeUp";
 
-interface Programme {
-  id: string;
-  name: string;
-  duration: string;
-  schedule: string;
-  campuses: string;
-  description: string;
-  skills: string[];
-  badge?: string;
-}
-
-const programmes: Programme[] = [
+const programmes = [
   {
     id: "ux-ui",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <circle cx="9" cy="9" r="2" />
+        <path d="M21 15l-5-5L5 21" />
+      </svg>
+    ),
+    badge: "Most popular",
     name: "UX / UI Design",
     duration: "14 months",
-    schedule: "Mon · Wed · Fri evenings + Saturday workshops",
-    campuses: "Lisbon (Baixa) & Porto (Aliados)",
-    badge: "Most popular",
-    description:
-      "Learn to design digital products people actually want to use. From user research and wireframes to high-fidelity prototypes in Figma, you'll graduate with a portfolio of 5 real projects that show employers you can do the work.",
-    skills: ["User Research", "Figma", "Wireframing", "Prototyping", "Usability Testing", "Design Systems"],
+    campuses: "Lisbon & Porto",
+    description: "Design digital products people actually want to use. Graduate with a portfolio of 5 real Figma projects — from user research to high-fidelity prototypes.",
+    skills: ["User Research", "Figma", "Wireframing", "Prototyping", "Design Systems"],
   },
   {
     id: "digital-marketing",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+      </svg>
+    ),
     name: "Digital Marketing",
     duration: "14 months",
-    schedule: "Tue · Thu evenings + Saturday workshops",
-    campuses: "Lisbon (Baixa)",
-    description:
-      "Run campaigns across the full digital funnel — SEO, Google Ads, social media, email, and analytics. In your final semester, you'll manage actual campaigns for real clients. Graduate with documented results to show in every interview.",
-    skills: ["SEO & SEM", "Google Ads", "Meta Ads", "Email Marketing", "Analytics (GA4)", "Content Strategy"],
+    campuses: "Lisbon",
+    description: "Run campaigns across SEO, Google Ads, Meta, email, and analytics. Manage real client campaigns in your final semester. Graduate with documented results.",
+    skills: ["SEO & SEM", "Google Ads", "Meta Ads", "Analytics (GA4)", "Content Strategy"],
   },
   {
     id: "frontend-dev",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
     name: "Frontend Development",
     duration: "10 months",
-    schedule: "Mon · Wed · Fri evenings",
     campuses: "Lisbon & Porto",
-    description:
-      "Build web interfaces from scratch. You'll go from HTML/CSS to JavaScript and React, deploying three production-ready projects to your public portfolio. No prior coding experience required — just consistency.",
-    skills: ["HTML & CSS", "JavaScript", "React", "Git & GitHub", "Responsive Design", "REST APIs"],
+    description: "Build web interfaces from scratch — HTML/CSS to React. Deploy three production-ready projects to your public portfolio. No prior coding experience required.",
+    skills: ["HTML & CSS", "JavaScript", "React", "Git & GitHub", "REST APIs"],
   },
   {
     id: "graphic-design",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="4" />
+        <line x1="4.93" y1="4.93" x2="9.17" y2="9.17" />
+        <line x1="14.83" y1="14.83" x2="19.07" y2="19.07" />
+        <line x1="14.83" y1="9.17" x2="19.07" y2="4.93" />
+        <line x1="4.93" y1="19.07" x2="9.17" y2="14.83" />
+      </svg>
+    ),
     name: "Graphic Design & Motion",
     duration: "12 months",
-    schedule: "Weekend intensives + Thursday evenings",
-    campuses: "Porto (Aliados)",
-    description:
-      "Brand identity, typography, print and digital design — plus motion graphics for social and video. Adobe Creative Suite from day one. Graduate with a Behance-ready portfolio and the brief-reading skills clients pay for.",
-    skills: ["Adobe Illustrator", "Photoshop", "InDesign", "After Effects", "Typography", "Brand Identity"],
+    campuses: "Porto",
+    description: "Brand identity, typography, print and digital design — plus motion graphics. Adobe Creative Suite from day one. Graduate with a Behance-ready portfolio.",
+    skills: ["Illustrator", "Photoshop", "After Effects", "Typography", "Brand Identity"],
   },
 ];
 
 export default function Programmes() {
-  const [openId, setOpenId] = useState<string | null>("ux-ui");
-
-  const toggle = (id: string) => setOpenId(openId === id ? null : id);
-
   return (
     <section id="programmes" className="bg-warm py-20 lg:py-28">
-      <div className="max-w-4xl mx-auto px-5">
+      <div className="max-w-6xl mx-auto px-5">
         <FadeUp className="text-center mb-14">
           <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">
             Our programs
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-brand leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-brand leading-tight">
             Choose your digital path
           </h2>
-          <p className="text-slate-500 mt-4 text-lg">
+          <p className="text-text-secondary mt-4 text-lg max-w-xl mx-auto">
             All programs are evening-based so you can study while your residence permit is being processed.
           </p>
         </FadeUp>
 
-        <FadeUp delay={0.1}>
-          <div className="space-y-3">
-            {programmes.map((prog) => {
-              const isOpen = openId === prog.id;
-              return (
-                <div
-                  key={prog.id}
-                  className={`rounded-2xl border transition-colors duration-200 overflow-hidden ${
-                    isOpen
-                      ? "border-brand/30 bg-white shadow-sm"
-                      : "border-warm-dark bg-white/60 hover:bg-white hover:border-brand/20"
-                  }`}
-                >
-                  <button
-                    onClick={() => toggle(prog.id)}
-                    className="w-full text-left px-6 py-5 flex items-center justify-between gap-4"
-                    aria-expanded={isOpen}
-                  >
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-semibold text-brand text-lg">{prog.name}</span>
-                        {prog.badge && (
-                          <span className="bg-accent text-white text-xs font-bold px-2.5 py-0.5 rounded-full">
-                            {prog.badge}
-                          </span>
-                        )}
-                      </div>
-                      <div className="flex flex-wrap gap-x-4 gap-y-0.5 mt-1">
-                        <span className="text-sm text-slate-400">{prog.duration}</span>
-                        <span className="text-sm text-slate-400 hidden sm:inline">{prog.campuses}</span>
-                      </div>
-                    </div>
-                    <motion.span
-                      animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
-                      className="flex-shrink-0 w-7 h-7 rounded-full bg-warm flex items-center justify-center text-brand text-lg font-light"
-                    >
-                      +
-                    </motion.span>
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ overflow: "hidden" }}
-                      >
-                        <div className="px-6 pb-7 border-t border-gray-100">
-                          <div className="pt-5">
-                            <div className="flex flex-wrap gap-x-6 gap-y-1 mb-5">
-                              <span className="text-sm text-slate-500">📅 {prog.schedule}</span>
-                              <span className="text-sm text-slate-500">📍 {prog.campuses}</span>
-                            </div>
-                            <p className="text-slate-600 text-base leading-relaxed mb-6">
-                              {prog.description}
-                            </p>
-                            <div>
-                              <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">
-                                You'll learn
-                              </p>
-                              <div className="flex flex-wrap gap-2">
-                                {prog.skills.map((skill) => (
-                                  <span
-                                    key={skill}
-                                    className="bg-warm text-brand text-sm px-3 py-1 rounded-full"
-                                  >
-                                    {skill}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                            <div className="mt-6">
-                              <a
-                                href="#consult"
-                                className="inline-block bg-accent hover:bg-accent-hover text-white font-semibold text-sm px-6 py-3 rounded-lg transition-colors"
-                              >
-                                Ask about {prog.name} →
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+        <div className="grid sm:grid-cols-2 gap-5">
+          {programmes.map(({ id, icon, badge, name, duration, campuses, description, skills }, i) => (
+            <FadeUp key={id} delay={i * 0.08}>
+              <div className="h-full bg-white rounded-2xl p-7 lg:p-8 border border-border shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col">
+                {/* Header */}
+                <div className="flex items-start justify-between mb-5">
+                  <div className="w-12 h-12 rounded-xl bg-warm flex items-center justify-center text-accent flex-shrink-0">
+                    {icon}
+                  </div>
+                  {badge && (
+                    <span className="bg-accent text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                      {badge}
+                    </span>
+                  )}
                 </div>
-              );
-            })}
-          </div>
-        </FadeUp>
+
+                {/* Title */}
+                <h3 className="font-display text-2xl font-bold text-brand mb-1">{name}</h3>
+                <div className="flex gap-3 mb-4">
+                  <span className="text-xs text-text-muted font-medium">{duration}</span>
+                  <span className="text-xs text-text-muted">·</span>
+                  <span className="text-xs text-text-muted font-medium">{campuses}</span>
+                </div>
+
+                {/* Description */}
+                <p className="text-text-secondary text-sm leading-relaxed mb-5 flex-1">
+                  {description}
+                </p>
+
+                {/* Skills */}
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  {skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="bg-warm text-brand text-xs font-medium px-2.5 py-1 rounded-full"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <a
+                  href="#consult"
+                  className="inline-flex items-center gap-1.5 text-accent font-semibold text-sm hover:gap-2.5 transition-all"
+                >
+                  Ask about this program
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            </FadeUp>
+          ))}
+        </div>
       </div>
     </section>
   );
