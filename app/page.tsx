@@ -1,65 +1,71 @@
-import Image from "next/image";
+/*
+ * FACULTET SCHOOL — HIGH-CONVERSION LANDING PAGE
+ *
+ * MESSAGE MAP
+ * H1: "Your Visa Problem Has an Education Solution"
+ * Sub: Licensed 14-month programs in Lisbon & Porto —
+ *      student residence permit + European certificate + portfolio
+ *
+ * SECTION FLOW & PURPOSE
+ * 1. Nav            → One CTA, no exit links
+ * 2. Hero           → "Am I in the right place?" → Yes.
+ * 3. TrustBar       → "Can I trust this?" → 2,147 graduates, licensed, 4.9/5
+ * 4. AudienceSelect → "Is this for me?" → Two specific personas
+ * 5. PainAgitation  → "Do they understand my pain?" → Deeply
+ * 6. DoubleValue    → "What do I actually get?" → Two problems, one enrollment
+ * 7. Programmes     → "What are my options?" → 4 programs
+ * 8. VisaSteps      → "Is the process complicated?" → No, 4 steps
+ * 9. VisaFaq        → Pre-empt every objection
+ * 10. Testimonials  → "Has it worked for people like me?" → Yes
+ * 11. SuccessStories → "What happens after?" → Stats + final CTA
+ *
+ * PRIMARY CTA: "Book My Free Consultation" (Hero + post-testimonials + final)
+ * OBJECTIONS HANDLED:
+ *   "Is this legit?" → TrustBar + FAQ #1 (Ministry license)
+ *   "Is this for me?" → AudienceSelect
+ *   "How does the visa work?" → VisaSteps + FAQ
+ *   "What if it fails?" → FAQ #6 (refund policy)
+ *   "Can I afford it?" → FAQ #5 (monthly installments from €380)
+ */
+
+import Nav from "@/components/Nav";
+import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
+import AudienceSelect from "@/components/AudienceSelect";
+import PainAgitation from "@/components/PainAgitation";
+import DoubleValue from "@/components/DoubleValue";
+import Programmes from "@/components/Programmes";
+import VisaSteps from "@/components/VisaSteps";
+import VisaFaq from "@/components/VisaFaq";
+import Testimonials from "@/components/Testimonials";
+import SuccessStories from "@/components/SuccessStories";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <TrustBar />
+        <AudienceSelect />
+        <PainAgitation />
+        <DoubleValue />
+        <Programmes />
+        <VisaSteps />
+        <Testimonials />
+        <VisaFaq />
+        <SuccessStories />
       </main>
-    </div>
+
+      {/* Mobile sticky CTA — visible only on small screens */}
+      <div className="fixed bottom-0 inset-x-0 z-40 bg-white border-t border-gray-200 shadow-lg p-4 sm:hidden">
+        <a
+          href="#consult"
+          className="block w-full text-center bg-accent hover:bg-accent-hover text-white font-semibold py-3.5 rounded-xl transition-colors text-base"
+        >
+          Book My Free Consultation
+        </a>
+      </div>
+    </>
   );
 }
