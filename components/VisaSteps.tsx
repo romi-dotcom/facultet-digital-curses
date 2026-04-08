@@ -25,13 +25,13 @@ const steps = [
 
 export default function VisaSteps() {
   return (
-    <section id="visa-steps" className="bg-[#F7F5F2] py-20 lg:py-24">
+    <section id="visa-steps" className="bg-[#F7F5F2] py-14 lg:py-24">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
 
         {/* Header */}
         <FadeUp className="text-center mb-10">
           <p className="text-[#E86339] text-[11px] font-semibold tracking-[2px] uppercase mb-4">HOW IT WORKS</p>
-          <h2 className="text-[#1A1A2E] text-[40px] font-bold leading-[1.15] max-w-[800px] mx-auto">
+          <h2 className="text-[#1A1A2E] text-[28px] sm:text-[40px] font-bold leading-[1.15] max-w-[800px] mx-auto">
             Renew your student permit —<br className="hidden sm:block" />
             without leaving Portugal
           </h2>
