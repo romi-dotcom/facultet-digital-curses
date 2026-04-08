@@ -85,7 +85,7 @@ export default function PainAgitation() {
         <FadeUp delay={0.2} className="max-w-[1100px] mx-auto mt-6">
           <a
             href="#double-value"
-            className="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-hover text-white font-medium px-7 py-4 rounded-full transition-all shadow-[0_4px_16px_rgba(232,93,38,0.31)] text-sm"
+            className="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-hover text-white font-medium px-5 py-4 rounded-full transition-all shadow-[0_4px_16px_rgba(232,93,38,0.31)] text-[13px] whitespace-nowrap"
           >
             Facultet solves all three. Here&apos;s how
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
