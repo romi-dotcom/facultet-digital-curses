@@ -22,13 +22,13 @@ const strip = [
 
 export default function DoubleValue() {
   return (
-    <section id="double-value" className="bg-[#F8FAFC] py-20 lg:py-24">
+    <section id="double-value" className="bg-[#F8FAFC] py-14 lg:py-24">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
         <FadeUp className="text-center mb-12">
           <p className="text-accent text-[11px] font-bold tracking-[2px] uppercase mb-5">
             WHY FACULTET
           </p>
-          <h2 className="text-[#1E293B] text-[36px] font-bold leading-[1.2] max-w-2xl mx-auto">
+          <h2 className="text-[#1E293B] text-[28px] sm:text-[36px] font-bold leading-[1.2] max-w-2xl mx-auto">
             One decision. Two problems solved.
           </h2>
           <p className="text-[#64748B] text-base mt-5 max-w-2xl mx-auto leading-relaxed">
