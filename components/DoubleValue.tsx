@@ -103,44 +103,46 @@ export default function DoubleValue() {
 
         {/* Comparison table */}
         <FadeUp delay={0.2}>
-          <div className="rounded-2xl overflow-hidden border border-[#E2E8F0]">
+          <div className="rounded-2xl overflow-hidden" style={{ background: "#2C3348" }}>
 
             {/* Row 1 */}
-            <div className="flex items-center justify-between px-5 py-4 bg-[#F1F5F9]">
+            <div className="flex items-start justify-between px-5 py-5">
               <div>
-                <p className="text-[#94A3B8] text-[11px] font-medium uppercase tracking-wide mb-0.5">Formal enrolment elsewhere</p>
-                <p className="text-[#1E293B] text-sm font-bold leading-tight">Renewal docs only</p>
-                <p className="text-[#64748B] text-xs mt-0.5">No career support, no education</p>
+                <p className="text-[#94A3B8] text-[12px] font-medium mb-1">Formal enrolment elsewhere</p>
+                <p className="text-white text-[20px] font-bold leading-tight mb-1">Renewal docs only</p>
+                <p className="text-[#94A3B8] text-sm">No career support, no education</p>
               </div>
-              <div className="w-7 h-7 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 ml-3">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-4 mt-1" style={{ background: "rgba(239,68,68,0.2)" }}>
                 <XIcon />
               </div>
             </div>
 
             {/* Divider */}
-            <div className="h-px bg-[#E2E8F0]" />
+            <div className="h-px mx-5" style={{ background: "rgba(255,255,255,0.08)" }} />
 
             {/* Row 2 */}
-            <div className="flex items-center justify-between px-5 py-4 bg-[#F1F5F9]">
+            <div className="flex items-start justify-between px-5 py-5">
               <div>
-                <p className="text-[#94A3B8] text-[11px] font-medium uppercase tracking-wide mb-0.5">Immigration lawyer</p>
-                <p className="text-[#1E293B] text-sm font-bold leading-tight">€1,000–3,000</p>
-                <p className="text-[#64748B] text-xs mt-0.5">Legal help only, no education</p>
+                <p className="text-[#94A3B8] text-[12px] font-medium mb-1">Immigration lawyer</p>
+                <p className="text-white text-[20px] font-bold leading-tight mb-1">€1,000–3,000</p>
+                <p className="text-[#94A3B8] text-sm">Legal help only, no education</p>
               </div>
-              <div className="w-7 h-7 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 ml-3">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-4 mt-1" style={{ background: "rgba(239,68,68,0.2)" }}>
                 <XIcon />
               </div>
             </div>
 
-            {/* Row 3 — Facultet (highlighted) */}
-            <div className="flex items-center justify-between px-5 py-4" style={{ background: "#166534" }}>
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <p className="text-white/80 text-[11px] font-medium">Facultet School</p>
-                  <span className="bg-[#4ADE80] text-[#14532D] text-[10px] font-bold px-2 py-0.5 rounded-full">Best Value</span>
-                </div>
-                <p className="text-white text-base font-bold leading-tight">from €125/month</p>
-                <p className="text-white/70 text-xs mt-0.5">Renewal docs + real education. Both.</p>
+            {/* Row 3 — Facultet */}
+            <div>
+              {/* Green header */}
+              <div className="flex items-center justify-between px-5 py-3" style={{ background: "#3D9E56" }}>
+                <p className="text-white font-bold text-sm">Facultet School</p>
+                <span className="bg-white/20 text-white text-[11px] font-bold px-3 py-1 rounded-full">Best Value</span>
+              </div>
+              {/* White content */}
+              <div className="px-5 py-5 bg-white">
+                <p className="text-[#1E293B] text-[28px] font-extrabold leading-tight mb-1">from €125/month</p>
+                <p className="text-[#64748B] text-sm">Renewal docs + real education. Both.</p>
               </div>
             </div>
 
