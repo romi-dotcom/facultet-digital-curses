@@ -63,7 +63,7 @@ export default function Hero() {
                 <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
               </svg>
               <span className="text-[#64748B] text-sm">
-                Most permits need renewal 60–90 days before expiry ·{" "}
+                Most permits need renewal 60–90 days before expiry
                 <br />Next intake: September 2026 · Limited spots
               </span>
             </motion.div>
