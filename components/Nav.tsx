@@ -58,7 +58,14 @@ export default function Nav() {
       </div>
 
       {/* Main nav */}
-      <nav className={`bg-white border-b border-border h-16 flex items-center transition-shadow duration-300 ${scrolled ? "shadow-[0_2px_12px_rgba(0,0,0,0.10)]" : "shadow-[0_2px_8px_rgba(0,0,0,0.06)]"}`}>
+      <nav className={`relative bg-white border-b border-border h-16 flex items-center transition-shadow duration-300 ${scrolled ? "shadow-[0_2px_12px_rgba(0,0,0,0.10)]" : "shadow-[0_2px_8px_rgba(0,0,0,0.06)]"}`}>
+        {/* Centered label — absolute so it doesn't affect layout */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="hidden sm:block text-[10px] font-semibold tracking-[0.2em] uppercase text-text-muted">
+            Study in Portugal · Licensed Institution
+          </span>
+        </div>
+
         <div className="max-w-[1440px] mx-auto px-5 lg:px-10 w-full flex items-center gap-4">
 
           {/* LEFT: Hamburger */}
