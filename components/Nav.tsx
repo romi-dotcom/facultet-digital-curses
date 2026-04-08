@@ -1,13 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
+const navLinks = [
+  { label: "Programmes",      href: "#programmes" },
+  { label: "Visa Process",    href: "#visa-steps" },
+  { label: "Student Stories", href: "#testimonials" },
+  { label: "FAQ",             href: "#faq" },
+  { label: "Book Consultation", href: "#consult" },
+];
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  // Lock body scroll when drawer open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  const close = () => setMenuOpen(false);
 
   return (
     <header className="fixed top-0 inset-x-0 z-50">
-      {/* §00 Top Utility Bar */}
+      {/* Top utility bar */}
       <div className="bg-[#1E293B] h-9 hidden sm:flex items-center">
         <div className="max-w-[1440px] mx-auto px-10 w-full flex items-center gap-4">
           <div className="flex items-center gap-1.5">
@@ -33,54 +57,132 @@ export default function Nav() {
         </div>
       </div>
 
-      {/* §01 Main Navigation */}
-      <nav className="bg-white border-b border-[#E2E8F0] shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-16 flex items-center">
-        <div className="max-w-[1440px] mx-auto px-5 lg:px-10 w-full flex items-center justify-between">
-          {/* Logo */}
-          <a href="/" className="flex items-center flex-shrink-0">
-            <span className="text-[#1E293B] text-xl font-bold">facultet</span>
+      {/* Main nav */}
+      <nav className={`bg-white border-b border-border h-16 flex items-center transition-shadow duration-300 ${scrolled ? "shadow-[0_2px_12px_rgba(0,0,0,0.10)]" : "shadow-[0_2px_8px_rgba(0,0,0,0.06)]"}`}>
+        <div className="max-w-[1440px] mx-auto px-5 lg:px-10 w-full flex items-center gap-4">
+
+          {/* LEFT: Hamburger */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="flex-shrink-0 w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-warm transition-colors"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+          >
+            <motion.span
+              animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.22 }}
+              className="block w-5 h-[1.75px] bg-brand rounded-full origin-center"
+            />
+            <motion.span
+              animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.18 }}
+              className="block w-5 h-[1.75px] bg-brand rounded-full"
+            />
+            <motion.span
+              animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.22 }}
+              className="block w-5 h-[1.75px] bg-brand rounded-full origin-center"
+            />
+          </button>
+
+          {/* CENTER: Logo */}
+          <a href="/" className="flex items-center flex-1 justify-center sm:flex-none sm:justify-start">
+            <span className="text-brand text-xl font-bold">facultet</span>
             <span className="text-accent text-xl font-normal">.school</span>
           </a>
 
-          {/* Nav Center — desktop */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#programmes" className="text-[#374151] text-sm font-medium hover:text-accent transition-colors">
-              Programmes ▾
-            </a>
-          </div>
-
-          {/* Nav Right */}
-          <div className="flex items-center gap-2.5">
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="text-[#374151] p-2 hover:text-accent transition-colors md:hidden"
-              aria-label="Menu"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                {menuOpen
-                  ? <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>
-                  : <><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></>
-                }
-              </svg>
-            </button>
-            <a
-              href="#consult"
-              className="bg-accent hover:bg-accent-hover text-white text-sm font-bold px-6 py-2.5 rounded-md transition-colors"
-            >
-              Apply Now →
-            </a>
-          </div>
+          {/* RIGHT: CTA */}
+          <a
+            href="#consult"
+            className="ml-auto flex-shrink-0 bg-accent hover:bg-accent-hover text-white text-sm font-bold px-5 sm:px-6 py-2.5 rounded-md transition-colors"
+          >
+            <span className="hidden sm:inline">Apply Now →</span>
+            <span className="sm:hidden">Apply →</span>
+          </a>
         </div>
-
-        {/* Mobile menu */}
-        {menuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white border-b border-[#E2E8F0] shadow-lg px-5 py-4 space-y-3 md:hidden">
-            <a href="#programmes" onClick={() => setMenuOpen(false)} className="block text-[#374151] text-sm font-medium py-2 hover:text-accent">Programmes</a>
-            <a href="#visa-steps" onClick={() => setMenuOpen(false)} className="block text-[#374151] text-sm font-medium py-2 hover:text-accent">Visa Process</a>
-            <a href="#faq" onClick={() => setMenuOpen(false)} className="block text-[#374151] text-sm font-medium py-2 hover:text-accent">FAQ</a>
-          </div>
-        )}
       </nav>
+
+      {/* Drawer overlay */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={close}
+              className="fixed inset-0 bg-black/40 z-40"
+            />
+
+            {/* Drawer */}
+            <motion.div
+              key="drawer"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed top-0 left-0 h-full w-72 bg-white z-50 shadow-2xl flex flex-col"
+            >
+              {/* Drawer header */}
+              <div className="flex items-center justify-between px-6 h-16 border-b border-border flex-shrink-0">
+                <a href="/" onClick={close} className="flex items-center">
+                  <span className="text-brand text-lg font-bold">facultet</span>
+                  <span className="text-accent text-lg font-normal">.school</span>
+                </a>
+                <button
+                  onClick={close}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-warm transition-colors text-brand"
+                  aria-label="Close menu"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                </button>
+              </div>
+
+              {/* Nav links */}
+              <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+                {navLinks.map(({ label, href }, i) => (
+                  <motion.a
+                    key={href}
+                    href={href}
+                    onClick={close}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 + i * 0.05, duration: 0.25 }}
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-colors group ${
+                      label === "Book Consultation"
+                        ? "bg-accent text-white hover:bg-accent-hover mt-4"
+                        : "text-brand hover:bg-warm hover:text-accent"
+                    }`}
+                  >
+                    {label}
+                    <svg
+                      width="14" height="14" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                      className={label === "Book Consultation" ? "text-white/70" : "text-text-muted group-hover:text-accent transition-colors"}
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </motion.a>
+                ))}
+              </nav>
+
+              {/* Drawer footer */}
+              <div className="px-6 py-5 border-t border-border flex-shrink-0">
+                <p className="text-text-muted text-xs leading-relaxed">
+                  Licensed by the Ministry of Education, Portugal
+                  <br />
+                  License #2847-DEP/2019
+                </p>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
