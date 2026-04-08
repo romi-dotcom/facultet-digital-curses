@@ -109,7 +109,7 @@ export default function DoubleValue() {
             <div className="flex items-start justify-between px-5 py-5">
               <div>
                 <p className="text-[#94A3B8] text-[12px] font-medium mb-1">Formal enrolment elsewhere</p>
-                <p className="text-white text-[20px] font-bold leading-tight mb-1">Renewal docs only</p>
+                <p className="text-white text-[16px] font-bold leading-tight mb-1">Renewal docs only</p>
                 <p className="text-[#94A3B8] text-sm">No career support, no education</p>
               </div>
               <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-4 mt-1" style={{ background: "rgba(239,68,68,0.2)" }}>
@@ -124,7 +124,7 @@ export default function DoubleValue() {
             <div className="flex items-start justify-between px-5 py-5">
               <div>
                 <p className="text-[#94A3B8] text-[12px] font-medium mb-1">Immigration lawyer</p>
-                <p className="text-white text-[20px] font-bold leading-tight mb-1">€1,000–3,000</p>
+                <p className="text-white text-[16px] font-bold leading-tight mb-1">€1,000–3,000</p>
                 <p className="text-[#94A3B8] text-sm">Legal help only, no education</p>
               </div>
               <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-4 mt-1" style={{ background: "rgba(239,68,68,0.2)" }}>
