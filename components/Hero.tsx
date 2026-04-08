@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section className="bg-[#F8FAFC] pt-[64px] sm:pt-[96px]">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px] py-[40px] lg:py-[72px]">
-        <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-20">
+        <div className="flex flex-col lg:flex-row items-start gap-4 lg:gap-20">
 
           {/* Left column */}
           <div className="flex flex-col gap-6 lg:w-1/2 w-full">
