@@ -35,13 +35,13 @@ const programmes = [
 
 export default function Programmes() {
   return (
-    <section id="programmes" className="bg-white py-20 lg:py-24">
+    <section id="programmes" className="bg-white py-14 lg:py-24">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
         <FadeUp className="text-center mb-10">
           <p className="text-[#E86339] text-[11px] font-semibold tracking-[2px] uppercase mb-4">
             OUR PROGRAMMES
           </p>
-          <h2 className="text-[#1E293B] text-[36px] font-bold leading-tight max-w-2xl mx-auto">
+          <h2 className="text-[#1E293B] text-[28px] sm:text-[36px] font-bold leading-tight max-w-2xl mx-auto">
             Choose Your Programme — Start Studying, Keep Working
           </h2>
           <p className="text-[#64748B] text-base mt-3">Evening · 13+ months · Licensed · Permit Renewal</p>
