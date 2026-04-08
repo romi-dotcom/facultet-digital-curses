@@ -43,15 +43,6 @@ export default function Home() {
         <ApplicationForm />
       </main>
 
-      {/* Mobile sticky CTA */}
-      <div className="fixed bottom-0 inset-x-0 z-40 bg-white border-t border-gray-200 shadow-lg p-4 sm:hidden">
-        <a
-          href="#consult"
-          className="block w-full text-center bg-accent hover:bg-accent-hover text-white font-bold py-3.5 rounded-xl transition-colors text-base"
-        >
-          Apply Now →
-        </a>
-      </div>
     </>
   );
 }
