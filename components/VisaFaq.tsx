@@ -26,7 +26,7 @@ export default function VisaFaq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-white py-14 lg:py-24">
+    <section id="faq" className="bg-white py-10 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
         <div className="flex flex-col lg:flex-row gap-20 items-start">
 
@@ -38,11 +38,11 @@ export default function VisaFaq() {
               </svg>
             </div>
 
-            <h2 className="text-[#1E293B] text-[28px] sm:text-[36px] font-bold leading-[1.2]">
+            <h2 className="text-[#1E293B] text-[20px] lg:text-[36px] font-bold leading-[1.2]">
               Permit Renewal Questions & Answers
             </h2>
 
-            <p className="text-[#64748B] text-base leading-[1.6]">
+            <p className="text-[#64748B] leading-[1.6]" style={{ fontSize: 14 }}>
               Everything you need to know about the student permit renewal process through Facultet.
             </p>
 

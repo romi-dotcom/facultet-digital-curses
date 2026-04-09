@@ -25,18 +25,18 @@ const steps = [
 
 export default function VisaSteps() {
   return (
-    <section id="visa-steps" className="bg-[#F7F5F2] py-14 lg:py-24">
+    <section id="visa-steps" className="bg-[#F7F5F2] py-10 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
 
         {/* Header */}
-        <FadeUp className="text-center mb-10">
-          <p className="text-[#E86339] text-[11px] font-semibold tracking-[2px] uppercase mb-4">HOW IT WORKS</p>
-          <h2 className="text-[#1A1A2E] text-[28px] sm:text-[40px] font-bold leading-[1.15] max-w-[800px] mx-auto">
-            Renew your student permit —<br className="hidden sm:block" />
+        <FadeUp className="text-center mb-8">
+          <p className="text-[#E86339] font-semibold uppercase mb-4" style={{ fontSize: 10, letterSpacing: 2 }}>HOW IT WORKS</p>
+          <h2 className="text-[#1A1A2E] text-[22px] lg:text-[40px] font-bold leading-[1.15] max-w-[800px] mx-auto">
+            Renew your student permit —<br className="hidden lg:block" />
             without leaving Portugal
           </h2>
-          <p className="text-[#64748B] text-[17px] leading-[1.5] mt-5 max-w-[720px] mx-auto">
-            Stay enrolled at a DGERT-licensed school — AIMA renews your student residence permit every year. We issue the documents you need.
+          <p className="text-[#64748B] leading-[1.5] mt-4 max-w-[720px] mx-auto" style={{ fontSize: 14 }}>
+            Stay enrolled at a DGERT-licensed school — AIMA renews your student residence permit every year.
           </p>
         </FadeUp>
 

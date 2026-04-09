@@ -17,14 +17,14 @@ const videos = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="bg-white py-14 lg:py-24">
+    <section id="testimonials" className="bg-white py-10 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
 
-        <FadeUp className="text-center mb-10">
-          <h2 className="text-[#1E293B] text-[28px] sm:text-[40px] font-extrabold tracking-[-1px]">
+        <FadeUp className="text-center mb-8">
+          <h2 className="text-[#1E293B] text-[22px] lg:text-[40px] font-bold">
             Watch Their Journey
           </h2>
-          <p className="text-[#64748B] text-base mt-3">
+          <p className="text-[#64748B] mt-3" style={{ fontSize: 14 }}>
             Unscripted stories from real Facultet graduates
           </p>
         </FadeUp>

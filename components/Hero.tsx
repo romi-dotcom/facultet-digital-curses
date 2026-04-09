@@ -11,20 +11,25 @@ const item = (delay: number) => ({
 
 export default function Hero() {
   return (
-    <section className="bg-[#F8FAFC] pt-[64px] sm:pt-[96px]">
-      <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px] py-[40px] lg:py-[72px]">
-        <div className="flex flex-col lg:flex-row items-start gap-4 lg:gap-20">
+    <section className="bg-[#F8FAFC] pt-[100px]">
+      <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px] py-[40px] lg:py-[80px]">
+        <div className="flex flex-col lg:flex-row items-start gap-5 lg:gap-20">
 
           {/* Left column */}
-          <div className="flex flex-col gap-6 lg:w-1/2 w-full">
-            {/* H1 */}
-            <motion.h1 {...item(0)} className="text-[#1E293B] text-[32px] sm:text-[40px] lg:text-[44px] font-bold leading-[1.15] tracking-tight">
+          <div className="flex flex-col gap-5 lg:w-1/2 w-full">
+            {/* Eyebrow — 10px, 700, #E85D26, letterSpacing 1.5 */}
+            <motion.p {...item(0)} style={{ color: "#E85D26", fontSize: 10, fontWeight: 700, letterSpacing: 1.5 }}>
+              STUDY IN PORTUGAL · LICENSED INSTITUTION
+            </motion.p>
+
+            {/* H1 — 28px mobile, 40px desktop */}
+            <motion.h1 {...item(0.05)} className="text-[#1E293B] text-[28px] lg:text-[40px] font-bold leading-[1.2]">
               Keep your student permit.<br />
               Build your European career.
             </motion.h1>
 
-            {/* Subtitle */}
-            <motion.p {...item(0.2)} className="text-[#64748B] text-base leading-[1.6]">
+            {/* Subtitle — 15px, lineHeight 1.6 */}
+            <motion.p {...item(0.1)} className="text-[#64748B] leading-[1.6]" style={{ fontSize: 15 }}>
               Evening professional programmes with an official enrolment
               certificate for your AIMA residence permit renewal.
               DGERT-licensed. Real campus. Real results.

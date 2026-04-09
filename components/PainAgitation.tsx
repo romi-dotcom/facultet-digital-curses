@@ -44,14 +44,14 @@ const stats = [
 export default function PainAgitation() {
   return (
     <section
-      className="py-14 lg:py-[120px]"
+      className="py-10 lg:py-[80px]"
       style={{ background: "linear-gradient(180deg, #1E293B 0%, #2A1F1A 100%)" }}
     >
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
 
         {/* Heading */}
         <FadeUp className="text-center mb-8 lg:mb-10">
-          <h2 className="text-white text-[28px] lg:text-[40px] font-bold leading-[1.2]">
+          <h2 className="text-white text-[22px] lg:text-[40px] font-bold leading-[1.2]">
             Does this sound familiar?
           </h2>
         </FadeUp>

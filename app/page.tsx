@@ -1,4 +1,3 @@
-import TopUtilityBar from "@/components/TopUtilityBar";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
@@ -8,24 +7,24 @@ import DoubleValue from "@/components/DoubleValue";
 import PhotoGalleryMobile from "@/components/PhotoGalleryMobile";
 import PhotoGalleryDesktop from "@/components/PhotoGalleryDesktop";
 import Programmes from "@/components/Programmes";
-import MiniCapture from "@/components/MiniCapture";
+import WhyFacultet from "@/components/WhyFacultet";
 import VisaSteps from "@/components/VisaSteps";
 import HowToApply from "@/components/HowToApply";
-import CTAStrip from "@/components/CTAStrip";
-import VisaFaq from "@/components/VisaFaq";
-import Testimonials from "@/components/Testimonials";
-import WhyFacultet from "@/components/WhyFacultet";
-import SuccessStories from "@/components/SuccessStories";
+import MiniCapture from "@/components/MiniCapture";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
-import CampusMap from "@/components/CampusMap";
+import CTAMobileForm from "@/components/CTAMobileForm";
+import VisaFaq from "@/components/VisaFaq";
+import CTAStrip from "@/components/CTAStrip";
+import SuccessStories from "@/components/SuccessStories";
+import Testimonials from "@/components/Testimonials";
 import ApplicationForm from "@/components/ApplicationForm";
+import CampusMap from "@/components/CampusMap";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
     <>
-      <TopUtilityBar />
       <Nav />
       <main>
         <Hero />
@@ -36,30 +35,36 @@ export default function Home() {
         <PhotoGalleryMobile />
         <PhotoGalleryDesktop />
         <Programmes />
-        <MiniCapture />
+        <WhyFacultet />
         <VisaSteps />
         <HowToApply />
-        <CTAStrip
-          heading="Ready to sort out your student permit?"
-          sub="Fill in two fields — your coordinator will call back within 2 hours. No paperwork needed at this stage."
-          btnText="Book a Free Consultation →"
-        />
-        <VisaFaq />
-        <Testimonials />
-        <WhyFacultet />
-        <SuccessStories />
+        {/* Desktop only: Mini Capture form then WhatsApp CTA */}
+        <MiniCapture />
         <WhatsAppCTA />
-        <CampusMap />
+        {/* Mobile only: CTA form strip */}
+        <CTAMobileForm />
+        <VisaFaq />
+        {/* Desktop only CTA #1 */}
+        <CTAStrip
+          heading="Ready to start? Apply in 2 minutes"
+          sub="Takes 2 minutes · No commitment · Response within 2 business hours"
+          btnText="Book a Free Consultation →"
+          desktopOnly
+          headingSize="large"
+        />
+        <SuccessStories />
+        <Testimonials />
+        {/* CTA #2 — both mobile and desktop */}
         <CTAStrip
           heading="Join Maria, Arjun, and 420 other students who chose Facultet."
-          sub="No documents needed to apply · Response within 1 business day"
           btnText="Get My Free Consultation"
           trust="No documents needed to apply · Response within 1 business day"
         />
         <ApplicationForm />
+        <CampusMap />
       </main>
-      <Footer />
       <BackToTop />
+      <Footer />
     </>
   );
 }

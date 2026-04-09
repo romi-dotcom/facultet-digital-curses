@@ -66,13 +66,13 @@ export default function AudienceSelect() {
   };
 
   return (
-    <section id="audience" className="bg-[#F8FAFC] py-14 lg:py-24">
+    <section id="audience" className="bg-[#F8FAFC] py-10 lg:py-20">
       <div className="max-w-[1440px] mx-auto lg:px-[160px]">
         <FadeUp className="text-center mb-8 px-5">
-          <h2 className="text-[#1E293B] text-[28px] sm:text-[36px] font-bold leading-[1.2]">
+          <h2 className="text-[#1E293B] text-[22px] lg:text-[36px] font-bold leading-[1.2]">
             Is this your situation?
           </h2>
-          <p className="text-[#64748B] text-base mt-3">
+          <p className="text-[#64748B] mt-3" style={{ fontSize: 14, lineHeight: 1.5 }}>
             Which of these sounds like you?
           </p>
         </FadeUp>

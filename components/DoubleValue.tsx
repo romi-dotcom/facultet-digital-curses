@@ -28,18 +28,18 @@ const XIcon = () => (
 
 export default function DoubleValue() {
   return (
-    <section id="double-value" className="bg-[#F8FAFC] py-14 lg:py-24">
+    <section id="double-value" className="bg-[#F8FAFC] py-10 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
 
         {/* Header */}
-        <FadeUp className="text-center mb-8">
-          <p className="text-accent text-[11px] font-bold tracking-[2px] uppercase mb-4">
+        <FadeUp className="text-center mb-6">
+          <p className="text-accent font-bold uppercase mb-4" style={{ fontSize: 10, letterSpacing: 2 }}>
             WHY FACULTET
           </p>
-          <h2 className="text-[#1E293B] text-[28px] sm:text-[36px] font-bold leading-[1.2] max-w-2xl mx-auto">
+          <h2 className="text-[#1E293B] text-[22px] lg:text-[36px] font-bold leading-[1.2] max-w-2xl mx-auto">
             One decision.<br className="sm:hidden" /> Two problems solved.
           </h2>
-          <p className="text-[#64748B] text-sm sm:text-base mt-4 max-w-xl mx-auto leading-relaxed">
+          <p className="text-[#64748B] mt-4 max-w-xl mx-auto leading-relaxed" style={{ fontSize: 14, lineHeight: 1.6 }}>
             No formal enrolment gives you a career. No online course helps you keep your status. We do both — in one evening programme.
           </p>
         </FadeUp>

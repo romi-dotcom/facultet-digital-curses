@@ -26,14 +26,14 @@ const steps = [
 
 export default function HowToApply() {
   return (
-    <section id="how-to-apply" className="bg-white py-20 lg:py-24">
+    <section id="how-to-apply" className="bg-white py-[60px] lg:py-20">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
-        <FadeUp className="text-center mb-12">
-          <h2 className="text-[#1E293B] text-[40px] font-bold leading-tight">
+        <FadeUp className="text-center mb-10">
+          <h2 className="text-[#1E293B] text-[28px] lg:text-[40px] font-extrabold leading-tight" style={{ letterSpacing: -0.5 }}>
             How to Apply
           </h2>
-          <p className="text-[#64748B] text-[17px] leading-[1.6] mt-3 max-w-2xl mx-auto">
-            3 simple steps — from application to enrolment documents in your hands.
+          <p className="text-[#64748B] leading-[1.6] mt-3 max-w-2xl mx-auto" style={{ fontSize: 15 }}>
+            3 simple steps — from application to<br className="hidden lg:block" /> enrolment documents in your hands.
           </p>
         </FadeUp>
 
