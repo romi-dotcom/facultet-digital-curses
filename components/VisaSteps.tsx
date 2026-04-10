@@ -89,18 +89,21 @@ export default function VisaSteps() {
               {steps.map(({ num, title, desc, orange }, i) => (
                 <div
                   key={num}
-                  className="flex gap-4"
+                  className="relative flex gap-4"
                   style={{ paddingBottom: i < steps.length - 1 ? 32 : 0 }}
                 >
-                  <div className="flex flex-col items-center gap-1">
+                  <div className="flex-shrink-0 w-10">
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                      className="w-10 h-10 rounded-full flex items-center justify-center"
                       style={{ background: orange ? "#E85D26" : "#1E293B" }}
                     >
                       <span className="text-white font-bold" style={{ fontSize: 16 }}>{num}</span>
                     </div>
                     {i < steps.length - 1 && (
-                      <div className="w-px flex-1 min-h-[24px] bg-[#D1CAC0]" />
+                      <div
+                        className="absolute bg-[#D1CAC0]"
+                        style={{ left: 19, top: 40, bottom: 0, width: 1 }}
+                      />
                     )}
                   </div>
                   <div className="flex flex-col gap-1 pt-1.5 pb-2">
