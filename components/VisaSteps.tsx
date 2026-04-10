@@ -2,59 +2,79 @@ import FadeUp from "./FadeUp";
 
 const steps = [
   {
-    num: "01",
-    title: "Enrol at Facultet",
-    desc: "Apply online and sign the enrolment agreement. No immigration documents needed from you at this stage.",
+    num: "1",
+    title: "Stay enrolled at Facultet",
+    desc: "Active enrolment at a DGERT-licensed school is the legal basis for your annual permit renewal.",
+    orange: true,
   },
   {
-    num: "02",
-    title: "Receive your documents",
-    desc: "We issue the official enrolment certificate accepted by AIMA — ready in 5 business days.",
+    num: "2",
+    title: "Request your renewal certificate",
+    desc: "We issue an official active-student confirmation. Ready in 2 business days.",
+    orange: false,
   },
   {
-    num: "03",
-    title: "Book your AIMA appointment",
-    desc: "Submit the renewal application with our document package. We prepare a full checklist so nothing is missing.",
+    num: "3",
+    title: "Submit renewal to AIMA",
+    desc: "Book your appointment at the AIMA office in Lisbon or Porto. We prepare all required documents.",
+    orange: false,
   },
   {
-    num: "04",
-    title: "Get your renewed permit",
-    desc: "AIMA processes and renews your student residence permit. 100% acceptance rate with our documentation.",
+    num: "4",
+    title: "Permit renewed for another year",
+    desc: "Continue studying, working, and building your life in Portugal. Repeat each year.",
+    orange: false,
   },
+];
+
+const stats = [
+  { val: "200+", lbl: "Students\nsupported" },
+  { val: "5", lbl: "Business days\nfor documents" },
+  { val: "100%", lbl: "Documents\naccepted by AIMA" },
 ];
 
 export default function VisaSteps() {
   return (
-    <section id="visa-steps" className="bg-[#F7F5F2] py-10 lg:py-20">
+    <section id="visa-steps" className="bg-[#F5F0E8] py-10 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
 
         {/* Header */}
         <FadeUp className="text-center mb-8">
           <p className="text-[#E86339] font-semibold uppercase mb-4" style={{ fontSize: 10, letterSpacing: 2 }}>HOW IT WORKS</p>
           <h2 className="text-[#1A1A2E] text-[22px] lg:text-[40px] font-bold leading-[1.15] max-w-[800px] mx-auto">
-            Renew your student permit —<br className="hidden lg:block" />
-            without leaving Portugal
+            Renew your student permit —<br className="hidden lg:block" /> without leaving Portugal
           </h2>
-          <p className="text-[#64748B] leading-[1.5] mt-4 max-w-[720px] mx-auto" style={{ fontSize: 14 }}>
+          <p className="text-[#64748B] leading-[1.6] mt-4 max-w-[720px] mx-auto" style={{ fontSize: 14 }}>
             Stay enrolled at a DGERT-licensed school — AIMA renews your student residence permit every year.
           </p>
         </FadeUp>
 
         {/* Stats row */}
-        <FadeUp delay={0.05} className="mb-12">
-          <div className="flex items-center justify-center flex-wrap gap-0 max-w-[1120px] mx-auto border border-[#E2E8F0] rounded-xl overflow-hidden bg-white">
-            {[
-              { val: "200+", lbl: "Students supported" },
-              { val: "5", lbl: "Business days for documents" },
-              { val: "100%", lbl: "Documents accepted by AIMA" },
-            ].map(({ val, lbl }, i) => (
+        <FadeUp delay={0.05} className="mb-10 lg:mb-12">
+          {/* Mobile: inline, no card */}
+          <div className="flex items-start justify-between lg:hidden">
+            {stats.map(({ val, lbl }, i) => (
+              <div key={val} className="flex flex-col items-center flex-1" style={{ borderRight: i < 2 ? "1px solid #C9C0B0" : undefined }}>
+                <span className="text-[#1A1A2E] font-bold leading-none" style={{ fontSize: 32 }}>{val}</span>
+                <span className="text-[#64748B] text-center leading-tight mt-1" style={{ fontSize: 12 }}>
+                  {lbl.split("\n").map((line, j) => <span key={j} className="block">{line}</span>)}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop: white card */}
+          <div className="hidden lg:flex items-center justify-center max-w-[1120px] mx-auto border border-[#E2E8F0] rounded-xl overflow-hidden bg-white">
+            {stats.map(({ val, lbl }, i) => (
               <div
                 key={val}
-                className="flex flex-col items-center gap-1.5 py-5 px-6 flex-1 min-w-[160px]"
+                className="flex flex-col items-center gap-1.5 py-5 px-6 flex-1"
                 style={{ borderRight: i < 2 ? "1px solid #E2E0DC" : undefined }}
               >
                 <span className="text-[#1A1A2E] text-[36px] font-bold leading-none">{val}</span>
-                <span className="text-[#64748B] text-sm text-center leading-tight max-w-[140px]">{lbl}</span>
+                <span className="text-[#64748B] text-sm text-center leading-tight max-w-[140px]">
+                  {lbl.split("\n").join(" ")}
+                </span>
               </div>
             ))}
           </div>
@@ -63,36 +83,38 @@ export default function VisaSteps() {
         {/* Body: steps + right column */}
         <div className="flex flex-col lg:flex-row gap-16 max-w-[1120px] mx-auto">
 
-          {/* Left: steps */}
+          {/* Steps */}
           <FadeUp delay={0.1} className="flex-1">
             <div className="flex flex-col">
-              {steps.map(({ num, title, desc }, i) => (
+              {steps.map(({ num, title, desc, orange }, i) => (
                 <div
                   key={num}
-                  className="flex gap-4 pb-5"
-                  style={{ paddingBottom: i < steps.length - 1 ? 20 : 0 }}
+                  className="flex gap-4"
+                  style={{ paddingBottom: i < steps.length - 1 ? 32 : 0 }}
                 >
                   <div className="flex flex-col items-center gap-1">
-                    <div className="w-9 h-9 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
-                      <span className="text-white text-sm font-bold">{num}</span>
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ background: orange ? "#E85D26" : "#1E293B" }}
+                    >
+                      <span className="text-white font-bold" style={{ fontSize: 16 }}>{num}</span>
                     </div>
                     {i < steps.length - 1 && (
-                      <div className="w-px flex-1 min-h-[24px] bg-[#E2E8F0]" />
+                      <div className="w-px flex-1 min-h-[24px] bg-[#D1CAC0]" />
                     )}
                   </div>
-                  <div className="flex flex-col gap-1 pt-1 pb-2">
-                    <h3 className="text-[#1A1A2E] text-base font-semibold">{title}</h3>
-                    <p className="text-[#64748B] text-sm leading-relaxed">{desc}</p>
+                  <div className="flex flex-col gap-1 pt-1.5 pb-2">
+                    <h3 className="text-[#1A1A2E] font-bold" style={{ fontSize: 16 }}>{title}</h3>
+                    <p className="text-[#64748B] leading-relaxed" style={{ fontSize: 14 }}>{desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </FadeUp>
 
-          {/* Right: urgency + trust boxes */}
-          <FadeUp delay={0.15} className="lg:w-[480px]">
-            <div className="flex flex-col gap-8">
-              {/* Urgency bar */}
+          {/* Right column: desktop only */}
+          <FadeUp delay={0.15} className="hidden lg:flex lg:w-[480px]">
+            <div className="flex flex-col gap-8 w-full">
               <div
                 className="p-5 rounded-lg"
                 style={{ background: "#FFFBEB", borderLeft: "3px solid #F59E0B" }}
@@ -111,7 +133,6 @@ export default function VisaSteps() {
                 </div>
               </div>
 
-              {/* Trust box */}
               <div
                 className="bg-white p-6 rounded-lg"
                 style={{ border: "1px solid #E2E0DC", borderLeft: "3px solid #E2E0DC" }}
