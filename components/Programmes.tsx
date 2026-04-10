@@ -199,14 +199,17 @@ export default function Programmes() {
           </div>
         </FadeUp>
 
-        <div className="flex flex-col gap-4 px-5">
+        <div
+          className="flex gap-3 overflow-x-auto pl-5 pr-5 scrollbar-hide items-start"
+          style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
+        >
           {programmes.map((p, idx) => {
             const isOpen = openDetails === idx;
             return (
               <article
                 key={p.name}
-                className="flex flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white"
-                style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.10)" }}
+                className="flex w-[300px] flex-shrink-0 flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white"
+                style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.10)", scrollSnapAlign: "start" }}
               >
                 <div className="relative h-[160px] w-full flex-shrink-0 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
