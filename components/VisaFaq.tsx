@@ -28,7 +28,7 @@ export default function VisaFaq() {
   return (
     <section id="faq" className="bg-white py-10 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
-        <div className="flex flex-col lg:flex-row gap-20 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 items-start">
 
           {/* Left */}
           <FadeUp className="lg:w-[370px] flex-shrink-0 flex flex-col gap-5">
