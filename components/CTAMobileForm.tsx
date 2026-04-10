@@ -67,7 +67,7 @@ export default function CTAMobileForm() {
         <div style={{ height: 4 }} />
         <input
           type="tel"
-          placeholder="+351 9XX XXX XXX"
+          placeholder="+351 XXX XXX XXX"
           style={{
             width: "100%",
             height: 46,
@@ -93,12 +93,12 @@ export default function CTAMobileForm() {
             borderRadius: 8,
             border: "none",
             color: "#FFFFFF",
-            fontSize: 16,
-            fontWeight: 700,
+            fontSize: 15,
+            fontWeight: 600,
             cursor: "pointer",
           }}
         >
-          Book a Free Consultation →
+          Get My Free Consultation →
         </button>
 
         {/* Spacer 10px */}
