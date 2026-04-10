@@ -200,7 +200,7 @@ export default function Programmes() {
         </FadeUp>
 
         <div
-          className="flex gap-3 overflow-x-auto pl-5 pr-5 scrollbar-hide items-start"
+          className="flex gap-3 overflow-x-auto pr-5 scrollbar-hide"
           style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
         >
           {programmes.map((p, idx) => {
@@ -208,14 +208,14 @@ export default function Programmes() {
             return (
               <article
                 key={p.name}
-                className="flex w-[300px] flex-shrink-0 flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white"
+                className={`flex w-[300px] flex-shrink-0 flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white${idx === 0 ? " ml-5" : ""}`}
                 style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.10)", scrollSnapAlign: "start" }}
               >
                 <div className="relative h-[160px] w-full flex-shrink-0 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={p.image} alt="" className="h-full w-full object-cover" />
                 </div>
-                <div className="flex flex-col gap-3 p-5">
+                <div className="flex flex-1 flex-col gap-3 p-5">
                   <div className="flex items-center gap-2.5">
                     <div
                       className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-[10px]"
@@ -291,7 +291,7 @@ export default function Programmes() {
                   <button
                     type="button"
                     onClick={() => setOpenDetails(isOpen ? null : idx)}
-                    className="flex h-[45px] w-full items-center justify-center gap-2 rounded-xl border text-[#E85D26]"
+                    className="mt-auto flex h-[45px] w-full items-center justify-center gap-2 rounded-xl border text-[#E85D26]"
                     style={{
                       fontSize: 14,
                       fontWeight: 600,
