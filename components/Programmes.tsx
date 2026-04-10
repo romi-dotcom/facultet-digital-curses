@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import FadeUp from "./FadeUp";
 
 type Programme = {
@@ -177,169 +177,12 @@ function IconChevronUp() {
   );
 }
 
-function ProgrammeDetailsModal({ programme, onClose }: { programme: Programme; onClose: () => void }) {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
-  }, []);
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex flex-col bg-white"
-      style={{ overflowY: "auto" }}
-    >
-      <div className="flex flex-col gap-5 px-5 pt-8 pb-6">
-        {/* Header */}
-        <div className="flex items-center gap-3">
-          <div
-            className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-[10px]"
-            style={{ background: programme.iconBg }}
-          >
-            <ProgrammeIcon name={programme.name} color={programme.iconColor} size={22} />
-          </div>
-          <h2 className="text-[#1E293B] font-bold leading-tight" style={{ fontSize: 22 }}>
-            {programme.name}
-          </h2>
-        </div>
-
-        {/* Description */}
-        <p className="text-[#64748B] leading-[1.5]" style={{ fontSize: 14 }}>
-          {programme.desc}
-        </p>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2">
-          {programme.tags.map((t) => (
-            <span
-              key={t}
-              className="rounded-full bg-[#F1F5F9] px-3 py-1.5 font-semibold text-[#475569]"
-              style={{ fontSize: 12 }}
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-
-        {/* Duration */}
-        <div className="flex items-center gap-4">
-          <span className="inline-flex items-center gap-1.5 text-[#64748B]" style={{ fontSize: 13, fontWeight: 500 }}>
-            <IconTimer />
-            13 months
-          </span>
-          <span className="inline-flex items-center gap-1.5 text-[#64748B]" style={{ fontSize: 13, fontWeight: 500 }}>
-            <IconSunset />
-            Evening classes
-          </span>
-        </div>
-
-        {/* Salary */}
-        <div>
-          <p className="text-[#1E293B] font-extrabold tracking-[-0.5px]" style={{ fontSize: 20 }}>
-            {programme.salary}
-          </p>
-          <p className="text-[#94A3B8]" style={{ fontSize: 12, fontWeight: 500 }}>
-            Average EU remote salary after graduation
-          </p>
-          <p className="text-[#CBD5E1]" style={{ fontSize: 12 }}>
-            {programme.salarySource}
-          </p>
-        </div>
-
-        {/* Details blocks */}
-        <div
-          className="flex flex-col rounded-2xl border border-[#E2E8F0] overflow-hidden"
-        >
-          {/* Modules */}
-          <div className="flex flex-col gap-2 p-4">
-            <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
-              PROGRAMME MODULES
-            </p>
-            <div className="flex flex-col gap-1">
-              {programme.modules.map((m) => (
-                <p key={m} className="text-[#1E293B]" style={{ fontSize: 14 }}>
-                  · {m}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          <div className="h-px bg-[#E2E8F0]" />
-
-          {/* What you build */}
-          <div className="flex flex-col gap-2 p-4">
-            <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
-              WHAT YOU BUILD
-            </p>
-            <div className="flex flex-col gap-1">
-              {programme.whatYouBuild.map((w) => (
-                <p key={w} className="text-[#1E293B]" style={{ fontSize: 14 }}>
-                  · {w}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          <div className="h-px bg-[#E2E8F0]" />
-
-          {/* Schedule */}
-          <div className="flex flex-col gap-2 p-4">
-            <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
-              SCHEDULE
-            </p>
-            <div className="flex flex-col gap-0.5">
-              {programme.schedule.split("\n").map((line, i) => (
-                <p key={i} className="text-[#1E293B]" style={{ fontSize: 14 }}>
-                  {line}
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Hide details button */}
-        <button
-          onClick={onClose}
-          className="flex h-[52px] w-full items-center justify-center gap-2 rounded-xl border border-[#E85D26] bg-white text-[#E85D26]"
-          style={{ fontSize: 15, fontWeight: 600 }}
-        >
-          Hide details
-          <IconChevronUp />
-        </button>
-      </div>
-    </div>
-  );
-}
 
 export default function Programmes() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
   const [openDetails, setOpenDetails] = useState<number | null>(null);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const CARD = 300;
-    const GAP = 12;
-    const step = CARD + GAP;
-    const onScroll = () => {
-      const idx = Math.round(el.scrollLeft / step);
-      setActive(Math.min(Math.max(idx, 0), programmes.length - 1));
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => el.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
     <section id="programmes" className="bg-white">
-      {/* ── Mobile details modal ── */}
-      {openDetails !== null && (
-        <ProgrammeDetailsModal
-          programme={programmes[openDetails]}
-          onClose={() => setOpenDetails(null)}
-        />
-      )}
-
       {/* ── Mobile (§05 Programmes Mobile) ── */}
       <div className="md:hidden flex flex-col gap-5 pt-10 pb-10">
         <FadeUp>
@@ -356,26 +199,20 @@ export default function Programmes() {
           </div>
         </FadeUp>
 
-        <div
-          ref={scrollRef}
-          className="flex h-[512px] items-center gap-3 overflow-x-auto pl-5 pr-5 scrollbar-hide"
-          style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
-        >
-          {programmes.map((p, idx) => (
-            <article
-              key={p.name}
-              className="flex h-[476px] w-[300px] flex-shrink-0 flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white"
-              style={{
-                boxShadow: "0 8px 24px rgba(0,0,0,0.10)",
-                scrollSnapAlign: "start",
-              }}
-            >
-              <div className="relative h-[160px] w-full flex-shrink-0 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.image} alt="" className="h-full w-full object-cover" />
-              </div>
-              <div className="flex min-h-0 flex-1 flex-col justify-between gap-3 p-5">
-                <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4 px-5">
+          {programmes.map((p, idx) => {
+            const isOpen = openDetails === idx;
+            return (
+              <article
+                key={p.name}
+                className="flex flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white"
+                style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.10)" }}
+              >
+                <div className="relative h-[160px] w-full flex-shrink-0 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={p.image} alt="" className="h-full w-full object-cover" />
+                </div>
+                <div className="flex flex-col gap-3 p-5">
                   <div className="flex items-center gap-2.5">
                     <div
                       className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-[10px]"
@@ -390,6 +227,13 @@ export default function Programmes() {
                   <p className="text-[#64748B] leading-[1.5]" style={{ fontSize: 13 }}>
                     {p.desc}
                   </p>
+                  <div className="flex flex-wrap gap-2">
+                    {p.tags.map((t) => (
+                      <span key={t} className="rounded-full bg-[#F1F5F9] px-3 py-1 font-semibold text-[#475569]" style={{ fontSize: 11 }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="inline-flex items-center gap-1 text-[#64748B]" style={{ fontSize: 12, fontWeight: 500 }}>
                       <IconTimer />
@@ -400,8 +244,6 @@ export default function Programmes() {
                       Evening classes
                     </span>
                   </div>
-                </div>
-                <div className="flex flex-col gap-2">
                   <div>
                     <p className="text-[#1E293B] font-extrabold tracking-[-0.5px]" style={{ fontSize: 16 }}>
                       {p.salary}
@@ -410,40 +252,57 @@ export default function Programmes() {
                       Average EU remote salary after graduation
                     </p>
                   </div>
+
+                  {/* Expandable details */}
+                  {isOpen && (
+                    <div className="flex flex-col rounded-xl border border-[#E2E8F0] overflow-hidden">
+                      <div className="flex flex-col gap-2 p-4">
+                        <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
+                          PROGRAMME MODULES
+                        </p>
+                        {p.modules.map((m) => (
+                          <p key={m} className="text-[#1E293B]" style={{ fontSize: 13 }}>· {m}</p>
+                        ))}
+                      </div>
+                      <div className="h-px bg-[#E2E8F0]" />
+                      <div className="flex flex-col gap-2 p-4">
+                        <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
+                          WHAT YOU BUILD
+                        </p>
+                        {p.whatYouBuild.map((w) => (
+                          <p key={w} className="text-[#1E293B]" style={{ fontSize: 13 }}>· {w}</p>
+                        ))}
+                      </div>
+                      <div className="h-px bg-[#E2E8F0]" />
+                      <div className="flex flex-col gap-2 p-4">
+                        <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
+                          SCHEDULE
+                        </p>
+                        {p.schedule.split("\n").map((line, i) => (
+                          <p key={i} className="text-[#1E293B]" style={{ fontSize: 13 }}>{line}</p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   <button
                     type="button"
-                    onClick={() => setOpenDetails(idx)}
-                    className="flex h-[45px] w-[260px] max-w-full items-center justify-center gap-2 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] text-[#475569]"
-                    style={{ fontSize: 14, fontWeight: 600 }}
+                    onClick={() => setOpenDetails(isOpen ? null : idx)}
+                    className="flex h-[45px] w-full items-center justify-center gap-2 rounded-xl border text-[#E85D26]"
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 600,
+                      borderColor: isOpen ? "#E85D26" : "#E2E8F0",
+                      background: isOpen ? "#FFFFFF" : "#F8FAFC",
+                    }}
                   >
-                    Show details
-                    <IconChevronDown />
+                    {isOpen ? "Hide details" : "Show details"}
+                    {isOpen ? <IconChevronUp /> : <IconChevronDown />}
                   </button>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="flex justify-center gap-1.5">
-          {programmes.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Programme ${i + 1}`}
-              className="rounded-sm border-0 p-0"
-              style={{
-                width: i === active ? 20 : 6,
-                height: 6,
-                background: i === active ? "#E85D26" : "#CBD5E1",
-              }}
-              onClick={() => {
-                const el = scrollRef.current;
-                if (!el) return;
-                el.scrollTo({ left: i * (300 + 12), behavior: "smooth" });
-              }}
-            />
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         <div className="flex flex-col items-center gap-[15px] px-5">
