@@ -203,12 +203,13 @@ export default function Programmes() {
           className="flex gap-3 overflow-x-auto pr-5 scrollbar-hide"
           style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
         >
+          <div className="flex-shrink-0 w-5" aria-hidden="true" />
           {programmes.map((p, idx) => {
             const isOpen = openDetails === idx;
             return (
               <article
                 key={p.name}
-                className={`flex w-[300px] flex-shrink-0 flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white${idx === 0 ? " ml-5" : ""}`}
+                className="flex w-[300px] flex-shrink-0 flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white"
                 style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.10)", scrollSnapAlign: "start" }}
               >
                 <div className="relative h-[160px] w-full flex-shrink-0 overflow-hidden">
@@ -227,7 +228,7 @@ export default function Programmes() {
                       {p.name}
                     </h3>
                   </div>
-                  <p className="text-[#64748B] leading-[1.5]" style={{ fontSize: 13 }}>
+                  <p className="text-[#64748B] leading-[1.5]" style={{ fontSize: 13, minHeight: '59px' }}>
                     {p.desc}
                   </p>
                   <div className="flex flex-wrap gap-2">
