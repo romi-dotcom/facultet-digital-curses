@@ -21,7 +21,7 @@ type Programme = {
 const programmes: Programme[] = [
   {
     name: "Digital Marketing",
-    desc: "SEO, PPC, Social Media, Analytics — learn to drive growth for any business.",
+    desc: "SEO, PPC, Social Media, Analytics — learn to drive measurable growth for any business.",
     image:
       "https://images.unsplash.com/photo-1649762202604-cc7cf2737aa0?w=800&q=80",
     iconBg: "#FFF7ED",
