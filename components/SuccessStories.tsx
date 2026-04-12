@@ -13,9 +13,12 @@ const stories = [
     tagsDesktop: ["SEO", "Google Ads", "Content Strategy", "Analytics"],
     before: "Freelance designer.\nStudent permit expiring in 3 months.\nNo European credential to show employers.",
     after: "Junior Digital Marketer\nat a Lisbon agency.\n3 campaign portfolio.",
+    afterLabelColor: "#64748B",
     metric: "3",
     metricLabel: "months\nfrom enrollment to job offer",
+    metricLabelMobile: "months to job offer",
     badge: "Hired in 3 months",
+    badgeMobileIcon: <IconBriefcase />,
     photo: "https://images.unsplash.com/photo-1651107466227-1a7100432973?w=800&q=80",
   },
   {
@@ -27,9 +30,12 @@ const stories = [
     tagsDesktop: ["Social Media", "Email Marketing", "CRM", "Branding"],
     before: "IT support in Mumbai.\nNo European work\nexperience.",
     after: "Marketing Specialist\nat a Porto startup.\nEU network built.",
+    afterLabelColor: "#64748B",
     metric: "4",
     metricLabel: "months\nfrom enrollment to visa approval",
+    metricLabelMobile: "months to visa approval",
     badge: "Visa approved in 4 months",
+    badgeMobileIcon: <IconPlane />,
     photo: "https://images.unsplash.com/photo-1607710577791-a31393e17748?w=800&q=80",
   },
   {
@@ -41,12 +47,41 @@ const stories = [
     tagsDesktop: ["Agile", "Scrum", "Stakeholder Mgmt", "Jira"],
     before: "Marketing assistant\nin São Paulo. No PM\ncertification.",
     after: "Freelance PM for\n2 EU clients.\nResidency obtained.",
+    afterLabelColor: "#16A34A",
     metric: "4",
     metricLabel: "months\nfrom enrollment to residency",
+    metricLabelMobile: "months to residency",
     badge: "Residency in 4 months",
+    badgeMobileIcon: <IconMapPin />,
     photo: "https://images.unsplash.com/photo-1517945577684-acd9255116a7?w=800&q=80",
   },
 ];
+
+function IconBriefcase() {
+  return (
+    <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+    </svg>
+  );
+}
+
+function IconPlane() {
+  return (
+    <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 2c-2-2-4-2-5.5-.5L10 5 1.8 6.2c-.5.1-.9.5-1 1-.1.6.1 1.2.6 1.6l3.6 3.6-3.6 3.6c-.5.4-.7 1-.6 1.6.1.5.5.9 1 1l8.2 1.2 1.4 1.4c.4.4.9.6 1.4.6s1-.2 1.4-.6l3.6-3.6c.4-.4.5-1 .2-1.4z"/>
+    </svg>
+  );
+}
+
+function IconMapPin() {
+  return (
+    <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+  );
+}
 
 function IconGradCap() {
   return (
@@ -116,42 +151,53 @@ export default function SuccessStories() {
 
         {/* Scroll cards */}
         <div
-          className="flex gap-3 overflow-x-auto scrollbar-hide"
+          className="flex gap-4 overflow-x-auto scrollbar-hide"
           style={{ scrollSnapType: "x mandatory", scrollPaddingLeft: 20, WebkitOverflowScrolling: "touch", paddingLeft: 20, paddingRight: 20 }}
         >
-          {stories.map(({ name, metaMobile, quote, tagsMobile, metric, metricLabel, badge, photo }) => (
+          {stories.map(({ name, metaMobile, quote, tagsMobile, metric, badge, badgeMobileIcon, photo }) => (
             <article
               key={name}
               className="flex-shrink-0 flex flex-col overflow-hidden rounded-[20px] bg-white"
-              style={{ width: 315, height: 480, border: "1px solid #E2E8F0", boxShadow: "0 4px 16px rgba(0,0,0,0.10)", scrollSnapAlign: "start" }}
+              style={{ width: 315, height: 510, border: "1px solid #E2E8F0", boxShadow: "0 2px 8px rgba(0,0,0,0.063), 0 16px 40px -8px rgba(0,0,0,0.071)", scrollSnapAlign: "start" }}
             >
               {/* Photo */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={photo} alt="" className="w-full object-cover flex-shrink-0" style={{ height: 180 }} />
 
               {/* Content */}
-              <div className="flex flex-1 flex-col gap-3 p-5 overflow-hidden">
-                <div>
-                  <p className="text-[#1E293B] font-bold" style={{ fontSize: 17 }}>{name}</p>
-                  <p className="text-[#64748B]" style={{ fontSize: 12 }}>{metaMobile}</p>
-                </div>
+              <div className="flex flex-1 flex-col gap-2.5 overflow-hidden" style={{ padding: "20px 20px 32px 20px" }}>
+                <p className="text-[#1E293B] font-bold" style={{ fontSize: 17 }}>{name}</p>
+                <p className="text-[#64748B]" style={{ fontSize: 12 }}>{metaMobile}</p>
                 <p className="text-[#374151] leading-[1.5] italic" style={{ fontSize: 13 }}>{quote}</p>
-                <div className="flex flex-wrap gap-1.5">
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5 pb-1">
                   {tagsMobile.map(t => (
-                    <span key={t} className="rounded-full bg-[#F1F5F9] px-2.5 py-1 font-semibold text-[#475569]" style={{ fontSize: 11 }}>
+                    <span key={t} className="rounded-full font-semibold" style={{ fontSize: 11, background: "#FFF7ED", color: "#EA580C", border: "1px solid #FDBA74", padding: "4px 10px" }}>
                       {t}
                     </span>
                   ))}
                 </div>
-                {/* Bottom row */}
-                <div className="mt-auto flex items-end justify-between">
-                  <div className="flex flex-col gap-0">
-                    <span className="text-[#E85D26] font-extrabold leading-none" style={{ fontSize: 28 }}>{metric}</span>
-                    <span className="text-[#64748B]" style={{ fontSize: 11 }}>{metricLabel.split("\n")[1]}</span>
+                {/* Bottom: result track */}
+                <div className="flex flex-col gap-2.5 mt-auto" style={{ paddingTop: 16 }}>
+                  <span className="font-bold text-[#CBD5E1]" style={{ fontSize: 9, letterSpacing: "1.5px" }}>RESULT</span>
+                  {/* Track */}
+                  <div className="flex items-center">
+                    <div className="rounded-full bg-[#E85D26] flex-shrink-0" style={{ width: 8, height: 8 }} />
+                    <div className="flex-1" style={{ height: 2, background: "linear-gradient(90deg, #E85D26, #16A34A)" }} />
+                    <div className="rounded-full bg-[#16A34A] flex-shrink-0" style={{ width: 8, height: 8 }} />
                   </div>
-                  <div className="flex items-center gap-1.5 rounded-full px-3 py-1.5 bg-[#DCFCE7]">
-                    <IconCheck size={12} color="#16A34A" />
-                    <span className="text-[#16A34A] font-semibold" style={{ fontSize: 12 }}>{badge}</span>
+                  {/* Labels */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-[#94A3B8]" style={{ fontSize: 10, fontWeight: 500 }}>Start</span>
+                    <div className="flex items-center gap-1">
+                      <IconCheck size={11} color="#16A34A" />
+                      <span className="text-[#16A34A] font-bold" style={{ fontSize: 10 }}>{metric} months</span>
+                    </div>
+                  </div>
+                  {/* Badge */}
+                  <div className="flex items-center gap-1.5 rounded-lg bg-[#F0FDF4]" style={{ padding: "8px 12px" }}>
+                    {badgeMobileIcon}
+                    <span className="font-semibold text-[#15803D]" style={{ fontSize: 12 }}>{badge}</span>
                   </div>
                 </div>
               </div>
@@ -161,9 +207,9 @@ export default function SuccessStories() {
 
         {/* Dots */}
         <div className="flex items-center justify-center gap-1.5">
-          <div className="rounded-full bg-[#E85D26]" style={{ width: 20, height: 6 }} />
-          <div className="rounded-full bg-[#CBD5E1]" style={{ width: 6, height: 6 }} />
-          <div className="rounded-full bg-[#CBD5E1]" style={{ width: 6, height: 6 }} />
+          <div className="bg-[#E85D26]" style={{ width: 20, height: 6, borderRadius: 3 }} />
+          <div className="bg-[#CBD5E1]" style={{ width: 6, height: 6, borderRadius: 3 }} />
+          <div className="bg-[#CBD5E1]" style={{ width: 6, height: 6, borderRadius: 3 }} />
         </div>
       </div>
 
@@ -190,7 +236,7 @@ export default function SuccessStories() {
           {/* Card */}
           <FadeUp delay={0.1}>
             <div
-              className="flex rounded-[20px] overflow-hidden border border-[#E2E8F0]"
+              className="flex rounded-[20px] overflow-hidden border border-[#E2E8F0] max-w-[960px] mx-auto"
               style={{ height: 480, boxShadow: "0 4px 24px rgba(0,0,0,0.04)" }}
             >
               {/* Photo */}
@@ -202,7 +248,7 @@ export default function SuccessStories() {
 
               {/* Content panel */}
               <div
-                className="flex flex-1 flex-col justify-between p-8"
+                className="flex flex-1 flex-col justify-between pt-8 pr-8 pb-8 pl-7"
                 style={{ background: "rgba(255,255,255,0.93)", borderLeft: "1px solid rgba(255,255,255,0.5)" }}
               >
                 {/* Top: name + before/after */}
@@ -232,7 +278,7 @@ export default function SuccessStories() {
                     </div>
                     <div className="flex flex-col gap-1.5" style={{ width: 160 }}>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[#64748B] font-bold" style={{ fontSize: 11 }}>AFTER</span>
+                        <span className="font-bold" style={{ fontSize: 11, color: story.afterLabelColor }}>AFTER</span>
                         <div className="rounded-full bg-[#22C55E] flex-shrink-0" style={{ width: 10, height: 10 }} />
                       </div>
                       <p className="text-[#1E293B] leading-snug whitespace-pre-line" style={{ fontSize: 13 }}>{story.after}</p>
@@ -268,7 +314,7 @@ export default function SuccessStories() {
           </FadeUp>
 
           {/* Nav row */}
-          <FadeUp delay={0.15} className="flex items-center gap-6 mt-8">
+          <FadeUp delay={0.15} className="flex items-center justify-center gap-6 mt-8 max-w-[960px] mx-auto">
             <button
               onClick={() => setActive((active - 1 + stories.length) % stories.length)}
               className="w-11 h-11 rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center shadow-sm hover:shadow-md transition-all"
