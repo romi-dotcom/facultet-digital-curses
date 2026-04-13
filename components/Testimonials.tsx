@@ -94,7 +94,7 @@ export default function Testimonials() {
       <div className="md:hidden flex flex-col gap-6 pt-10 pb-10">
 
         {/* Header */}
-        <div className="flex flex-col gap-2 px-5">
+        <div className="flex flex-col gap-2 px-5 text-center">
           <h2 className="text-[#1E293B] font-bold" style={{ fontSize: 22 }}>
             Watch Their Journey
           </h2>
