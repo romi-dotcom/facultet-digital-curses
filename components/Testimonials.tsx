@@ -130,7 +130,7 @@ export default function Testimonials() {
         </div>
 
         {/* Google bar */}
-        <div className="mx-5 flex items-center justify-center gap-3 rounded-2xl bg-[#F8FAFC]" style={{ padding: "16px 20px" }}>
+        <div className="flex items-center justify-center gap-3 rounded-2xl bg-[#F8FAFC]" style={{ padding: "16px 20px" }}>
           <span className="text-[#4285F4] font-bold leading-none" style={{ fontSize: 28 }}>G</span>
           <div className="bg-[#E2E8F0]" style={{ width: 1, height: 36 }} />
           <div className="flex flex-col items-center gap-0.5">
