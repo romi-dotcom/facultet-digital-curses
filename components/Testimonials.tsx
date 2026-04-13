@@ -6,19 +6,19 @@ import FadeUp from "./FadeUp";
 const videos = [
   {
     name: "Maria Fernandes",
-    duration: "2:14",
+    duration: "0:49",
     quote: "\"I landed my first job in Lisbon within 3 months of enrolling\"",
     src: "/reviews/1.mp4",
   },
   {
     name: "Arjun Mehta",
-    duration: "1:57",
+    duration: "0:59",
     quote: "\"Renewing my permit felt like a maze. Facultet prepared every document — AIMA accepted it all first time.\"",
     src: "/reviews/2.mp4",
   },
   {
     name: "Ana L.",
-    duration: "2:30",
+    duration: "0:56",
     quote: "\"From assistant to freelance PM — all in just 4 months\"",
     src: "/reviews/3.mp4",
   },
