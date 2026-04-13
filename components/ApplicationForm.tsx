@@ -4,9 +4,9 @@ import { useState } from "react";
 import FadeUp from "./FadeUp";
 
 const mobileBullets = [
-  "No visa costs or hidden fees",
-  "Fast and simple process",
-  "Same day approval",
+  "Response within 1 business day",
+  "No documents needed to apply",
+  "Enrolment certificate in 5–10 business days",
 ];
 
 const trustSignals = [
@@ -18,9 +18,9 @@ const trustSignals = [
 
 function IconCheckCircle() {
   return (
-    <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-      <polyline points="22 4 12 14.01 9 11.01"/>
+    <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="#E85D26" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+      <circle cx="12" cy="12" r="10"/>
+      <polyline points="9 12 11 14 15 10"/>
     </svg>
   );
 }
@@ -64,56 +64,53 @@ export default function ApplicationForm() {
     <section id="consult">
 
       {/* ── Mobile ── */}
-      <div className="md:hidden flex flex-col gap-8 bg-[#F8FAFC]" style={{ padding: "48px 20px" }}>
+      <div className="md:hidden flex flex-col gap-6 bg-[#F8FAFC]" style={{ padding: "40px 20px" }}>
 
         {/* Heading */}
-        <div className="flex flex-col gap-6">
-          <h2 className="text-[#1E293B] font-bold leading-[1.2]" style={{ fontSize: 32 }}>
-            Ready to renew your student permit?
-          </h2>
+        <h2 className="text-[#1E293B] font-bold leading-[1.25]" style={{ fontSize: 22 }}>
+          Ready to renew your student permit?
+        </h2>
 
-          {/* Bullets */}
-          <div className="flex flex-col gap-4">
-            {mobileBullets.map((b) => (
-              <div key={b} className="flex items-center gap-3">
-                <IconCheckCircle />
-                <span className="text-[#475569] font-medium" style={{ fontSize: 14 }}>{b}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Quote */}
-          <div className="flex flex-col gap-3 rounded-xl bg-white p-4" style={{ border: "1px solid #E2E8F0" }}>
-            <p className="text-[#475569] italic leading-[1.5]" style={{ fontSize: 14 }}>
-              &ldquo;This process was incredibly smooth. They handled everything professionally.&rdquo;
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center rounded-full text-white font-bold flex-shrink-0" style={{ width: 36, height: 36, background: "#1E293B", fontSize: 14 }}>
-                J
-              </div>
-              <div>
-                <p className="text-[#1E293B] font-bold" style={{ fontSize: 14 }}>Joana dos Santos</p>
-                <p className="text-[#64748B]" style={{ fontSize: 13 }}>Student, Digital Marketing</p>
-              </div>
+        {/* Bullets */}
+        <div className="flex flex-col gap-3">
+          {mobileBullets.map((b) => (
+            <div key={b} className="flex items-center gap-3">
+              <IconCheckCircle />
+              <span className="text-[#475569]" style={{ fontSize: 14 }}>{b}</span>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Intake */}
-          <div className="flex items-center gap-3">
-            <IconCalendar />
-            <p style={{ fontSize: 14 }}>
-              <span className="text-[#1E293B] font-bold">Next intake: </span>
-              <span className="text-[#475569]">20 January 2026</span>
-            </p>
+        {/* Social proof */}
+        <div className="flex items-center gap-3 rounded-xl bg-[#E2E8F0]" style={{ padding: "12px 16px" }}>
+          <div className="flex items-center flex-shrink-0">
+            {["#94A3B8", "#CBD5E1"].map((c, i) => (
+              <div key={i} className="rounded-full border-2 border-white" style={{ width: 32, height: 32, background: c, marginLeft: i > 0 ? -10 : 0 }} />
+            ))}
+            <div className="rounded-full border-2 border-white flex items-center justify-center text-white font-bold" style={{ width: 32, height: 32, background: "#E85D26", marginLeft: -10, fontSize: 10 }}>+423</div>
           </div>
+          <span className="text-[#1E293B] font-medium" style={{ fontSize: 14 }}>423 students already enrolled</span>
+        </div>
+
+        {/* Intake pill */}
+        <div className="flex items-center gap-2 rounded-lg" style={{ padding: "10px 14px", background: "#FFF7ED", border: "1px solid #FDBA74" }}>
+          <IconCalendar />
+          <span className="text-[#E85D26] font-medium" style={{ fontSize: 13 }}>Next Intake: September 2026 · Limited spots</span>
         </div>
 
         {/* Form card */}
-        <div className="flex flex-col gap-6 bg-white rounded-xl" style={{ padding: "24px", border: "1px solid #E2E8F0", boxShadow: "0 4px 16px rgba(0,0,0,0.06)" }}>
+        <div className="flex flex-col gap-5 bg-white rounded-xl" style={{ padding: "24px", border: "1px solid #E2E8F0", boxShadow: "0 4px 16px rgba(0,0,0,0.06)" }}>
 
           <div className="flex flex-col gap-1">
-            <h3 className="text-[#1E293B] font-bold" style={{ fontSize: 24 }}>Free Consultation</h3>
+            <h3 className="text-[#1E293B] font-bold" style={{ fontSize: 20 }}>Free Consultation</h3>
             <p className="text-[#64748B]" style={{ fontSize: 14 }}>No commitment required</p>
+            <div className="flex items-center gap-2 mt-1">
+              <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+                <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+              <span className="text-[#94A3B8]" style={{ fontSize: 12 }}>Just 7 fields — takes 2 minutes</span>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -121,92 +118,69 @@ export default function ApplicationForm() {
             {/* Full Name */}
             <div className="flex flex-col gap-1.5">
               <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Full Name</label>
-              <input
-                type="text"
-                placeholder="Your full name"
-                value={form.name}
+              <input type="text" placeholder="Your full name" value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full bg-white rounded-lg px-4 text-[#1E293B] placeholder-[#94A3B8] outline-none transition-all"
-                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14 }}
-                required
-              />
-            </div>
-
-            {/* Email */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Email</label>
-              <input
-                type="email"
-                placeholder="your.email@example.com"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full bg-white rounded-lg px-4 text-[#1E293B] placeholder-[#94A3B8] outline-none transition-all"
-                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14 }}
-                required
-              />
+                className="w-full bg-white rounded-lg px-4 text-[#1E293B] placeholder-[#94A3B8] outline-none"
+                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14 }} required />
             </div>
 
             {/* WhatsApp */}
             <div className="flex flex-col gap-1.5">
               <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>WhatsApp</label>
-              <input
-                type="tel"
-                placeholder="+351 XXX XXX XXX"
-                value={form.whatsapp}
+              <input type="tel" placeholder="+351 XXX XXX XXX" value={form.whatsapp}
                 onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
-                className="w-full bg-white rounded-lg px-4 text-[#1E293B] placeholder-[#94A3B8] outline-none transition-all"
-                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14 }}
-              />
+                className="w-full bg-white rounded-lg px-4 text-[#1E293B] placeholder-[#94A3B8] outline-none"
+                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14 }} />
+            </div>
+
+            {/* Email */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Email</label>
+              <input type="email" placeholder="your@email.com" value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className="w-full bg-white rounded-lg px-4 text-[#1E293B] placeholder-[#94A3B8] outline-none"
+                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14 }} required />
             </div>
 
             {/* Programme */}
             <div className="flex flex-col gap-1.5">
               <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Programme</label>
-              <select
-                value={form.programme}
-                onChange={(e) => setForm({ ...form, programme: e.target.value })}
-                className="w-full bg-white rounded-lg px-4 text-[#1E293B] outline-none transition-all appearance-none"
-                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14, color: form.programme ? "#1E293B" : "#94A3B8" }}
-              >
-                <option value="" disabled>Select your programme</option>
+              <select value={form.programme} onChange={(e) => setForm({ ...form, programme: e.target.value })}
+                className="w-full bg-white rounded-lg px-4 outline-none appearance-none"
+                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14, color: form.programme ? "#1E293B" : "#94A3B8" }}>
+                <option value="">Not sure yet — help me choose</option>
                 <option value="digital-marketing">Digital Marketing</option>
                 <option value="ux-ui">UX / UI Design</option>
                 <option value="frontend">Frontend Development</option>
                 <option value="project-management">Project Management</option>
-                <option value="not-sure">Not sure yet</option>
               </select>
+              <p className="text-[#E85D26] italic" style={{ fontSize: 12 }}>Not sure? We&apos;ll help you choose during the consultation</p>
             </div>
 
             {/* Student Permit Status */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Student Permit Status</label>
-              <select
-                value={form.status}
-                onChange={(e) => setForm({ ...form, status: e.target.value })}
-                className="w-full bg-white rounded-lg px-4 text-[#1E293B] outline-none transition-all appearance-none"
-                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14, color: form.status ? "#1E293B" : "#94A3B8" }}
-              >
-                <option value="" disabled>Select your current status</option>
+              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Your current student permit status</label>
+              <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}
+                className="w-full bg-white rounded-lg px-4 outline-none appearance-none"
+                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14, color: form.status ? "#1E293B" : "#94A3B8" }}>
+                <option value="" disabled>Select your status</option>
                 <option value="enrolled">Currently enrolled</option>
-                <option value="expiring-1-3">Permit expiring in 1–3 months</option>
-                <option value="expiring-3-6">Permit expiring in 3–6 months</option>
-                <option value="expired">Permit already expired</option>
+                <option value="expiring-1-3">Expiring in 1–3 months</option>
+                <option value="expiring-3-6">Expiring in 3–6 months</option>
+                <option value="expired">Already expired</option>
                 <option value="not-sure">Not sure</option>
               </select>
             </div>
 
             {/* Submit */}
-            <button
-              type="submit"
-              className="w-full flex items-center justify-center gap-2 text-white font-semibold rounded-lg transition-all"
-              style={{ height: 48, fontSize: 14, background: "linear-gradient(90deg, #E85D26 0%, #F97316 100%)", boxShadow: "0 4px 16px rgba(232,93,38,0.35)" }}
-            >
+            <button type="submit"
+              className="w-full flex items-center justify-center gap-2 text-white font-semibold rounded-lg"
+              style={{ height: 52, fontSize: 15, background: "#E85D26", boxShadow: "0 4px 16px rgba(232,93,38,0.35)" }}>
               <IconLock />
               Get My Free Consultation →
             </button>
 
-            {/* Footnote */}
-            <p className="text-[#64748B] text-center" style={{ fontSize: 12 }}>
+            <p className="text-[#94A3B8] text-center" style={{ fontSize: 12 }}>
               We respect your privacy. No spam, ever.
             </p>
 
