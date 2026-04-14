@@ -122,7 +122,7 @@ export default function PainAgitation() {
                 style={{
                   background: cardBg,
                   border: "1px solid rgba(255,255,255,0.10)",
-                  borderLeft: "3px solid rgba(232,93,38,0.5)",
+                  borderLeft: "3px solid rgba(96,165,250,0.6)",
                   padding: 20,
                   display: "block",
                 }}
