@@ -258,7 +258,7 @@ export default function ApplicationForm() {
             {/* Submit */}
             <button type="submit"
               className="btn-gradient w-full flex items-center justify-center gap-2 text-white font-bold rounded-lg"
-              style={{ height: 48, fontSize: 15 }}>
+              style={{ height: 48, fontSize: 15, marginTop: 8 }}>
               <IconLock />
               Get My Free Consultation →
             </button>
