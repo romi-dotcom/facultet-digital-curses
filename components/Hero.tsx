@@ -53,12 +53,34 @@ export default function Hero() {
 
             {/* CTA */}
             <motion.div {...item(0.3)}>
-              <a
+              <motion.a
                 href="#consult"
-                className="inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-white text-base font-bold px-9 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25 w-full sm:w-auto"
+                className="relative inline-flex items-center justify-center text-white text-base font-bold px-9 py-3.5 rounded-lg w-full sm:w-auto overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, #F05A1A 0%, #E85D26 55%, #F5793A 100%)",
+                }}
+                animate={{
+                  boxShadow: [
+                    "0 4px 12px rgba(232,93,38,0.25)",
+                    "0 6px 28px rgba(232,93,38,0.55)",
+                    "0 4px 12px rgba(232,93,38,0.25)",
+                  ],
+                }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
-                Apply Now →
-              </a>
+                {/* Shimmer sweep */}
+                <motion.span
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(105deg, transparent 38%, rgba(255,255,255,0.22) 50%, transparent 62%)",
+                  }}
+                  animate={{ x: ["-100%", "200%"] }}
+                  transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 3.2, ease: "easeInOut" }}
+                />
+                <span className="relative z-10">Apply Now →</span>
+              </motion.a>
             </motion.div>
 
             {/* Urgency strip */}
