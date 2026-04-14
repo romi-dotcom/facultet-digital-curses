@@ -8,19 +8,19 @@ const videos = [
     name: "Maria Fernandes",
     duration: "0:49",
     quote: "\"I landed my first job in Lisbon within 3 months of enrolling\"",
-    src: "/reviews/1.mp4",
+    src: "https://atdao8v8f9itay9b.public.blob.vercel-storage.com/1.mp4",
   },
   {
     name: "Arjun Mehta",
     duration: "0:59",
     quote: "\"Renewing my permit felt like a maze. Facultet prepared every document — AIMA accepted it all first time.\"",
-    src: "/reviews/2.mp4",
+    src: "https://atdao8v8f9itay9b.public.blob.vercel-storage.com/2.mp4",
   },
   {
     name: "Ana L.",
     duration: "0:56",
     quote: "\"From assistant to freelance PM — all in just 4 months\"",
-    src: "/reviews/3.mp4",
+    src: "https://atdao8v8f9itay9b.public.blob.vercel-storage.com/3.mp4",
   },
 ];
 

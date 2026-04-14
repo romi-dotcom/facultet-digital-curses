@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# videos (hosted on Vercel Blob CDN)
+public/reviews
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
