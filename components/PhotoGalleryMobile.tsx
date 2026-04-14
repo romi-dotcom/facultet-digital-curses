@@ -74,8 +74,6 @@ export default function PhotoGalleryMobile() {
         style={{
           gap: 12,
           height: 220,
-          paddingLeft: 20,
-          paddingRight: 20,
           scrollSnapType: "x mandatory",
           WebkitOverflowScrolling: "touch",
         }}
@@ -92,6 +90,8 @@ export default function PhotoGalleryMobile() {
               backgroundSize: "cover",
               backgroundPosition: "center",
               scrollSnapAlign: "start",
+              marginLeft: i === 0 ? 20 : 0,
+              marginRight: i === photos.length - 1 ? 20 : 0,
             }}
           >
             {/* Caption overlay */}

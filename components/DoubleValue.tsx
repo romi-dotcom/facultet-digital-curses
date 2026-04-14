@@ -140,7 +140,7 @@ export default function DoubleValue() {
                 <span className="bg-white/20 text-white text-[11px] font-bold px-3 py-1 rounded-full">Best Value</span>
               </div>
               {/* Price content */}
-              <div className="px-5 py-5" style={{ background: "#F8FAFC" }}>
+              <div className="px-5 py-5" style={{ background: "#EEF2F7" }}>
                 <p className="text-[#1E293B] text-[28px] font-extrabold leading-tight mb-1">from €125/month</p>
                 <p className="text-[#64748B] text-sm">Renewal docs + real education. Both.</p>
               </div>
