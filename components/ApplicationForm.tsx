@@ -95,7 +95,7 @@ export default function ApplicationForm() {
         {/* Intake pill */}
         <div className="flex items-center gap-2 rounded-lg" style={{ padding: "10px 14px", background: "#FFF7ED", border: "1px solid #FDBA74" }}>
           <IconCalendar />
-          <span className="text-[#E85D26] font-medium" style={{ fontSize: 13 }}>Next Intake: September 2026 · Limited spots</span>
+          <span className="text-[#E85D26] font-light" style={{ fontSize: 13 }}>Next Intake: September 2026 · Limited spots</span>
         </div>
 
         {/* Form card */}
