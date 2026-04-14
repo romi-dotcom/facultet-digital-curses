@@ -35,9 +35,12 @@ export default function Nav() {
   const close = () => setMenuOpen(false);
 
   return (
-    <>
-      {/* Mobile utility bar — static, scrolls away on mobile */}
-      <div className="flex items-center justify-between md:hidden bg-[#1E293B]" style={{ height: 44, padding: "0 20px" }}>
+    <header className="fixed top-0 inset-x-0 z-50">
+      {/* Mobile utility bar — collapses on scroll */}
+      <div
+        className={`flex items-center justify-between md:hidden bg-[#1E293B] overflow-hidden transition-all duration-300 ${scrolled ? "h-0" : "h-[44px]"}`}
+        style={{ padding: "0 20px" }}
+      >
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E85D26" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -54,7 +57,6 @@ export default function Nav() {
         <a href="tel:+351000000000" className="text-white/60 text-[11px]">+351 XXX XXX XXX</a>
       </div>
 
-    <header className="sticky top-0 inset-x-0 z-50 md:fixed md:top-0">
       {/* Desktop utility bar — h=36px, bg #1E293B */}
       <div className="hidden md:flex items-center bg-[#1E293B]" style={{ height: 36, padding: "0 160px" }}>
         <div className="flex items-center gap-4">
@@ -213,6 +215,5 @@ export default function Nav() {
         )}
       </AnimatePresence>
     </header>
-    </>
   );
 }
