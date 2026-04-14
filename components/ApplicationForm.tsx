@@ -103,7 +103,7 @@ export default function ApplicationForm() {
 
           <div className="flex flex-col gap-1">
             <h3 className="text-[#1E293B] font-bold" style={{ fontSize: 20 }}>Free Consultation</h3>
-            <p className="text-[#64748B]" style={{ fontSize: 14 }}>No commitment required</p>
+            <p className="text-[#64748B]" style={{ fontSize: 13 }}>No commitment required</p>
             <div className="flex items-center gap-2 mt-1">
               <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                 <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
@@ -117,7 +117,7 @@ export default function ApplicationForm() {
 
             {/* Full Name */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Full Name</label>
+              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 13 }}>Full Name</label>
               <input type="text" placeholder="Your full name" value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="w-full bg-white rounded-lg px-4 text-[#1E293B] placeholder-[#94A3B8] outline-none"
@@ -126,7 +126,7 @@ export default function ApplicationForm() {
 
             {/* WhatsApp */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>WhatsApp</label>
+              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 13 }}>WhatsApp</label>
               <input type="tel" placeholder="+351 XXX XXX XXX" value={form.whatsapp}
                 onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
                 className="w-full bg-white rounded-lg px-4 text-[#1E293B] placeholder-[#94A3B8] outline-none"
@@ -135,7 +135,7 @@ export default function ApplicationForm() {
 
             {/* Email */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Email</label>
+              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 13 }}>Email</label>
               <input type="email" placeholder="your@email.com" value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="w-full bg-white rounded-lg px-4 text-[#1E293B] placeholder-[#94A3B8] outline-none"
@@ -144,7 +144,7 @@ export default function ApplicationForm() {
 
             {/* Programme */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Programme</label>
+              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 13 }}>Programme</label>
               <select value={form.programme} onChange={(e) => setForm({ ...form, programme: e.target.value })}
                 className="w-full rounded-lg px-4 outline-none appearance-none"
                 style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14, color: "#374151", background: "#FFF7ED" }}>
@@ -159,7 +159,7 @@ export default function ApplicationForm() {
 
             {/* Student Permit Status */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Your current student permit status</label>
+              <label className="text-[#1E293B] font-semibold" style={{ fontSize: 13 }}>Your current student permit status</label>
               <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}
                 className="w-full rounded-lg px-4 outline-none appearance-none"
                 style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14, color: form.status ? "#374151" : "#94A3B8", background: "#FFF7ED" }}>
