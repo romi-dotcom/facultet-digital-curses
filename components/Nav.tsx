@@ -35,8 +35,8 @@ export default function Nav() {
   const close = () => setMenuOpen(false);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50">
-      {/* Mobile utility bar — h=44px, bg #1E293B */}
+    <>
+      {/* Mobile utility bar — static, scrolls away on mobile */}
       <div className="flex items-center justify-between md:hidden bg-[#1E293B]" style={{ height: 44, padding: "0 20px" }}>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5">
@@ -54,6 +54,7 @@ export default function Nav() {
         <a href="tel:+351000000000" className="text-white/60 text-[11px]">+351 XXX XXX XXX</a>
       </div>
 
+    <header className="fixed top-0 inset-x-0 z-50">
       {/* Desktop utility bar — h=36px, bg #1E293B */}
       <div className="hidden md:flex items-center bg-[#1E293B]" style={{ height: 36, padding: "0 160px" }}>
         <div className="flex items-center gap-4">
@@ -212,5 +213,6 @@ export default function Nav() {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 }

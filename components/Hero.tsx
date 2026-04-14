@@ -11,7 +11,7 @@ const item = (delay: number) => ({
 
 export default function Hero() {
   return (
-    <section className="bg-[#F8FAFC] pt-[100px]">
+    <section className="bg-[#F8FAFC] pt-[56px] md:pt-[100px]">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px] py-[40px] lg:py-[80px]">
         <div className="flex flex-col lg:flex-row items-start gap-5 lg:gap-20">
 
