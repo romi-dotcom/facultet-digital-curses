@@ -109,7 +109,7 @@ export default function WhyFacultet() {
                   <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
                   <path d="M6 12v5c3 3 9 3 12 0v-5" />
                 </svg>
-                <span style={{ color: "#E85D26", fontSize: 10, fontWeight: 700, textAlign: "center", width: 83 }}>Facultet{"\n"}School</span>
+                <span style={{ color: "#E85D26", fontSize: 10, fontWeight: 700, textAlign: "center", width: 83, whiteSpace: "pre-line" }}>{"Facultet\nSchool"}</span>
                 <span style={{ background: "#E85D26", color: "white", fontSize: 8, fontWeight: 700, padding: "2px 6px", borderRadius: 8 }}>Best</span>
               </div>
             </div>

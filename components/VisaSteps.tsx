@@ -41,13 +41,13 @@ export default function VisaSteps() {
       <div className="md:hidden flex flex-col gap-6 px-5 pt-10 pb-10">
 
         {/* Header */}
-        <p className="text-[#E86339] font-semibold uppercase" style={{ fontSize: 10, letterSpacing: 2 }}>
+        <p className="text-[#E86339] font-semibold uppercase text-center" style={{ fontSize: 10, letterSpacing: 2 }}>
           HOW IT WORKS
         </p>
-        <h2 className="text-[#1A1A2E] font-bold leading-[1.2]" style={{ fontSize: 22 }}>
+        <h2 className="text-[#1A1A2E] font-bold leading-[1.2] text-center" style={{ fontSize: 22 }}>
           Renew your student permit — without leaving Portugal
         </h2>
-        <p className="text-[#64748B] leading-[1.6]" style={{ fontSize: 14 }}>
+        <p className="text-[#64748B] leading-[1.6] text-center" style={{ fontSize: 14 }}>
           Stay enrolled at a DGERT-licensed school — AIMA renews your student residence permit every year.
         </p>
 
