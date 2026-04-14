@@ -54,7 +54,7 @@ export default function Nav() {
         <a href="tel:+351000000000" className="text-white/60 text-[11px]">+351 XXX XXX XXX</a>
       </div>
 
-    <header className="fixed top-0 inset-x-0 z-50">
+    <header className="sticky top-0 inset-x-0 z-50 md:fixed md:top-0">
       {/* Desktop utility bar — h=36px, bg #1E293B */}
       <div className="hidden md:flex items-center bg-[#1E293B]" style={{ height: 36, padding: "0 160px" }}>
         <div className="flex items-center gap-4">
