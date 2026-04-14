@@ -34,7 +34,7 @@ const stories = [
     metric: "4",
     metricLabel: "months\nfrom enrollment to visa approval",
     metricLabelMobile: "months to visa approval",
-    badge: "Visa approved in 4 months",
+    badge: "Student residence extended",
     badgeMobileIcon: <IconPlane />,
     photo: "https://images.unsplash.com/photo-1607710577791-a31393e17748?w=800&q=80",
   },

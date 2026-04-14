@@ -65,6 +65,24 @@ body {
   display: none;
 }
 
+/* Gradient submit button glow pulse */
+@keyframes btn-glow {
+  0%, 100% { box-shadow: 0 4px 20px rgba(232,93,38,0.40); }
+  50%       { box-shadow: 0 4px 36px rgba(232,93,38,0.70); }
+}
+.btn-gradient {
+  background: linear-gradient(90deg, #E85D26, #F97316);
+  animation: btn-glow 2s ease-in-out infinite;
+  transition: filter 0.2s, transform 0.15s;
+}
+.btn-gradient:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.btn-gradient:active {
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

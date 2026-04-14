@@ -146,36 +146,36 @@ export default function ApplicationForm() {
             <div className="flex flex-col gap-1.5">
               <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Programme</label>
               <select value={form.programme} onChange={(e) => setForm({ ...form, programme: e.target.value })}
-                className="w-full bg-white rounded-lg px-4 outline-none appearance-none"
-                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14, color: form.programme ? "#1E293B" : "#94A3B8" }}>
+                className="w-full rounded-lg px-4 outline-none appearance-none"
+                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14, color: "#374151", background: "#FFF7ED" }}>
                 <option value="">Not sure yet — help me choose</option>
                 <option value="digital-marketing">Digital Marketing</option>
                 <option value="ux-ui">UX / UI Design</option>
                 <option value="frontend">Frontend Development</option>
                 <option value="project-management">Project Management</option>
               </select>
-              <p className="text-[#E85D26] italic" style={{ fontSize: 12 }}>Not sure? We&apos;ll help you choose during the consultation</p>
+              <p className="text-[#94A3B8] italic" style={{ fontSize: 11 }}>Not sure? We&apos;ll help you choose during the consultation</p>
             </div>
 
             {/* Student Permit Status */}
             <div className="flex flex-col gap-1.5">
               <label className="text-[#1E293B] font-semibold" style={{ fontSize: 14 }}>Your current student permit status</label>
               <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}
-                className="w-full bg-white rounded-lg px-4 outline-none appearance-none"
-                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14, color: form.status ? "#1E293B" : "#94A3B8" }}>
+                className="w-full rounded-lg px-4 outline-none appearance-none"
+                style={{ height: 44, border: "1px solid #E2E8F0", fontSize: 14, color: form.status ? "#374151" : "#94A3B8", background: "#FFF7ED" }}>
                 <option value="" disabled>Select your status</option>
-                <option value="enrolled">Currently enrolled</option>
-                <option value="expiring-1-3">Expiring in 1–3 months</option>
-                <option value="expiring-3-6">Expiring in 3–6 months</option>
-                <option value="expired">Already expired</option>
-                <option value="not-sure">Not sure</option>
+                <option value="valid">Student permit valid (renewal in 3+ months)</option>
+                <option value="expiring-soon">Student permit expiring soon (less than 90 days)</option>
+                <option value="expiring-urgent">Student permit expiring very soon (less than 30 days)</option>
+                <option value="expired">Student permit already expired</option>
+                <option value="not-sure">Not sure — need advice</option>
               </select>
             </div>
 
             {/* Submit */}
             <button type="submit"
-              className="w-full flex items-center justify-center gap-2 text-white font-semibold rounded-lg"
-              style={{ height: 52, fontSize: 15, background: "#E85D26", boxShadow: "0 4px 16px rgba(232,93,38,0.35)" }}>
+              className="btn-gradient w-full flex items-center justify-center gap-2 text-white font-bold rounded-lg"
+              style={{ height: 48, fontSize: 15 }}>
               <IconLock />
               Get My Free Consultation →
             </button>
