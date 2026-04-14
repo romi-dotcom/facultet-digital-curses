@@ -74,11 +74,12 @@ export default function PhotoGalleryMobile() {
         style={{
           gap: 12,
           height: 220,
+          paddingLeft: 20,
+          paddingRight: 20,
           scrollSnapType: "x mandatory",
           WebkitOverflowScrolling: "touch",
         }}
       >
-        <div style={{ width: 20, flexShrink: 0 }} />
         {photos.map((photo, i) => (
           <div
             key={i}
@@ -122,7 +123,6 @@ export default function PhotoGalleryMobile() {
             </div>
           </div>
         ))}
-        <div style={{ width: 20, flexShrink: 0 }} />
       </div>
 
       {/* Dots */}
