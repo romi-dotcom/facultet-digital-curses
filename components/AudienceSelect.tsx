@@ -95,15 +95,15 @@ export default function AudienceSelect() {
                 >
                   <div className="flex flex-col items-center gap-5 text-center">
                     <div
-                      className="w-[72px] h-[72px] rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: iconBg }}
+                      className="w-[56px] h-[56px] flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: iconBg, borderRadius: 28 }}
                     >
                       {icon}
                     </div>
-                    <h3 className="text-[#1E293B] text-[22px] font-bold leading-tight whitespace-pre-line">
+                    <h3 className="text-[#1E293B] text-[17px] font-bold leading-tight whitespace-pre-line">
                       {title}
                     </h3>
-                    <p className="text-[#64748B] text-[15px] leading-[1.6] whitespace-pre-line">
+                    <p className="text-[#64748B] text-[14px] whitespace-pre-line" style={{ lineHeight: 1.55 }}>
                       {desc}
                     </p>
                   </div>
