@@ -11,18 +11,18 @@ const programmeOptions = [
 ];
 
 const statusOptions = [
-  { value: "valid", label: "Student permit valid (renewal in 3+ months)" },
-  { value: "expiring-soon", label: "Student permit expiring soon (less than 90 days)" },
-  { value: "expiring-urgent", label: "Expiring very soon (less than 30 days)" },
-  { value: "expired", label: "Student permit already expired" },
-  { value: "not-sure", label: "Not sure — need advice" },
+  { value: "valid", label: "Student permit valid (renewal in 3+ months)", short: "Valid — renewal in 3+ months" },
+  { value: "expiring-soon", label: "Student permit expiring soon (less than 90 days)", short: "Expiring soon (< 90 days)" },
+  { value: "expiring-urgent", label: "Expiring very soon (less than 30 days)", short: "Expiring urgently (< 30 days)" },
+  { value: "expired", label: "Student permit already expired", short: "Already expired" },
+  { value: "not-sure", label: "Not sure — need advice", short: "Not sure — need advice" },
 ];
 
 function FloatSelect({ label, placeholder, value, options, onChange }: {
   label: string;
   placeholder: string;
   value: string;
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; short?: string }[];
   onChange: (v: string) => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -48,7 +48,7 @@ function FloatSelect({ label, placeholder, value, options, onChange }: {
         <div className="flex flex-col" style={{ gap: 2 }}>
           <span className="font-semibold text-[#94A3B8]" style={{ fontSize: 10 }}>{label}</span>
           <span style={{ fontSize: 13, color: selected ? "#374151" : "#CBD5E1" }}>
-            {selected ? selected.label : placeholder}
+            {selected ? (selected.short ?? selected.label) : placeholder}
           </span>
         </div>
         <svg
