@@ -1,7 +1,93 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import FadeUp from "./FadeUp";
+
+const programmeOptions = [
+  { value: "digital-marketing", label: "Digital Marketing" },
+  { value: "ux-ui", label: "UX / UI Design" },
+  { value: "frontend", label: "Frontend Development" },
+  { value: "project-management", label: "Project Management" },
+];
+
+const statusOptions = [
+  { value: "valid", label: "Student permit valid (renewal in 3+ months)" },
+  { value: "expiring-soon", label: "Student permit expiring soon (less than 90 days)" },
+  { value: "expiring-urgent", label: "Expiring very soon (less than 30 days)" },
+  { value: "expired", label: "Student permit already expired" },
+  { value: "not-sure", label: "Not sure — need advice" },
+];
+
+function FloatSelect({ label, placeholder, value, options, onChange }: {
+  label: string;
+  placeholder: string;
+  value: string;
+  options: { value: string; label: string }[];
+  onChange: (v: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const selected = options.find(o => o.value === value);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center justify-between rounded-lg text-left"
+        style={{ height: 52, padding: "6px 14px", border: "1px solid #E2E8F0", background: "#FFF7ED" }}
+      >
+        <div className="flex flex-col" style={{ gap: 2 }}>
+          <span className="font-semibold text-[#94A3B8]" style={{ fontSize: 10 }}>{label}</span>
+          <span style={{ fontSize: 13, color: selected ? "#374151" : "#CBD5E1" }}>
+            {selected ? selected.label : placeholder}
+          </span>
+        </div>
+        <svg
+          width={16} height={16} viewBox="0 0 24 24" fill="none"
+          stroke="#374151" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
+          style={{ flexShrink: 0, transition: "transform 0.2s", transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
+        >
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+
+      {open && (
+        <div
+          className="absolute left-0 right-0 z-50 flex flex-col overflow-hidden"
+          style={{ top: "calc(100% + 4px)", background: "white", borderRadius: 12, border: "1px solid #E2E8F0", boxShadow: "0 8px 24px rgba(0,0,0,0.10)" }}
+        >
+          {options.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => { onChange(opt.value); setOpen(false); }}
+              className="text-left transition-colors"
+              style={{
+                padding: "12px 14px",
+                fontSize: 13,
+                color: opt.value === value ? "#E85D26" : "#374151",
+                background: opt.value === value ? "#FFF7ED" : "white",
+                fontWeight: opt.value === value ? 600 : 400,
+                borderBottom: "1px solid #F1F5F9",
+              }}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 const mobileBullets = [
   "Response within 1 business day",
@@ -152,43 +238,22 @@ export default function ApplicationForm() {
             </div>
 
             {/* Programme */}
-            <div className="flex items-center justify-between rounded-lg" style={{ height: 52, padding: "6px 14px", border: "1px solid #E2E8F0", background: "#FFF7ED" }}>
-              <div className="flex flex-col" style={{ gap: 2 }}>
-                <span className="font-semibold text-[#94A3B8]" style={{ fontSize: 10 }}>Programme</span>
-                <select value={form.programme} onChange={(e) => setForm({ ...form, programme: e.target.value })}
-                  className="bg-transparent text-[#374151] outline-none appearance-none"
-                  style={{ fontSize: 13 }}>
-                  <option value="">Not sure — help me choose</option>
-                  <option value="digital-marketing">Digital Marketing</option>
-                  <option value="ux-ui">UX / UI Design</option>
-                  <option value="frontend">Frontend Development</option>
-                  <option value="project-management">Project Management</option>
-                </select>
-              </div>
-              <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
-            </div>
+            <FloatSelect
+              label="Programme"
+              placeholder="Not sure — help me choose"
+              value={form.programme}
+              options={programmeOptions}
+              onChange={(v) => setForm({ ...form, programme: v })}
+            />
 
             {/* Student Permit Status */}
-            <div className="flex items-center justify-between rounded-lg" style={{ height: 52, padding: "6px 14px", border: "1px solid #E2E8F0", background: "#FFF7ED" }}>
-              <div className="flex flex-col" style={{ gap: 2 }}>
-                <span className="font-semibold text-[#94A3B8]" style={{ fontSize: 10 }}>Student permit status</span>
-                <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}
-                  className="bg-transparent outline-none appearance-none"
-                  style={{ fontSize: 13, color: form.status ? "#374151" : "#CBD5E1" }}>
-                  <option value="">Select your status</option>
-                  <option value="valid">Student permit valid (renewal in 3+ months)</option>
-                  <option value="expiring-soon">Student permit expiring soon (less than 90 days)</option>
-                  <option value="expiring-urgent">Student permit expiring very soon (less than 30 days)</option>
-                  <option value="expired">Student permit already expired</option>
-                  <option value="not-sure">Not sure — need advice</option>
-                </select>
-              </div>
-              <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
-            </div>
+            <FloatSelect
+              label="Student permit status"
+              placeholder="Select your status"
+              value={form.status}
+              options={statusOptions}
+              onChange={(v) => setForm({ ...form, status: v })}
+            />
 
             {/* Submit */}
             <button type="submit"
