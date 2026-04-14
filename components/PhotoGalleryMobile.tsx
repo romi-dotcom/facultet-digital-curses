@@ -56,7 +56,7 @@ export default function PhotoGalleryMobile() {
   }, []);
 
   return (
-    <section className="bg-white py-10 md:hidden overflow-hidden">
+    <section className="bg-white py-10 md:hidden">
       {/* Header */}
       <div className="flex flex-col gap-2 px-5 mb-5">
         <h2 className="text-[#1E293B] text-[22px] font-bold leading-tight">
