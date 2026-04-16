@@ -214,29 +214,6 @@ export default function HowToApply() {
           ))}
         </div>
 
-        {/* ① CTA — FadeUp + ⑥ shimmer + arrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={sectionInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.45, ease: "easeOut", delay: 0.35 }}
-          className="flex flex-col items-center gap-2.5 px-5"
-        >
-          <a
-            href="#consult"
-            className="cta-shimmer-apply w-full flex items-center justify-center rounded-[14px] text-white font-bold gap-2"
-            style={{
-              fontSize: 15,
-              padding: "16px 24px",
-              boxShadow: "0 8px 24px rgba(232, 93, 38, 0.25)",
-            }}
-          >
-            Start Your Application
-            <span className="arrow-right">→</span>
-          </a>
-          <p className="text-[#94A3B8] text-center" style={{ fontSize: 12 }}>
-            No documents needed · Response within 1 business day
-          </p>
-        </motion.div>
       </div>
 
       {/* ── Desktop (unchanged) ──────────────────────────────────────────── */}
@@ -274,23 +251,6 @@ export default function HowToApply() {
             </div>
           </FadeUp>
 
-          <FadeUp delay={0.2} className="flex flex-col items-center gap-3 mt-10">
-            <a
-              href="#consult"
-              className="inline-flex items-center justify-center rounded-[14px] text-white font-bold transition-opacity hover:opacity-90"
-              style={{
-                fontSize: 15,
-                padding: "16px 32px",
-                background: "linear-gradient(180deg, #E85D26 0%, #F97316 100%)",
-                boxShadow: "0 8px 24px rgba(232, 93, 38, 0.25)",
-              }}
-            >
-              Start Your Application →
-            </a>
-            <p className="text-[#94A3B8]" style={{ fontSize: 12 }}>
-              No documents needed · Response within 1 business day
-            </p>
-          </FadeUp>
         </div>
       </div>
     </section>
