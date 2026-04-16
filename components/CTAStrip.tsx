@@ -185,14 +185,17 @@ export default function CTAStrip({
           {btnText}
         </a>
 
-        {/* ⑤ Trust text — typewriter */}
+        {/* ⑤ Trust text — typewriter (CLS-safe: invisible spacer reserves height) */}
         {trust && (
-          <p className="text-white/50" style={{ fontSize: 12, lineHeight: 1.5, minHeight: "1.5em" }}>
-            {inView ? typewritten : ""}
-            {inView && typewritten.length < trust.length && (
-              <span style={{ opacity: 0.6, animation: "none" }}>|</span>
-            )}
-          </p>
+          <div style={{ position: "relative" }}>
+            <p aria-hidden="true" style={{ visibility: "hidden", fontSize: 12, lineHeight: 1.5, margin: 0 }}>{trust}</p>
+            <p className="text-white/50" style={{ position: "absolute", top: 0, left: 0, fontSize: 12, lineHeight: 1.5, margin: 0 }}>
+              {inView ? typewritten : ""}
+              {inView && typewritten.length < trust.length && (
+                <span style={{ opacity: 0.6 }}>|</span>
+              )}
+            </p>
+          </div>
         )}
       </motion.div>
     </section>

@@ -124,19 +124,26 @@ export default function CTAMobileForm() {
 
       <div style={{ height: 20 }} />
 
-      {/* ② Trust items — sequential typewriter */}
-      <div className="flex items-center justify-center" style={{ gap: 12, minHeight: 20 }}>
-        {trustItems.map((item, i) => {
-          const isTyping = typed[i].length > 0 && typed[i].length < item.length;
-          const isNext = i > 0 && typed[i - 1] === trustItems[i - 1] && typed[i].length === 0;
-          const showCursor = isTyping || (i === 0 && typed[0].length === 0 && inView) || isNext;
-          return (
-            <span key={item} style={{ color: "#CBD5E1", fontSize: 13, minWidth: i === 0 ? 48 : i === 1 ? 120 : 90 }}>
-              {typed[i]}
-              {showCursor && <span className="tw-cursor">|</span>}
-            </span>
-          );
-        })}
+      {/* ② Trust items — sequential typewriter (CLS-safe) */}
+      <div style={{ position: "relative" }}>
+        <div aria-hidden="true" className="flex items-center justify-center" style={{ gap: 12, visibility: "hidden" }}>
+          {trustItems.map(item => (
+            <span key={item} style={{ fontSize: 13 }}>{item}</span>
+          ))}
+        </div>
+        <div className="flex items-center justify-center" style={{ gap: 12, position: "absolute", top: 0, left: 0, right: 0 }}>
+          {trustItems.map((item, i) => {
+            const isTyping = typed[i].length > 0 && typed[i].length < item.length;
+            const isNext = i > 0 && typed[i - 1] === trustItems[i - 1] && typed[i].length === 0;
+            const showCursor = isTyping || (i === 0 && typed[0].length === 0 && inView) || isNext;
+            return (
+              <span key={item} style={{ color: "#CBD5E1", fontSize: 13 }}>
+                {typed[i]}
+                {showCursor && <span className="tw-cursor">|</span>}
+              </span>
+            );
+          })}
+        </div>
       </div>
 
       <div style={{ height: 28 }} />
