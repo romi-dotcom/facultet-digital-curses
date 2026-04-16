@@ -5,10 +5,6 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const photos = [
   {
-    url: "/gallery/gallery-6.png",
-    caption: "Classroom Session",
-  },
-  {
     url: "/gallery/gallery-7.png",
     caption: "Facultet Campus",
   },
@@ -23,6 +19,10 @@ const photos = [
   {
     url: "/gallery/gallery-2.png",
     caption: "Mentoring Room",
+  },
+  {
+    url: "/gallery/gallery-6.png",
+    caption: "Classroom Session",
   },
 ];
 
