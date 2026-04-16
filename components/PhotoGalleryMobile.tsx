@@ -5,6 +5,10 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const photos = [
   {
+    url: "/gallery/gallery-6.png",
+    caption: "Classroom Session",
+  },
+  {
     url: "/gallery/gallery-7.png",
     caption: "Facultet Campus",
   },
@@ -19,10 +23,6 @@ const photos = [
   {
     url: "/gallery/gallery-2.png",
     caption: "Mentoring Room",
-  },
-  {
-    url: "/gallery/gallery-6.png",
-    caption: "Classroom Session",
   },
 ];
 
@@ -98,20 +98,16 @@ export default function PhotoGalleryMobile() {
               key={i}
               className="flex-shrink-0 relative overflow-hidden transition-[filter] duration-150 active:brightness-90"
               style={{
+                // C) Uniform width — one card fills viewport, next peeks ~16px
                 width: "calc(100vw - 56px)",
                 height: 220,
                 borderRadius: 12,
+                backgroundImage: `url(${photo.url})`,
+                backgroundSize: "110%",
+                backgroundPosition: "center",
                 scrollSnapAlign: "start",
-                backgroundColor: "#000",
               }}
             >
-              {/* Photo */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={photo.url}
-                alt={photo.caption}
-                style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
-              />
               {/* Gradient overlay */}
               <div
                 style={{

@@ -56,7 +56,7 @@ const programmes: Programme[] = [
     iconColor: "#3B82F6",
     salary: "€2 500–4 000/mo",
     salarySource: "Source: Glassdoor Portugal, 2025",
-    tags: ["Python", "SQL", "ML", "Power BI", "AI Tools"],
+    tags: ["Python", "SQL", "ML", "Power BI"],
     duration: "14 months",
     modules: [
       "Python for Data Analysis",
