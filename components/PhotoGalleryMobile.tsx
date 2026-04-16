@@ -83,10 +83,13 @@ export default function PhotoGalleryMobile() {
           ref={scrollRef}
           className="flex overflow-x-auto scrollbar-hide"
           style={{
-            gap: 0,
-            height: 260,
+            gap: 12,
+            height: 220,
             scrollSnapType: "x mandatory",
+            scrollPaddingLeft: 20,
             WebkitOverflowScrolling: "touch",
+            paddingLeft: 20,
+            paddingRight: 20,
           }}
         >
           {photos.map((photo, i) => (
@@ -95,9 +98,9 @@ export default function PhotoGalleryMobile() {
               key={i}
               className="flex-shrink-0 relative overflow-hidden transition-[filter] duration-150 active:brightness-90"
               style={{
-                width: "100vw",
-                height: 260,
-                borderRadius: 0,
+                width: "calc(100vw - 56px)",
+                height: 220,
+                borderRadius: 12,
                 backgroundImage: `url(${photo.url})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
