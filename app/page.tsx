@@ -59,6 +59,7 @@ export default function Home() {
           heading="Join Maria, Arjun, and 420 other students who chose Facultet."
           btnText="Get My Free Consultation"
           trust="No documents needed to apply · Response within 1 business day"
+          highlightWords={["Maria", "Arjun", "420"]}
         />
         <ApplicationForm />
         <CampusMap />

@@ -15,7 +15,7 @@ export default function WhatsAppCTA() {
             Prefer to ask questions first?
           </p>
           <a
-            href="https://wa.me/351000000000"
+            href="https://wa.me/351300509112"
             style={{
               display: "flex", alignItems: "center", gap: 8,
               background: "#25D366", color: "white",

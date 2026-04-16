@@ -9,6 +9,13 @@ const item = (delay: number) => ({
   transition: { duration: 0.6, ease, delay } as Transition,
 });
 
+// ① scale-pop for eyebrow
+const popItem = (delay: number) => ({
+  initial: { opacity: 0, scale: 0.8, y: 8 },
+  animate: { opacity: 1, scale: 1, y: 0 },
+  transition: { duration: 0.5, ease, delay } as Transition,
+});
+
 export default function Hero() {
   return (
     <section className="bg-[#F8FAFC] pt-[100px]">
@@ -17,8 +24,8 @@ export default function Hero() {
 
           {/* Left column */}
           <div className="flex flex-col gap-5 lg:w-1/2 w-full">
-            {/* Eyebrow — 10px, 700, #E85D26, letterSpacing 1.5 */}
-            <motion.p {...item(0)} style={{ color: "#E85D26", fontSize: 10, fontWeight: 700, letterSpacing: 1.5 }}>
+            {/* ① Eyebrow — scale-pop */}
+            <motion.p {...popItem(0)} style={{ color: "#E85D26", fontSize: 10, fontWeight: 700, letterSpacing: 1.5 }}>
               STUDY IN PORTUGAL · LICENSED INSTITUTION
             </motion.p>
 
@@ -35,21 +42,31 @@ export default function Hero() {
               DGERT-licensed. Real campus. Real results.
             </motion.p>
 
-            {/* Location pills */}
-            <motion.div {...item(0.25)} className="flex items-center gap-2">
-              <span className="flex items-center gap-1.5 bg-white border border-[#E2E8F0] rounded-full px-3.5 py-1.5 text-[#374151] text-sm">
+            {/* ③ Location pills — stagger */}
+            <div className="flex items-center gap-2">
+              <motion.span
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease, delay: 0.25 } as Transition}
+                className="flex items-center gap-1.5 bg-white border border-[#E2E8F0] rounded-full px-3.5 py-1.5 text-[#374151] text-sm"
+              >
                 <svg className="text-accent w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                 </svg>
                 Lisbon Campus
-              </span>
-              <span className="flex items-center gap-1.5 bg-white border border-[#E2E8F0] rounded-full px-3.5 py-1.5 text-[#374151] text-sm">
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease, delay: 0.33 } as Transition}
+                className="flex items-center gap-1.5 bg-white border border-[#E2E8F0] rounded-full px-3.5 py-1.5 text-[#374151] text-sm"
+              >
                 <svg className="text-accent w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                 </svg>
                 Porto Campus
-              </span>
-            </motion.div>
+              </motion.span>
+            </div>
 
             {/* CTA */}
             <motion.div {...item(0.3)}>
@@ -79,7 +96,7 @@ export default function Hero() {
                   animate={{ x: ["-100%", "200%"] }}
                   transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 3.2, ease: "easeInOut" }}
                 />
-                <span className="relative z-10">Apply Now →</span>
+                <span className="relative z-10">Get Free Consultation →</span>
               </motion.a>
             </motion.div>
 
@@ -96,29 +113,40 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right column — hero image */}
+          {/* Right column — hero video */}
           <motion.div
             {...item(0.2)}
-            className="lg:w-1/2 w-full rounded-2xl overflow-hidden aspect-[16/9] lg:aspect-auto lg:min-h-[420px]"
+            className="lg:w-1/2 w-full rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:min-h-[420px]"
           >
-            <div
-              className="w-full h-full rounded-2xl"
-              style={{
-                background: "linear-gradient(135deg, #1E293B 0%, #E85D26 50%, #F59E0B 100%)",
-                opacity: 0.85,
-                minHeight: "inherit",
-              }}
-            >
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center px-8">
-                  <p className="text-white/40 text-sm font-medium">Campus Photo</p>
-                  <p className="text-white/20 text-xs mt-1">Lisbon & Porto</p>
-                </div>
-              </div>
-            </div>
+            <video
+              src="https://atdao8v8f9itay9b.public.blob.vercel-storage.com/002.mp4"
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
           </motion.div>
 
         </div>
+
+        {/* ② Scroll-hint arrow — mobile only, bounce */}
+        <motion.div
+          className="lg:hidden flex justify-center mt-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.5 }}
+        >
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <svg width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="#CBD5E1" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </motion.div>
+        </motion.div>
+
       </div>
     </section>
   );
