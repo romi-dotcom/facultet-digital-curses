@@ -128,8 +128,8 @@ export default function PainAgitation() {
                 padding: "20px 20px 22px",
               }}
             >
-              {/* Icon badge + pulse */}
-              <div className="flex items-center gap-3 mb-3">
+              {/* Icon + Title inline */}
+              <div className="flex items-center gap-3 mb-2">
                 <div className="relative flex-shrink-0">
                   <div
                     className="w-9 h-9 rounded-[10px] flex items-center justify-center"
@@ -152,15 +152,13 @@ export default function PainAgitation() {
                     </>
                   )}
                 </div>
+                <h3
+                  className="text-white font-bold leading-snug"
+                  style={{ fontSize: 16 }}
+                >
+                  {title}
+                </h3>
               </div>
-
-              {/* Title */}
-              <h3
-                className="text-white font-bold leading-snug"
-                style={{ fontSize: 16 }}
-              >
-                {title}
-              </h3>
 
               {/* Body — always visible */}
               <p
