@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 import FadeUp from "./FadeUp";
 
 const stories = [
@@ -19,7 +20,7 @@ const stories = [
     metricLabelMobile: "months to job offer",
     badge: "Hired in 3 months",
     badgeMobileIcon: <IconBriefcase />,
-    photo: "https://images.unsplash.com/photo-1651107466227-1a7100432973?w=800&q=80",
+    photo: "/reviews/maria.png",
   },
   {
     name: "Arjun Mehta",
@@ -36,7 +37,7 @@ const stories = [
     metricLabelMobile: "months to visa approval",
     badge: "Student residence extended",
     badgeMobileIcon: <IconPlane />,
-    photo: "https://images.unsplash.com/photo-1607710577791-a31393e17748?w=800&q=80",
+    photo: "/reviews/arjun.png",
   },
   {
     name: "Ana L.",
@@ -53,7 +54,7 @@ const stories = [
     metricLabelMobile: "months to residency",
     badge: "Residency in 4 months",
     badgeMobileIcon: <IconMapPin />,
-    photo: "https://images.unsplash.com/photo-1517945577684-acd9255116a7?w=800&q=80",
+    photo: "/reviews/ana.png",
   },
 ];
 
@@ -129,87 +130,199 @@ function IconChevronRight({ color = "white" }: { color?: string }) {
   );
 }
 
+// ── StoryCard (per-card inView for track animation) ─────────────────────────
+
+type StoryData = typeof stories[number];
+
+function StoryCard({ story, sectionInView }: { story: StoryData; sectionInView: boolean }) {
+  const { name, metaMobile, quote, tagsMobile, metric, badge, badgeMobileIcon, photo } = story;
+  const cardRef    = useRef<HTMLElement>(null);
+  const cardInView = useInView(cardRef, { once: true, margin: "0px -40px 0px 0px" });
+
+  return (
+    <motion.article
+      ref={cardRef}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={sectionInView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+      className="flex-shrink-0 flex flex-col overflow-hidden rounded-[20px] bg-white"
+      style={{ width: 315, height: 510, border: "1px solid #E2E8F0", boxShadow: "0 2px 8px rgba(0,0,0,0.063), 0 16px 40px -8px rgba(0,0,0,0.071)", scrollSnapAlign: "start" }}
+    >
+      {/* ⑥ Photo + overlay gradient */}
+      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 180 }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={photo} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.28) 100%)" }} />
+      </div>
+
+      {/* Content */}
+      <div className="flex flex-1 flex-col gap-2.5 overflow-hidden" style={{ padding: "20px 20px 32px 20px" }}>
+        <p className="text-[#1E293B] font-bold" style={{ fontSize: 17 }}>{name}</p>
+        <p className="text-[#64748B]" style={{ fontSize: 12 }}>{metaMobile}</p>
+        <p className="text-[#374151] leading-[1.5] italic" style={{ fontSize: 13 }}>{quote}</p>
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 pb-1">
+          {tagsMobile.map(t => (
+            <span key={t} className="rounded-full font-semibold" style={{ fontSize: 11, background: "#FFF7ED", color: "#EA580C", border: "1px solid #FDBA74", padding: "4px 10px" }}>
+              {t}
+            </span>
+          ))}
+        </div>
+        {/* Bottom: result track */}
+        <div className="flex flex-col gap-2.5 mt-auto" style={{ paddingTop: 16 }}>
+          <span className="font-bold text-[#CBD5E1]" style={{ fontSize: 9, letterSpacing: "1.5px" }}>RESULT</span>
+          {/* ③ Animated track — dot travels left→right, orange→green */}
+          <div className="relative" style={{ height: 10 }}>
+            {/* Track line — starts at left:0 so its right edge never exceeds the dot */}
+            <div className="absolute overflow-hidden" style={{ left: 0, right: 0, height: 2, top: 4, zIndex: 0 }}>
+              <div style={{
+                position: "absolute", inset: 0,
+                background: "linear-gradient(90deg, #E85D26, #16A34A)",
+                transform: cardInView ? "scaleX(1)" : "scaleX(0)",
+                transformOrigin: "left",
+                transition: "transform 2.55s ease-out",
+              }} />
+            </div>
+            {/* Static left orange dot — on top of line start */}
+            <div className="rounded-full absolute" style={{ width: 8, height: 8, background: "#E85D26", left: 0, top: 1, zIndex: 2 }} />
+            {/* Moving dot — left: 0 → calc(100% - 10px), orange→green */}
+            <div style={{
+              position: "absolute",
+              width: 10, height: 10,
+              borderRadius: "50%",
+              top: 0,
+              left: cardInView ? "calc(100% - 10px)" : "0px",
+              zIndex: 3,
+              background: cardInView ? "#16A34A" : "#E85D26",
+              transition: cardInView
+                ? "left 2.55s ease-out, background 2.55s ease-out"
+                : "none",
+              boxShadow: cardInView ? "0 0 0 3px rgba(22,163,74,0.2)" : "0 0 0 3px rgba(232,93,38,0.2)",
+            }} />
+          </div>
+          {/* Labels */}
+          <div className="flex items-center justify-between">
+            <span className="text-[#94A3B8]" style={{ fontSize: 10, fontWeight: 500 }}>Start</span>
+            <div className="flex items-center gap-1">
+              <IconCheck size={11} color="#16A34A" />
+              <span className={`text-[#16A34A] font-bold${cardInView ? " metric-pop" : ""}`} style={{ fontSize: 10 }}>{metric} months</span>
+            </div>
+          </div>
+          {/* ⑤ Badge — shimmer + reveal after metric pop */}
+          <div className={`relative overflow-hidden flex items-center gap-1.5 rounded-lg bg-[#F0FDF4]${cardInView ? " badge-reveal" : ""}`} style={{ padding: "8px 12px", opacity: cardInView ? undefined : 0 }}>
+            <div className="story-badge-shimmer absolute inset-0 rounded-lg" />
+            {badgeMobileIcon}
+            <span className="font-semibold text-[#15803D] relative z-10" style={{ fontSize: 12 }}>{badge}</span>
+          </div>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
 export default function SuccessStories() {
   const [active, setActive] = useState(0);
   const story = stories[active];
+
+  // Mobile refs
+  const mobileRef = useRef<HTMLDivElement>(null);
+  const scrollRef  = useRef<HTMLDivElement>(null);
+  const mobileInView = useInView(mobileRef, { once: true, margin: "-60px" });
+
+  // ④ Reactive dots
+  const [activeDot, setActiveDot] = useState(0);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const total = el.scrollWidth - el.clientWidth;
+      const seg   = total / (stories.length - 1);
+      setActiveDot(Math.min(Math.max(Math.round(el.scrollLeft / seg), 0), stories.length - 1));
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <section id="success-stories" className="bg-[#F8FAFC]">
 
       {/* ── Mobile ── */}
-      <div className="md:hidden flex flex-col gap-6 pt-10 pb-10">
+      <div ref={mobileRef} className="md:hidden flex flex-col gap-6 pt-10 pb-10">
 
-        {/* Header */}
-        <div className="flex flex-col gap-2 px-5">
+        <style>{`
+          /* ⑤ Badge shimmer */
+          @keyframes storyBadgeShimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position:  200% center; }
+          }
+          .story-badge-shimmer {
+            background: linear-gradient(90deg, transparent 0%, rgba(34,197,94,0.18) 50%, transparent 100%);
+            background-size: 200% auto;
+            animation: storyBadgeShimmer 2.2s linear infinite;
+          }
+
+          /* Metric pop — fires when dot arrives */
+          @keyframes metricPop {
+            0%   { color: #16A34A; text-shadow: none; transform: scale(1); }
+            30%  { color: #22C55E; text-shadow: 0 0 10px rgba(34,197,94,0.6); transform: scale(1.18); }
+            65%  { color: #15803D; text-shadow: 0 0 6px rgba(22,163,74,0.35); transform: scale(1.08); }
+            100% { color: #16A34A; text-shadow: none; transform: scale(1); }
+          }
+          .metric-pop {
+            display: inline-block;
+            animation: metricPop 1s ease-out 2.55s both;
+          }
+
+          /* Badge reveal — fires after metric pop completes (2.55s + 1s = 3.55s) */
+          @keyframes badgeReveal {
+            0%   { opacity: 0; transform: translateY(6px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          .badge-reveal {
+            animation: badgeReveal 0.45s ease-out 3.55s both;
+          }
+        `}</style>
+
+        {/* ① Header — FadeUp */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={mobileInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="flex flex-col gap-2 px-5 text-center items-center"
+        >
           <h2 className="text-[#1E293B] font-bold leading-[1.2]" style={{ fontSize: 22 }}>
             From Zero to Career in 3–5 Months
           </h2>
           <p className="text-[#64748B] leading-[1.5]" style={{ fontSize: 14 }}>
             How 3 students transformed their careers in Portugal
           </p>
-        </div>
+        </motion.div>
 
-        {/* Scroll cards */}
+        {/* ② Scroll cards — each with own inView */}
         <div
+          ref={scrollRef}
           className="flex gap-4 overflow-x-auto scrollbar-hide"
           style={{ scrollSnapType: "x mandatory", scrollPaddingLeft: 20, WebkitOverflowScrolling: "touch", paddingLeft: 20, paddingRight: 20 }}
         >
-          {stories.map(({ name, metaMobile, quote, tagsMobile, metric, badge, badgeMobileIcon, photo }) => (
-            <article
-              key={name}
-              className="flex-shrink-0 flex flex-col overflow-hidden rounded-[20px] bg-white"
-              style={{ width: 315, height: 510, border: "1px solid #E2E8F0", boxShadow: "0 2px 8px rgba(0,0,0,0.063), 0 16px 40px -8px rgba(0,0,0,0.071)", scrollSnapAlign: "start" }}
-            >
-              {/* Photo */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={photo} alt="" className="w-full object-cover flex-shrink-0" style={{ height: 180 }} />
-
-              {/* Content */}
-              <div className="flex flex-1 flex-col gap-2.5 overflow-hidden" style={{ padding: "20px 20px 32px 20px" }}>
-                <p className="text-[#1E293B] font-bold" style={{ fontSize: 17 }}>{name}</p>
-                <p className="text-[#64748B]" style={{ fontSize: 12 }}>{metaMobile}</p>
-                <p className="text-[#374151] leading-[1.5] italic" style={{ fontSize: 13 }}>{quote}</p>
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 pb-1">
-                  {tagsMobile.map(t => (
-                    <span key={t} className="rounded-full font-semibold" style={{ fontSize: 11, background: "#FFF7ED", color: "#EA580C", border: "1px solid #FDBA74", padding: "4px 10px" }}>
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                {/* Bottom: result track */}
-                <div className="flex flex-col gap-2.5 mt-auto" style={{ paddingTop: 16 }}>
-                  <span className="font-bold text-[#CBD5E1]" style={{ fontSize: 9, letterSpacing: "1.5px" }}>RESULT</span>
-                  {/* Track */}
-                  <div className="flex items-center">
-                    <div className="rounded-full bg-[#E85D26] flex-shrink-0" style={{ width: 8, height: 8 }} />
-                    <div className="flex-1" style={{ height: 2, background: "linear-gradient(90deg, #E85D26, #16A34A)" }} />
-                    <div className="rounded-full bg-[#16A34A] flex-shrink-0" style={{ width: 8, height: 8 }} />
-                  </div>
-                  {/* Labels */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-[#94A3B8]" style={{ fontSize: 10, fontWeight: 500 }}>Start</span>
-                    <div className="flex items-center gap-1">
-                      <IconCheck size={11} color="#16A34A" />
-                      <span className="text-[#16A34A] font-bold" style={{ fontSize: 10 }}>{metric} months</span>
-                    </div>
-                  </div>
-                  {/* Badge */}
-                  <div className="flex items-center gap-1.5 rounded-lg bg-[#F0FDF4]" style={{ padding: "8px 12px" }}>
-                    {badgeMobileIcon}
-                    <span className="font-semibold text-[#15803D]" style={{ fontSize: 12 }}>{badge}</span>
-                  </div>
-                </div>
-              </div>
-            </article>
+          {stories.map((s) => (
+            <StoryCard key={s.name} story={s} sectionInView={mobileInView} />
           ))}
         </div>
 
-        {/* Dots */}
+        {/* ④ Dots — reactive to scroll */}
         <div className="flex items-center justify-center gap-1.5">
-          <div className="bg-[#E85D26]" style={{ width: 20, height: 6, borderRadius: 3 }} />
-          <div className="bg-[#CBD5E1]" style={{ width: 6, height: 6, borderRadius: 3 }} />
-          <div className="bg-[#CBD5E1]" style={{ width: 6, height: 6, borderRadius: 3 }} />
+          {stories.map((_, i) => (
+            <div
+              key={i}
+              style={{
+                width: i === activeDot ? 20 : 6,
+                height: 6,
+                borderRadius: 3,
+                background: i === activeDot ? "#E85D26" : "#CBD5E1",
+                transition: "width 0.2s ease, background-color 0.2s ease",
+              }}
+            />
+          ))}
         </div>
       </div>
 
