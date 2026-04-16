@@ -90,6 +90,8 @@ export default function PhotoGalleryMobile() {
             WebkitOverflowScrolling: "touch",
             paddingLeft: 20,
             paddingRight: 20,
+            maskImage: "linear-gradient(to right, transparent 0px, black 20px, black 100%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0px, black 20px, black 100%)",
           }}
         >
           {photos.map((photo, i) => (
