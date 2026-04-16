@@ -133,7 +133,7 @@ export default function PainAgitation() {
                 <div className="relative flex-shrink-0">
                   <div
                     className="w-9 h-9 rounded-[10px] flex items-center justify-center"
-                    style={{ background: "rgba(232,93,38,0.22)", border: "1px solid rgba(232,93,38,0.45)", color: "#E85D26" }}
+                    style={{ background: "rgba(232,93,38,0.30)", border: "1.5px solid rgba(232,93,38,0.75)", color: "#E85D26" }}
                   >
                     {icon}
                   </div>
