@@ -1,44 +1,46 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const pains = [
   {
-    cardBg: "rgba(255,255,255,0.07)",
     pulse: true,
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E85D26" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14 2 14 8 20 8"/>
-        <line x1="16" y1="13" x2="8" y2="13"/>
-        <line x1="16" y1="17" x2="8" y2="17"/>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+        <line x1="8" y1="14" x2="8" y2="14"/>
+        <line x1="12" y1="14" x2="16" y2="14"/>
       </svg>
     ),
     title: "My student permit expires in 2 months. I don't know where to start.",
     body: "AIMA appointments take weeks to book. My documents need to be ready now — and I don't know exactly what AIMA requires. If I miss the deadline, I lose everything I built here.",
   },
   {
-    cardBg: "rgba(255,255,255,0.10)",
     pulse: false,
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E85D26" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
         <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+        <line x1="12" y1="12" x2="12" y2="16"/>
+        <line x1="10" y1="14" x2="14" y2="14"/>
       </svg>
     ),
     title: "I've sent 80 CVs. Two replies. Both: no.",
     body: "They want European experience. I have 7 years of experience — just not from here. My diploma is worthless. I need something that opens doors in Portugal.",
   },
   {
-    cardBg: "rgba(255,255,255,0.15)",
     pulse: false,
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E85D26" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-        <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
       </svg>
     ),
     title: "I'm floating. Status shaky. Career stalled. Nothing is moving.",
@@ -71,11 +73,13 @@ function useCountUp(target: number, duration: number, active: boolean) {
 function StatItem({ target, suffix, label, active }: { target: number; suffix: string; label: string; active: boolean }) {
   const n = useCountUp(target, 1400, active);
   return (
-    <div className="flex flex-col items-center gap-1 flex-1">
-      <span className="text-[#E86339] font-bold leading-none" style={{ fontSize: 26 }}>
+    <div className="flex flex-col items-center gap-2">
+      <span className="text-white font-bold leading-none" style={{ fontSize: 34 }}>
         {n}{suffix}
       </span>
-      <span className="text-[#94A3B8] text-xs text-center leading-tight mt-1">{label}</span>
+      <span className="text-center leading-tight" style={{ fontSize: 11, color: "rgba(255,255,255,0.38)", maxWidth: 90 }}>
+        {label}
+      </span>
     </div>
   );
 }
@@ -85,7 +89,6 @@ export default function PainAgitation() {
   const statsRef   = useRef<HTMLDivElement>(null);
   const inView      = useInView(sectionRef, { once: true, margin: "-8%" });
   const statsInView = useInView(statsRef,   { once: true, margin: "-15%" });
-  const [expanded, setExpanded] = useState<number | null>(0);
 
   return (
     <section
@@ -107,90 +110,65 @@ export default function PainAgitation() {
           </h2>
         </motion.div>
 
-        {/* Pain cards — staggered + accordion */}
+        {/* Pain cards — always open */}
         <div className="flex flex-col gap-3 max-w-[760px] mx-auto">
-          {pains.map(({ cardBg, pulse, icon, title, body }, i) => (
+          {pains.map(({ icon, pulse, title, body }, i) => (
             <motion.div
               key={title}
               initial={{ opacity: 0, y: 28 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, ease, delay: i * 0.12 }}
+              className="rounded-[14px]"
+              style={{
+                background: "rgba(255,255,255,0.06)",
+                borderLeft: "3px solid rgba(255,255,255,0.2)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderLeftWidth: 3,
+                borderLeftColor: "rgba(255,255,255,0.2)",
+                padding: "20px 20px 22px",
+              }}
             >
-              <button
-                onClick={() => setExpanded(expanded === i ? null : i)}
-                className="w-full text-left rounded-[14px]"
-                style={{
-                  background: cardBg,
-                  border: "1px solid rgba(255,255,255,0.10)",
-                  borderLeft: "3px solid rgba(96,165,250,0.6)",
-                  padding: 20,
-                  display: "block",
-                }}
-              >
-                <div className="flex items-start gap-4">
-                  {/* Icon + optional pulsing dot */}
-                  <div className="relative flex-shrink-0">
-                    <div
-                      className="w-11 h-11 rounded-[10px] flex items-center justify-center"
-                      style={{ background: "rgba(232,93,38,0.18)" }}
-                    >
-                      {icon}
-                    </div>
-                    {pulse && (
-                      <>
-                        <span
-                          className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full"
-                          style={{ background: "#E85D26" }}
-                        />
-                        <motion.span
-                          className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full"
-                          style={{ background: "#E85D26" }}
-                          animate={{ scale: [1, 2.5], opacity: [0.7, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
-                        />
-                      </>
-                    )}
+              {/* Icon badge + pulse */}
+              <div className="flex items-center gap-3 mb-3">
+                <div className="relative flex-shrink-0">
+                  <div
+                    className="w-9 h-9 rounded-[10px] flex items-center justify-center"
+                    style={{ background: "rgba(232,93,38,0.15)", color: "#E85D26" }}
+                  >
+                    {icon}
                   </div>
-
-                  {/* Title + chevron */}
-                  <div className="flex-1 flex items-start justify-between gap-2">
-                    <h3 className="text-white font-semibold leading-snug" style={{ fontSize: 15 }}>
-                      {title}
-                    </h3>
-                    <motion.svg
-                      width="16" height="16" viewBox="0 0 24 24" fill="none"
-                      stroke="rgba(255,255,255,0.35)" strokeWidth="2.5"
-                      strokeLinecap="round" strokeLinejoin="round"
-                      className="flex-shrink-0 mt-0.5"
-                      animate={{ rotate: expanded === i ? 180 : 0 }}
-                      transition={{ duration: 0.22 }}
-                    >
-                      <polyline points="6 9 12 15 18 9"/>
-                    </motion.svg>
-                  </div>
-                </div>
-
-                {/* Accordion body */}
-                <AnimatePresence initial={false}>
-                  {expanded === i && (
-                    <motion.div
-                      key="body"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.26, ease: "easeInOut" }}
-                      style={{ overflow: "hidden" }}
-                    >
-                      <p
-                        className="text-white/50 leading-relaxed"
-                        style={{ fontSize: 13, marginTop: 10, paddingLeft: 52 }}
-                      >
-                        {body}
-                      </p>
-                    </motion.div>
+                  {pulse && (
+                    <>
+                      <span
+                        className="absolute -top-1 -right-1 w-2 h-2 rounded-full"
+                        style={{ background: "#E85D26" }}
+                      />
+                      <motion.span
+                        className="absolute -top-1 -right-1 w-2 h-2 rounded-full"
+                        style={{ background: "#E85D26" }}
+                        animate={{ scale: [1, 3], opacity: [0.6, 0] }}
+                        transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
+                      />
+                    </>
                   )}
-                </AnimatePresence>
-              </button>
+                </div>
+              </div>
+
+              {/* Title */}
+              <h3
+                className="text-white font-bold leading-snug"
+                style={{ fontSize: 16 }}
+              >
+                {title}
+              </h3>
+
+              {/* Body — always visible */}
+              <p
+                className="mt-2"
+                style={{ fontSize: 13, color: "rgba(255,255,255,0.52)", lineHeight: 1.65 }}
+              >
+                {body}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -204,7 +182,8 @@ export default function PainAgitation() {
         >
           <a
             href="#double-value"
-            className="flex items-center justify-center gap-2 w-full lg:w-auto bg-accent hover:bg-accent-hover text-white font-medium px-8 py-4 rounded-full transition-all shadow-[0_4px_20px_rgba(232,93,38,0.35)] text-[13px] lg:text-sm whitespace-nowrap"
+            className="flex items-center justify-center gap-2 w-full lg:w-auto text-[#E85D26] font-medium px-8 py-4 rounded-full transition-all text-[13px] lg:text-sm whitespace-nowrap"
+            style={{ border: "1.5px solid rgba(232,93,38,0.7)", background: "rgba(232,93,38,0.08)" }}
           >
             Facultet solves all three. Here&apos;s how
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -213,24 +192,21 @@ export default function PainAgitation() {
           </a>
         </motion.div>
 
-        {/* Stats — count-up on scroll */}
+        {/* Stats — count-up on scroll, no dividers */}
         <div
           ref={statsRef}
           className="max-w-[760px] mx-auto mt-8 lg:mt-10 pt-6"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.10)" }}
+          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
         >
           <motion.div
-            className="flex items-center justify-between"
+            className="flex items-start justify-around"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.52 }}
           >
-            {statTargets.flatMap(({ target, suffix, label }, i) => [
-              <StatItem key={`s${i}`} target={target} suffix={suffix} label={label} active={statsInView} />,
-              ...(i < statTargets.length - 1
-                ? [<div key={`d${i}`} className="w-px h-9 flex-shrink-0" style={{ background: "#334155" }} />]
-                : []),
-            ])}
+            {statTargets.map(({ target, suffix, label }, i) => (
+              <StatItem key={i} target={target} suffix={suffix} label={label} active={statsInView} />
+            ))}
           </motion.div>
         </div>
 
