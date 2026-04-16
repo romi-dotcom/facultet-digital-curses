@@ -6,8 +6,7 @@ import FadeUp from "./FadeUp";
 
 const programmeOptions = [
   { value: "digital-marketing", label: "Digital Marketing" },
-  { value: "ux-ui", label: "UX / UI Design" },
-  { value: "frontend", label: "Frontend Development" },
+  { value: "data-science", label: "Data Science" },
   { value: "project-management", label: "Project Management" },
 ];
 
@@ -323,7 +322,7 @@ export default function ApplicationForm() {
           initial={{ opacity: 0, y: 28 }}
           animate={mobileInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, ease: "easeOut", delay: 0.2 }}
-          className="flex flex-col mx-5 overflow-hidden"
+          className="flex flex-col mx-5"
           style={{ background: "rgba(255,255,255,0.85)", borderRadius: 20, border: "1px solid rgba(255,255,255,0.38)", boxShadow: "0 8px 40px rgba(0,0,0,0.08)", backdropFilter: "blur(32px)" }}
         >
           {/* A) Progress bar */}
@@ -464,7 +463,7 @@ export default function ApplicationForm() {
 
       {/* ── Desktop (unchanged) ── */}
       <div
-        className="hidden md:block relative py-20 overflow-hidden"
+        className="hidden md:block relative py-20"
         style={{ background: "#0F172A" }}
       >
         <div
@@ -546,10 +545,9 @@ export default function ApplicationForm() {
                       onChange={(e) => setForm({ ...form, programme: e.target.value })}
                       className="w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-3 text-[#1E293B] text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all">
                       <option value="">Select a programme</option>
-                      <option>UX / UI Design</option>
                       <option>Digital Marketing</option>
-                      <option>Frontend Development</option>
-                      <option>Not sure yet</option>
+                      <option>Data Science</option>
+                      <option>Project Management</option>
                     </select>
                   </div>
                   <div className="flex flex-col gap-1.5">
