@@ -213,7 +213,7 @@ export default function Programmes() {
   };
 
   return (
-    <section id="programmes" className="bg-white">
+    <section id="programmes" className="bg-[#F1F5F9]">
       {/* ── Mobile (§05 Programmes Mobile) ── */}
       <div ref={sectionRef} className="md:hidden flex flex-col gap-5 pt-10 pb-10">
 
@@ -272,7 +272,7 @@ export default function Programmes() {
               <motion.article
                 key={p.name}
                 className="flex w-[300px] flex-shrink-0 flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white"
-                style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.10)", scrollSnapAlign: "start" }}
+                style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.10)", scrollSnapAlign: "start" }}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.45, ease, delay: 0.1 + idx * 0.1 } as Transition}
@@ -502,7 +502,7 @@ export default function Programmes() {
               <FadeUp key={p.name} delay={i * 0.08}>
                 <div
                   className="flex h-full flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white"
-                  style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.10)" }}
+                  style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.10)" }}
                 >
                   <div className="relative h-[185px] w-full flex-shrink-0 overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
