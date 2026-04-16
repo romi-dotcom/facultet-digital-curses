@@ -96,7 +96,26 @@ export default function CTAMobileForm() {
           92%            { transform: scale(1.025); box-shadow: 0 8px 28px rgba(232,99,57,0.5); }
         }
         .form-btn-pulse { animation: formBtnPulse 3.5s ease-in-out infinite; }
+
+        /* ⑦ Floating particles */
+        @keyframes formParticleFloat {
+          0%   { transform: translateY(0) scale(1);      opacity: 0.14; }
+          50%  { transform: translateY(-18px) scale(1.2); opacity: 0.22; }
+          100% { transform: translateY(0) scale(1);      opacity: 0.14; }
+        }
+        .form-particle { animation: formParticleFloat 5s ease-in-out infinite; position: absolute; border-radius: 50%; background: #F97316; pointer-events: none; }
       `}</style>
+
+      {/* ⑦ Particles */}
+      {[
+        { top: "8%",  left: "5%",  size: 7, delay: "0s"   },
+        { top: "70%", left: "90%", size: 5, delay: "0.9s" },
+        { top: "40%", left: "3%",  size: 9, delay: "1.5s" },
+        { top: "85%", left: "75%", size: 5, delay: "0.4s" },
+        { top: "20%", left: "88%", size: 6, delay: "2.1s" },
+      ].map((p, i) => (
+        <div key={i} className="form-particle" style={{ top: p.top, left: p.left, width: p.size, height: p.size, animationDelay: p.delay }} />
+      ))}
 
       {/* ① Заголовок — FadeUp */}
       <motion.h3
