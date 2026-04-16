@@ -101,12 +101,17 @@ export default function PhotoGalleryMobile() {
                 width: "calc(100vw - 56px)",
                 height: 220,
                 borderRadius: 12,
-                backgroundImage: `url(${photo.url})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
                 scrollSnapAlign: "start",
+                backgroundColor: "#000",
               }}
             >
+              {/* Photo */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={photo.url}
+                alt={photo.caption}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+              />
               {/* Gradient overlay */}
               <div
                 style={{
