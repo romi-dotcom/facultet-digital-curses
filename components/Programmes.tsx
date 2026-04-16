@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence, useInView, type Transition } from "framer-motion";
 import FadeUp from "./FadeUp";
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 type Programme = {
   name: string;
@@ -13,6 +16,7 @@ type Programme = {
   salarySource: string;
   tags: string[];
   badge?: string;
+  duration: string;
   modules: string[];
   whatYouBuild: string[];
   schedule: string;
@@ -22,14 +26,14 @@ const programmes: Programme[] = [
   {
     name: "Digital Marketing",
     desc: "SEO, PPC, Social Media, Analytics — learn to drive measurable growth for any business.",
-    image:
-      "https://images.unsplash.com/photo-1649762202604-cc7cf2737aa0?w=800&q=80",
+    image: "/covers/digital-marketing.png",
     iconBg: "#FFF7ED",
     iconColor: "#E85D26",
     salary: "€1 200–1 800/mo",
     salarySource: "Source: Glassdoor Portugal, 2025",
     tags: ["SEO", "Google Ads", "Social Media", "Analytics"],
     badge: "Most Popular",
+    duration: "13 months",
     modules: [
       "SEO & Content Strategy",
       "Paid Advertising (Google, Meta)",
@@ -45,15 +49,15 @@ const programmes: Programme[] = [
     schedule: "Mon & Wed · 19:00–21:30 · Lisbon campus + online\n13 months · Sept 2026 intake",
   },
   {
-    name: "Data Analytics",
-    desc: "Python, SQL, Tableau, Power BI — transform raw data into business decisions.",
-    image:
-      "https://images.unsplash.com/photo-1686061593213-98dad7c599b9?w=800&q=80",
+    name: "Data Science",
+    desc: "Python, SQL, Machine Learning, Power BI — transform raw data into business decisions.",
+    image: "/covers/data-science.png",
     iconBg: "#EFF6FF",
     iconColor: "#3B82F6",
     salary: "€2 500–4 000/mo",
     salarySource: "Source: Glassdoor Portugal, 2025",
-    tags: ["Python", "SQL", "Tableau", "Power BI"],
+    tags: ["Python", "SQL", "ML", "Power BI"],
+    duration: "14 months",
     modules: [
       "Python for Data Analysis",
       "SQL & Database Design",
@@ -71,13 +75,13 @@ const programmes: Programme[] = [
   {
     name: "Project Management",
     desc: "Agile, Scrum, Stakeholder Management — lead teams and deliver projects on time.",
-    image:
-      "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80",
+    image: "/covers/project-management.png",
     iconBg: "#F0FDF4",
     iconColor: "#16A34A",
     salary: "€2 000–3 500/mo",
     salarySource: "Source: Glassdoor Portugal, 2025",
     tags: ["Agile", "Scrum", "Jira", "Stakeholder Mgmt"],
+    duration: "13 months",
     modules: [
       "Agile & Scrum Frameworks",
       "Project Planning & Risk Management",
@@ -179,42 +183,112 @@ function IconChevronUp() {
 
 
 export default function Programmes() {
-  const [openDetails, setOpenDetails] = useState<number | null>(null);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+
+  // Mobile scroll tracking
+  const trackRef   = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [activeDot, setActiveDot] = useState(0);
+  const inView = useInView(sectionRef, { once: true, margin: "-60px" });
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const total = el.scrollWidth - el.clientWidth;
+      const seg   = total / (programmes.length - 1);
+      if (seg > 0) setActiveDot(Math.min(Math.max(Math.round(el.scrollLeft / seg), 0), programmes.length - 1));
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // A) Dots navigation
+  const goTo = (i: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const firstCard = el.children[0] as HTMLElement;
+    const step = firstCard.offsetWidth + 12;
+    el.scrollTo({ left: i * step, behavior: "smooth" });
+  };
 
   return (
     <section id="programmes" className="bg-white">
       {/* ── Mobile (§05 Programmes Mobile) ── */}
-      <div className="md:hidden flex flex-col gap-5 pt-10 pb-10">
-        <FadeUp>
-          <div className="flex flex-col items-center gap-4 px-5 text-center">
-            <p className="text-[#E86339] font-semibold uppercase" style={{ fontSize: 10, letterSpacing: 2 }}>
-              OUR PROGRAMMES
-            </p>
-            <h2 className="text-[#1E293B] font-bold leading-[1.2] w-full" style={{ fontSize: 20 }}>
-              Choose Your Programme — Start Studying, Keep Working
-            </h2>
-            <p className="text-[#64748B]" style={{ fontSize: 14 }}>
-              Evening · 13+ months · Licensed · Permit Renewal
-            </p>
-          </div>
-        </FadeUp>
+      <div ref={sectionRef} className="md:hidden flex flex-col gap-5 pt-10 pb-10">
 
-        <div
-          className="flex gap-3 overflow-x-auto pr-5 pb-4 scrollbar-hide"
-          style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", scrollPaddingLeft: "20px" }}
+        <style>{`
+          /* C) CTA shimmer + pulse */
+          @keyframes progCTAShimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position:  200% center; }
+          }
+          .prog-cta-shimmer {
+            background: linear-gradient(90deg, #E86339 0%, #F97316 38%, #FFAC6B 50%, #F97316 62%, #E86339 100%);
+            background-size: 200% auto;
+            animation: progCTAShimmer 2.4s linear infinite;
+          }
+          @keyframes progCTAPulse {
+            0%, 85%, 100% { box-shadow: 0 4px 16px rgba(232,99,57,0.3); }
+            92%            { box-shadow: 0 8px 28px rgba(232,99,57,0.5); }
+          }
+          .prog-cta-pulse { animation: progCTAPulse 3.5s ease-in-out infinite; }
+        `}</style>
+
+        {/* Header */}
+        <motion.div
+          className="flex flex-col items-center gap-4 px-5 text-center"
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="flex-shrink-0 w-5" aria-hidden="true" />
+          <p className="text-[#E86339] font-semibold uppercase" style={{ fontSize: 10, letterSpacing: 2 }}>
+            OUR PROGRAMMES
+          </p>
+          <h2 className="text-[#1E293B] font-bold leading-[1.2] w-full" style={{ fontSize: 20 }}>
+            Choose Your Programme — Start Studying, Keep Working
+          </h2>
+          <p className="text-[#64748B]" style={{ fontSize: 14 }}>
+            Evening · 13+ months · Licensed · Permit Renewal
+          </p>
+        </motion.div>
+
+        {/* B) paddingLeft instead of spacer div */}
+        <div
+          ref={trackRef}
+          className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide"
+          style={{
+            scrollSnapType: "x mandatory",
+            scrollPaddingLeft: 20,
+            WebkitOverflowScrolling: "touch",
+            paddingLeft: 20,
+            paddingRight: 20,
+          }}
+        >
           {programmes.map((p, idx) => {
-            const isOpen = openDetails === idx;
+            const isOpen = detailsOpen;
             return (
-              <article
+              // ① Card entrance stagger
+              <motion.article
                 key={p.name}
                 className="flex w-[300px] flex-shrink-0 flex-col overflow-hidden rounded-[20px] border border-[#E2E8F0] bg-white"
                 style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.10)", scrollSnapAlign: "start" }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.45, ease, delay: 0.1 + idx * 0.1 } as Transition}
               >
                 <div className="relative h-[160px] w-full flex-shrink-0 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={p.image} alt="" className="h-full w-full object-cover" />
+                  {/* ③ Most Popular badge on mobile */}
+                  {p.badge && (
+                    <span
+                      className="absolute top-3 left-3 rounded-full font-bold text-white"
+                      style={{ background: "#E85D26", fontSize: 11, padding: "5px 12px" }}
+                    >
+                      {p.badge}
+                    </span>
+                  )}
                 </div>
                 <div className="flex flex-1 flex-col gap-3 p-5">
                   <div className="flex items-center gap-2.5">
@@ -228,7 +302,7 @@ export default function Programmes() {
                       {p.name}
                     </h3>
                   </div>
-                  <p className="text-[#64748B] leading-[1.5]" style={{ fontSize: 13, minHeight: '59px' }}>
+                  <p className="text-[#64748B] leading-[1.5]" style={{ fontSize: 13, minHeight: "59px" }}>
                     {p.desc}
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -241,82 +315,164 @@ export default function Programmes() {
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="inline-flex items-center gap-1 text-[#64748B]" style={{ fontSize: 12, fontWeight: 500 }}>
                       <IconTimer />
-                      13 months
+                      {p.duration}
                     </span>
                     <span className="inline-flex items-center gap-1 text-[#64748B]" style={{ fontSize: 12, fontWeight: 500 }}>
                       <IconSunset />
                       Evening classes
                     </span>
                   </div>
+                  {/* Salary block */}
                   <div>
+                    <p style={{ fontSize: 10, fontWeight: 700, color: "#16A34A", letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 3 }}>
+                      After graduation
+                    </p>
                     <p className="text-[#1E293B] font-extrabold tracking-[-0.5px]" style={{ fontSize: 16 }}>
                       {p.salary}
                     </p>
                     <p className="text-[#94A3B8]" style={{ fontSize: 11 }}>
-                      Average EU remote salary after graduation
+                      Average EU remote salary
                     </p>
                   </div>
 
-                  {/* Expandable details */}
-                  {isOpen && (
-                    <div className="flex flex-col rounded-xl border border-[#E2E8F0] overflow-hidden">
-                      <div className="flex flex-col gap-2 p-4">
-                        <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
-                          PROGRAMME MODULES
-                        </p>
-                        {p.modules.map((m) => (
-                          <p key={m} className="text-[#1E293B]" style={{ fontSize: 13 }}>· {m}</p>
-                        ))}
-                      </div>
-                      <div className="h-px bg-[#E2E8F0]" />
-                      <div className="flex flex-col gap-2 p-4">
-                        <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
-                          WHAT YOU BUILD
-                        </p>
-                        {p.whatYouBuild.map((w) => (
-                          <p key={w} className="text-[#1E293B]" style={{ fontSize: 13 }}>· {w}</p>
-                        ))}
-                      </div>
-                      <div className="h-px bg-[#E2E8F0]" />
-                      <div className="flex flex-col gap-2 p-4">
-                        <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
-                          SCHEDULE
-                        </p>
-                        {p.schedule.split("\n").map((line, i) => (
-                          <p key={i} className="text-[#1E293B]" style={{ fontSize: 13 }}>{line}</p>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  {/* Divider */}
+                  <div className="h-px bg-[#F1F5F9]" />
+
+                  {/* Investment block */}
+                  <div>
+                    <p style={{ fontSize: 10, fontWeight: 700, color: "#64748B", letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 3 }}>
+                      Your investment
+                    </p>
+                    <p className="text-[#1E293B] font-extrabold tracking-[-0.5px]" style={{ fontSize: 16 }}>
+                      from €125/month
+                    </p>
+                    <p className="text-[#94A3B8]" style={{ fontSize: 11 }}>
+                      Full 12-month programme
+                    </p>
+                  </div>
+
+                  {/* ② Expandable details — AnimatePresence */}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key="details"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.28, ease: "easeInOut" }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <div className="flex flex-col rounded-xl border border-[#E2E8F0] overflow-hidden">
+                          {/* Programme info */}
+                          <div className="flex flex-col gap-2 p-4">
+                            <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
+                              PROGRAMME INFO
+                            </p>
+                            {[
+                              { label: "Format", value: "40% offline + 60% online" },
+                              { label: "Study time", value: "~3 h / day, 2× per week" },
+                              { label: "Tuition", value: "Flexible payments" },
+                              { label: "City", value: "Lisbon, Porto" },
+                            ].map(({ label, value }) => (
+                              <div key={label} className="flex items-start gap-1.5">
+                                <span className="text-[#94A3B8]" style={{ fontSize: 12, minWidth: 76 }}>{label}:</span>
+                                <span className="text-[#1E293B]" style={{ fontSize: 12, fontWeight: 500 }}>{value}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="h-px bg-[#E2E8F0]" />
+                          <div className="flex flex-col gap-2 p-4">
+                            <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
+                              PROGRAMME MODULES
+                            </p>
+                            {p.modules.map((m) => (
+                              <p key={m} className="text-[#1E293B]" style={{ fontSize: 13 }}>· {m}</p>
+                            ))}
+                          </div>
+                          <div className="h-px bg-[#E2E8F0]" />
+                          <div className="flex flex-col gap-2 p-4">
+                            <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
+                              WHAT YOU BUILD
+                            </p>
+                            {p.whatYouBuild.map((w) => (
+                              <p key={w} className="text-[#1E293B]" style={{ fontSize: 13 }}>· {w}</p>
+                            ))}
+                          </div>
+                          <div className="h-px bg-[#E2E8F0]" />
+                          <div className="flex flex-col gap-2 p-4">
+                            <p className="font-semibold uppercase tracking-widest text-[#94A3B8]" style={{ fontSize: 11 }}>
+                              SCHEDULE
+                            </p>
+                            {p.schedule.split("\n").map((line, i) => (
+                              <p key={i} className="text-[#1E293B]" style={{ fontSize: 13 }}>{line}</p>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   <button
                     type="button"
-                    onClick={() => setOpenDetails(isOpen ? null : idx)}
+                    onClick={() => setDetailsOpen(!detailsOpen)}
                     className="mt-auto flex h-[45px] w-full items-center justify-center gap-2 rounded-xl border text-[#E85D26]"
                     style={{
                       fontSize: 14,
                       fontWeight: 600,
                       borderColor: isOpen ? "#E85D26" : "#E2E8F0",
                       background: isOpen ? "#FFFFFF" : "#F8FAFC",
+                      transition: "border-color 0.2s ease, background 0.2s ease",
                     }}
                   >
                     {isOpen ? "Hide details" : "Show details"}
-                    {isOpen ? <IconChevronUp /> : <IconChevronDown />}
+                    <motion.span
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.22 }}
+                      style={{ display: "flex" }}
+                    >
+                      <IconChevronDown />
+                    </motion.span>
                   </button>
                 </div>
-              </article>
+              </motion.article>
             );
           })}
         </div>
 
-        <div className="flex flex-col items-center gap-[15px] px-5 mt-4">
+        {/* A) Dots + counter */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center gap-1.5">
+            {programmes.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                style={{
+                  width: i === activeDot ? 20 : 6,
+                  height: 6,
+                  borderRadius: 3,
+                  background: i === activeDot ? "#E85D26" : "#CBD5E1",
+                  transition: "width 0.2s ease, background-color 0.2s ease",
+                  border: "none",
+                  padding: 0,
+                  cursor: "pointer",
+                }}
+              />
+            ))}
+          </div>
+          <span style={{ fontSize: 12, color: "#94A3B8", fontWeight: 500 }}>
+            {activeDot + 1} / {programmes.length}
+          </span>
+        </div>
+
+        {/* C) CTA — shimmer + pulse */}
+        <div className="flex flex-col items-center gap-[15px] px-5 mt-2">
           <p className="text-center text-[#64748B]" style={{ fontSize: 13 }}>
             Not sure which programme to choose?
           </p>
           <a
             href="#consult"
-            className="inline-flex items-center gap-2 rounded-[10px] bg-[#E85D26] px-5 py-3 text-white"
-            style={{ fontSize: 13, fontWeight: 600 }}
+            className="prog-cta-shimmer prog-cta-pulse inline-flex items-center gap-2 rounded-[10px] px-5 py-3 text-white w-full justify-center"
+            style={{ fontSize: 13, fontWeight: 600, textDecoration: "none" }}
           >
             <IconMessageCircle />
             Talk to our coordinator →
