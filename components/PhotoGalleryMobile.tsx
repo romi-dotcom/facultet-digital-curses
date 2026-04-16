@@ -5,10 +5,6 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const photos = [
   {
-    url: "/gallery/gallery-6.png",
-    caption: "Classroom Session",
-  },
-  {
     url: "/gallery/gallery-7.png",
     caption: "Facultet Campus",
   },
@@ -23,6 +19,10 @@ const photos = [
   {
     url: "/gallery/gallery-2.png",
     caption: "Mentoring Room",
+  },
+  {
+    url: "/gallery/gallery-6.png",
+    caption: "Classroom Session",
   },
 ];
 
@@ -83,13 +83,10 @@ export default function PhotoGalleryMobile() {
           ref={scrollRef}
           className="flex overflow-x-auto scrollbar-hide"
           style={{
-            gap: 12,
-            height: 220,
+            gap: 0,
+            height: 260,
             scrollSnapType: "x mandatory",
-            scrollPaddingLeft: 20,
             WebkitOverflowScrolling: "touch",
-            paddingLeft: 20,
-            paddingRight: 20,
           }}
         >
           {photos.map((photo, i) => (
@@ -98,10 +95,9 @@ export default function PhotoGalleryMobile() {
               key={i}
               className="flex-shrink-0 relative overflow-hidden transition-[filter] duration-150 active:brightness-90"
               style={{
-                // C) Uniform width — one card fills viewport, next peeks ~16px
-                width: "calc(100vw - 56px)",
-                height: 220,
-                borderRadius: 12,
+                width: "100vw",
+                height: 260,
+                borderRadius: 0,
                 backgroundImage: `url(${photo.url})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
