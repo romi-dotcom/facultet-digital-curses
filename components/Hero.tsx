@@ -125,6 +125,8 @@ export default function Hero() {
               muted
               loop
               playsInline
+              preload="none"
+              poster="/gallery/gallery-1.png"
             />
           </motion.div>
 

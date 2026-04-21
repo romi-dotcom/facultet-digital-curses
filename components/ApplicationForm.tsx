@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import FadeUp from "./FadeUp";
+import CountryCodePicker from "./CountryCodePicker";
+import { countryCodes } from "@/lib/countryCodes";
 
 const programmeOptions = [
   { value: "digital-marketing", label: "Digital Marketing" },
@@ -102,7 +104,7 @@ function FloatSelect({ label, placeholder, value, options, onChange }: {
 const mobileBullets = [
   "Response within 1 business day",
   "No documents needed to apply",
-  "Enrolment certificate in 5–10 business days",
+  "Enrolment certificate in 2–3 business days",
 ];
 
 const trustSignals = [
@@ -162,6 +164,23 @@ export default function ApplicationForm() {
   const [form, setForm] = useState({ name: "", email: "", whatsapp: "", programme: "", status: "" });
   const [touched, setTouched] = useState({ name: false, email: false, whatsapp: false });
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState("");
+  const [countryCode, setCountryCodeRaw] = useState("+351");
+  function setCountryCode(code: string) { setCountryCodeRaw(code); setPhoneError(""); }
+
+  const selectedCountry = countryCodes.find(c => c.code === countryCode) ?? countryCodes[0];
+  const maxDigits = selectedCountry.maxDigits;
+
+  function setPhoneSafe(val: string) {
+    const digits = val.replace(/\D/g, "");
+    const codeDigits = countryCode.replace(/\D/g, "");
+    if (digits.startsWith(codeDigits) && digits.length > codeDigits.length) {
+      setPhoneError(`Don't include the country code — ${countryCode} is already selected`);
+    } else {
+      setPhoneError("");
+    }
+    setForm(f => ({ ...f, whatsapp: digits.slice(0, maxDigits) }));
+  }
 
   // Animations
   const mobileRef = useRef<HTMLDivElement>(null);
@@ -323,11 +342,11 @@ export default function ApplicationForm() {
           initial={{ opacity: 0, y: 28 }}
           animate={mobileInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, ease: "easeOut", delay: 0.2 }}
-          className="flex flex-col mx-5 overflow-hidden"
+          className="flex flex-col mx-5"
           style={{ background: "rgba(255,255,255,0.85)", borderRadius: 20, border: "1px solid rgba(255,255,255,0.38)", boxShadow: "0 8px 40px rgba(0,0,0,0.08)", backdropFilter: "blur(32px)" }}
         >
-          {/* A) Progress bar */}
-          <div style={{ height: 4, background: "#F1F5F9" }}>
+          {/* A) Progress bar — overflow-hidden stays here only, to clip to card's top corners */}
+          <div style={{ height: 4, background: "#F1F5F9", borderRadius: "20px 20px 0 0", overflow: "hidden" }}>
             <div style={{
               height: "100%",
               width: `${progress}%`,
@@ -381,26 +400,37 @@ export default function ApplicationForm() {
                 )}
               </div>
 
-              {/* ③ WhatsApp — focus glow + C) validation */}
-              <div
-                className="relative flex flex-col justify-center bg-white rounded-lg"
-                style={{
-                  height: 52, padding: "6px 36px 6px 14px",
-                  border: `1px solid ${fBorder("whatsapp", touched.whatsapp && form.whatsapp.length > 0, isWaValid)}`,
-                  boxShadow: fShadow("whatsapp", touched.whatsapp && form.whatsapp.length > 0, isWaValid),
-                  transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-                }}
-              >
-                <span className="font-semibold text-[#94A3B8]" style={{ fontSize: 10 }}>WhatsApp</span>
-                <input type="tel" placeholder="+351 XXX XXX XXX" value={form.whatsapp}
-                  onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
-                  onFocus={() => setFocusedField("whatsapp")}
-                  onBlur={() => { setFocusedField(null); setTouched(t => ({ ...t, whatsapp: true })); }}
-                  className="w-full bg-transparent text-[#1E293B] placeholder-[#CBD5E1] outline-none"
-                  style={{ fontSize: 14 }} />
-                {touched.whatsapp && form.whatsapp.length > 0 && isWaValid && (
-                  <div className="absolute right-12 top-1/2 -translate-y-1/2"><IconValidCheck /></div>
-                )}
+              {/* ③ WhatsApp — country picker + focus glow + validation */}
+              <div className="flex flex-col" style={{ gap: 4 }}>
+                <div
+                  className="relative bg-white rounded-lg"
+                  style={{
+                    border: `1px solid ${phoneError ? "#EF4444" : fBorder("whatsapp", touched.whatsapp && form.whatsapp.length > 0, isWaValid)}`,
+                    boxShadow: phoneError ? "0 0 0 3px rgba(239,68,68,0.10)" : fShadow("whatsapp", touched.whatsapp && form.whatsapp.length > 0, isWaValid),
+                    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+                  }}
+                >
+                  <span className="font-semibold text-[#94A3B8] block" style={{ fontSize: 10, padding: "6px 14px 0" }}>WhatsApp</span>
+                  <div className="flex items-center" style={{ padding: "2px 36px 6px 14px" }}>
+                    <CountryCodePicker value={countryCode} onChange={setCountryCode} />
+                    <input
+                      type="tel"
+                      inputMode="numeric"
+                      placeholder="923 XXX XXX"
+                      value={form.whatsapp}
+                      maxLength={maxDigits}
+                      onChange={(e) => setPhoneSafe(e.target.value)}
+                      onFocus={() => setFocusedField("whatsapp")}
+                      onBlur={() => { setFocusedField(null); setTouched(t => ({ ...t, whatsapp: true })); }}
+                      className="flex-1 bg-transparent text-[#1E293B] placeholder-[#CBD5E1] outline-none"
+                      style={{ fontSize: 14 }}
+                    />
+                    {touched.whatsapp && form.whatsapp.length > 0 && isWaValid && !phoneError && (
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2"><IconValidCheck /></div>
+                    )}
+                  </div>
+                </div>
+                {phoneError && <p className="text-red-500" style={{ fontSize: 11, paddingLeft: 2 }}>{phoneError}</p>}
               </div>
 
               {/* ③ Email — focus glow + C) validation */}
@@ -554,9 +584,22 @@ export default function ApplicationForm() {
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[#374151] text-sm font-medium">Phone (optional)</label>
-                    <input type="tel" placeholder="+351 XXX XXX XXX" value={form.whatsapp}
-                      onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
-                      className="w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-3 text-[#1E293B] text-sm placeholder-[#94A3B8] outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all" />
+                    <div
+                      className={`flex items-center bg-white border rounded-lg transition-all ${phoneError ? "border-red-400" : "border-[#E2E8F0] focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/10"}`}
+                      style={{ padding: "0 16px", height: 46 }}
+                    >
+                      <CountryCodePicker value={countryCode} onChange={setCountryCode} />
+                      <input
+                        type="tel"
+                        inputMode="numeric"
+                        placeholder="923 XXX XXX"
+                        value={form.whatsapp}
+                        maxLength={maxDigits}
+                        onChange={(e) => setPhoneSafe(e.target.value)}
+                        className="flex-1 bg-transparent text-[#1E293B] text-sm placeholder-[#94A3B8] outline-none"
+                      />
+                    </div>
+                    {phoneError && <p className="text-xs text-red-500">{phoneError}</p>}
                   </div>
                   <button type="submit"
                     className="w-full bg-accent hover:bg-accent-hover text-white font-bold text-base py-4 rounded-xl transition-all hover:shadow-lg hover:shadow-accent/25 mt-2">

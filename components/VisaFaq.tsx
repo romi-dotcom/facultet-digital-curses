@@ -22,11 +22,28 @@ const faqs = [
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: a,
+    },
+  })),
+};
+
 export default function VisaFaq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section id="faq" className="bg-white py-10 lg:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="max-w-[1440px] mx-auto px-5 lg:px-[160px]">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 items-start">
 

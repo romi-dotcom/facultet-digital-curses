@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const photos = [
   {
@@ -100,16 +101,20 @@ export default function PhotoGalleryMobile() {
               key={i}
               className="flex-shrink-0 relative overflow-hidden transition-[filter] duration-150 active:brightness-90"
               style={{
-                // C) Uniform width — one card fills viewport, next peeks ~16px
                 width: "calc(100vw - 56px)",
                 height: 220,
                 borderRadius: 12,
-                backgroundImage: `url(${photo.url})`,
-                backgroundSize: "110%",
-                backgroundPosition: "center",
                 scrollSnapAlign: "start",
               }}
             >
+              <Image
+                src={photo.url}
+                alt={photo.caption}
+                fill
+                className="object-cover scale-[1.1]"
+                sizes="calc(100vw - 56px)"
+                loading={i === 0 ? "eager" : "lazy"}
+              />
               {/* Gradient overlay */}
               <div
                 style={{

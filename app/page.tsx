@@ -1,26 +1,28 @@
+import dynamic from "next/dynamic";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import AudienceSelect from "@/components/AudienceSelect";
 import PainAgitation from "@/components/PainAgitation";
 import DoubleValue from "@/components/DoubleValue";
-import PhotoGalleryMobile from "@/components/PhotoGalleryMobile";
-import PhotoGalleryDesktop from "@/components/PhotoGalleryDesktop";
-import Programmes from "@/components/Programmes";
-import WhyFacultet from "@/components/WhyFacultet";
-import VisaSteps from "@/components/VisaSteps";
-import HowToApply from "@/components/HowToApply";
-import MiniCapture from "@/components/MiniCapture";
-import WhatsAppCTA from "@/components/WhatsAppCTA";
-import CTAMobileForm from "@/components/CTAMobileForm";
-import VisaFaq from "@/components/VisaFaq";
-import CTAStrip from "@/components/CTAStrip";
-import SuccessStories from "@/components/SuccessStories";
-import Testimonials from "@/components/Testimonials";
-import ApplicationForm from "@/components/ApplicationForm";
-import CampusMap from "@/components/CampusMap";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import CTAStrip from "@/components/CTAStrip";
+
+const PhotoGalleryMobile = dynamic(() => import("@/components/PhotoGalleryMobile"));
+const PhotoGalleryDesktop = dynamic(() => import("@/components/PhotoGalleryDesktop"));
+const Programmes = dynamic(() => import("@/components/Programmes"));
+const WhyFacultet = dynamic(() => import("@/components/WhyFacultet"));
+const VisaSteps = dynamic(() => import("@/components/VisaSteps"));
+const HowToApply = dynamic(() => import("@/components/HowToApply"));
+const MiniCapture = dynamic(() => import("@/components/MiniCapture"));
+const WhatsAppCTA = dynamic(() => import("@/components/WhatsAppCTA"));
+const CTAMobileForm = dynamic(() => import("@/components/CTAMobileForm"));
+const VisaFaq = dynamic(() => import("@/components/VisaFaq"));
+const SuccessStories = dynamic(() => import("@/components/SuccessStories"));
+const Testimonials = dynamic(() => import("@/components/Testimonials"));
+const ApplicationForm = dynamic(() => import("@/components/ApplicationForm"));
+const CampusMap = dynamic(() => import("@/components/CampusMap"));
 
 export default function Home() {
   return (

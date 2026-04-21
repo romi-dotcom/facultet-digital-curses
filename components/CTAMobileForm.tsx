@@ -5,7 +5,6 @@ import { motion, useInView } from "framer-motion";
 
 const trustItems = ["✓ Free", "✓ No commitment", "✓ 2h response"];
 
-// Последовательный typewriter: печатает каждый пункт по очереди
 function useSequentialTypewriter(items: string[], inView: boolean, charSpeed = 40, pauseBetween = 350) {
   const [itemIdx, setItemIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
@@ -33,24 +32,7 @@ function useSequentialTypewriter(items: string[], inView: boolean, charSpeed = 4
 export default function CTAMobileForm() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-
-  const [nameFocused, setNameFocused] = useState(false);
-  const [phoneFocused, setPhoneFocused] = useState(false);
   const typed = useSequentialTypewriter(trustItems, inView);
-
-  const fieldStyle = (focused: boolean) => ({
-    width: "100%",
-    height: 46,
-    borderRadius: 8,
-    border: `1px solid ${focused ? "#E86339" : "#E2E8F0"}`,
-    padding: "0 16px",
-    fontSize: 14,
-    color: "#1E293B",
-    outline: "none",
-    boxSizing: "border-box" as const,
-    boxShadow: focused ? "0 0 0 3px rgba(232,99,57,0.15)" : "none",
-    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-  });
 
   return (
     <section
@@ -59,7 +41,6 @@ export default function CTAMobileForm() {
       style={{ padding: "48px 20px" }}
     >
       <style>{`
-        /* ⑥ Animated gradient */
         @keyframes formBgDrift {
           0%, 100% { background-position: 0% 50%; }
           50%       { background-position: 100% 50%; }
@@ -69,28 +50,20 @@ export default function CTAMobileForm() {
           background-size: 300% 300%;
           animation: formBgDrift 9s ease-in-out infinite;
         }
-
-        /* ⑤ Button shimmer */
         @keyframes formBtnShimmer {
           0%   { background-position: -200% center; }
           100% { background-position: 200% center; }
         }
         .form-btn-shimmer {
-          background: linear-gradient(
-            90deg, #E86339 0%, #F97316 38%, #FFAC6B 50%, #F97316 62%, #E86339 100%
-          );
+          background: linear-gradient(90deg, #E86339 0%, #F97316 38%, #FFAC6B 50%, #F97316 62%, #E86339 100%);
           background-size: 200% auto;
           animation: formBtnShimmer 2.4s linear infinite;
         }
-
-        /* ② Typewriter cursor blink */
         @keyframes cursorBlink {
           0%, 100% { opacity: 1; }
           50%       { opacity: 0; }
         }
         .tw-cursor { animation: cursorBlink 0.7s ease-in-out infinite; }
-
-        /* ⑤ Button scale pulse */
         @keyframes formBtnPulse {
           0%, 85%, 100% { transform: scale(1);     box-shadow: 0 4px 16px rgba(232,99,57,0.3); }
           92%            { transform: scale(1.025); box-shadow: 0 8px 28px rgba(232,99,57,0.5); }
@@ -98,11 +71,10 @@ export default function CTAMobileForm() {
         .form-btn-pulse { animation: formBtnPulse 3.5s ease-in-out infinite; }
       `}</style>
 
-      {/* ① Заголовок — FadeUp */}
       <motion.h3
         initial={{ opacity: 0, y: 18 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className="text-white text-center"
         style={{ fontSize: 24, fontWeight: 700, lineHeight: 1.2 }}
       >
@@ -111,7 +83,6 @@ export default function CTAMobileForm() {
 
       <div style={{ height: 12 }} />
 
-      {/* ① Подзаголовок — FadeUp */}
       <motion.p
         initial={{ opacity: 0, y: 14 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -124,7 +95,7 @@ export default function CTAMobileForm() {
 
       <div style={{ height: 20 }} />
 
-      {/* ② Trust items — sequential typewriter (CLS-safe) */}
+      {/* Trust items — sequential typewriter */}
       <div style={{ position: "relative" }}>
         <div aria-hidden="true" className="flex items-center justify-center" style={{ gap: 12, visibility: "hidden" }}>
           {trustItems.map(item => (
@@ -146,64 +117,28 @@ export default function CTAMobileForm() {
         </div>
       </div>
 
-      <div style={{ height: 28 }} />
+      <div style={{ height: 32 }} />
 
-      {/* ③ Form card — slide up */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
+      {/* CTA button — scrolls to main form */}
+      <motion.a
+        href="#consult"
+        initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0.38 }}
-        style={{ background: "#FFFFFF", borderRadius: 16, padding: 24 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.35 }}
+        className="form-btn-shimmer form-btn-pulse flex items-center justify-center"
+        style={{
+          width: "100%",
+          height: 54,
+          borderRadius: 10,
+          color: "#FFFFFF",
+          fontSize: 16,
+          fontWeight: 700,
+          textDecoration: "none",
+          display: "flex",
+        }}
       >
-        {/* ④ Name field with focus glow */}
-        <label style={{ color: "#64748B", fontSize: 12, display: "block" }}>Your name</label>
-        <div style={{ height: 4 }} />
-        <input
-          type="text"
-          placeholder="Maria Silva"
-          onFocus={() => setNameFocused(true)}
-          onBlur={() => setNameFocused(false)}
-          style={fieldStyle(nameFocused)}
-        />
-
-        <div style={{ height: 12 }} />
-
-        {/* ④ WhatsApp field with focus glow */}
-        <label style={{ color: "#64748B", fontSize: 12, display: "block" }}>WhatsApp</label>
-        <div style={{ height: 4 }} />
-        <input
-          type="tel"
-          placeholder="+351 XXX XXX XXX"
-          onFocus={() => setPhoneFocused(true)}
-          onBlur={() => setPhoneFocused(false)}
-          style={fieldStyle(phoneFocused)}
-        />
-
-        <div style={{ height: 16 }} />
-
-        {/* ⑤ CTA — shimmer + pulse */}
-        <button
-          className="form-btn-shimmer form-btn-pulse"
-          style={{
-            width: "100%",
-            height: 52,
-            borderRadius: 8,
-            border: "none",
-            color: "#FFFFFF",
-            fontSize: 15,
-            fontWeight: 600,
-            cursor: "pointer",
-          }}
-        >
-          Get My Free Consultation →
-        </button>
-
-        <div style={{ height: 10 }} />
-
-        <p style={{ color: "#94A3B8", fontSize: 11, textAlign: "center", lineHeight: 1.5 }}>
-          AIMA processing times vary. We provide the documents — AIMA makes the decision.
-        </p>
-      </motion.div>
+        Get My Free Consultation →
+      </motion.a>
     </section>
   );
 }
